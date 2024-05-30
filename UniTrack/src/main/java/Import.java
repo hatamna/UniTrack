@@ -35,26 +35,17 @@ public class Import {
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final List<String> SCOPES = Collections.singletonList(ClassroomScopes.CLASSROOM_COURSES_READONLY);
 
-    public static void importUserData() throws IOException, GeneralSecurityException {
-        Classroom service = initialize();
-        List<Course> courses = getCourses(service);
-        if(courses!=null){
-            for (Course course : courses) {
-                System.out.println("Course ID: " + course.getId());
-                System.out.println("Course Name: " + course.getName());
-                // You can perform other operations with the course here
-            }
-        }
-        else{
-            System.out.println("User is not in any classes");
-        }
+    public static Classroom getClassroomData() throws IOException, GeneralSecurityException {
+        return initialize();
     }
 
+    
+    
     public static List<Course> getCourses(Classroom service) throws IOException {
         ListCoursesResponse response = service.courses().list().execute();
         return response.getCourses();
     }
-
+    
     private static Classroom initialize() throws IOException, GeneralSecurityException {
         HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         Credential credential = authorize(httpTransport);

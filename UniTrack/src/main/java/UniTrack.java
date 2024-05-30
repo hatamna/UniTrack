@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.HashMap;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -13,7 +14,11 @@ import java.security.GeneralSecurityException;
  * @author krish
  */
 public class UniTrack {
-
+    
+    private static HashMap<String, String> userAndPass = new HashMap<>(); //MAKE SURE THAT THIS IS INFO SAFE
+    
+    
+    
     public static void main(String[] args) throws IOException, GeneralSecurityException {
         System.out.println("Creating user");
         createUser();
@@ -21,5 +26,9 @@ public class UniTrack {
     
     public static void createUser() throws IOException, GeneralSecurityException{
         User test = new User();
+    }
+    
+    public static HashMap<String, String> getUserAndPass(){
+        return userAndPass;
     }
 }
