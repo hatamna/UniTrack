@@ -10,13 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,12 +30,12 @@ import javax.swing.SwingUtilities;
  */
 public class User {
     
-    private static Classroom classroomData = null;
-    private static SortedMap<UniCourse, Double> userCourses = new TreeMap<>();
-    private static Course[] courseList;
-    private static Thread OAuth = null;
-    private static String username;
-    
+    private Classroom classroomData = null;
+    private SortedMap<UniCourse, Double> userCourses = new TreeMap<>();
+    private List<Course> studentCourseList;
+    private Course[] courseList;
+    private Thread OAuth = null;
+    private String username;
     private JFrame setUpMenu;
     private JPanel accountCreation;
     private JPanel importing;
@@ -49,12 +49,26 @@ public class User {
     private JPasswordField passwordInput;
     private JButton createAccount;
     private JLabel errorMessage;
-    private JPanel classSelection;
+    private JPanel courseSelection;
+    private JComponent[][] courseSelector;
+    private Object[][] courseAndID;
+    private int size;
     
     public User() throws IOException, GeneralSecurityException, InterruptedException{
         SwingUtilities.invokeLater(this::createAccountSetup); //creates seperate thread for the gui
         waitForOAuth(); //pauses main code until OAuth complete
-        courseList= new Course[Import.getCourses(classroomData).size()];
+        studentCourseList=Import.getCourses(classroomData);
+        size=Import.getCourses(classroomData).size();
+        courseList= new Course[size];
+        courseSelector = new JComponent[size][4]; //one array per course 4 Jcomponents per
+        courseAndID = new Object[size][size];
+        for(int x=0; x<size; x++){
+            if(!studentCourseList.get(x).getCourseState().equals("ACTIVE")) continue;
+            courseSelector[x][0]=new JLabel(studentCourseList.get(x).getName());
+            courseSelector[x][1]=new JLabel(studentCourseList.get(x).getSection());
+            courseSelector[x][2]=new JLabel(studentCourseList.get(x).getAlternateLink());
+            courseSelector[x][3]=new JButton(); 
+        }
         
     }
     
@@ -139,11 +153,7 @@ public class User {
                 MainScreen screen = new MainScreen();
                 screen.setVisible(true);
                 screen.toFront();
-                dispose();
-            }
-
-            private void dispose() {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                setUpMenu.dispose();
             }
         });
         createAccount.addActionListener(new ActionListener(){
