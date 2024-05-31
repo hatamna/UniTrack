@@ -136,7 +136,14 @@ public class User {
         no.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                System.exit(0); //change this later
+                MainScreen screen = new MainScreen();
+                screen.setVisible(true);
+                screen.toFront();
+                dispose();
+            }
+
+            private void dispose() {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
         createAccount.addActionListener(new ActionListener(){
@@ -173,7 +180,7 @@ public class User {
         });
         
         //set window size and layout
-        setUpMenu.setSize(400,400);
+        setUpMenu.setSize(800,600);
         setUpMenu.getContentPane().setLayout(new java.awt.FlowLayout()); //random temp layout
         
         //setting window locations
