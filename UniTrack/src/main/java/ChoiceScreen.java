@@ -34,9 +34,10 @@ public class ChoiceScreen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         LogInButton = new javax.swing.JButton();
         SignUpButton = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 128));
 
@@ -44,6 +45,11 @@ public class ChoiceScreen extends javax.swing.JFrame {
         LogInButton.setBorder(null);
         LogInButton.setBorderPainted(false);
         LogInButton.setContentAreaFilled(false);
+        LogInButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogInButtonActionPerformed(evt);
+            }
+        });
 
         SignUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SingUpChoiceButton.png"))); // NOI18N
         SignUpButton.setBorder(null);
@@ -55,10 +61,15 @@ public class ChoiceScreen extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exitButton.png"))); // NOI18N
-        jButton3.setBorder(null);
-        jButton3.setBorderPainted(false);
-        jButton3.setContentAreaFilled(false);
+        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exitButton.png"))); // NOI18N
+        exitButton.setBorder(null);
+        exitButton.setBorderPainted(false);
+        exitButton.setContentAreaFilled(false);
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -72,14 +83,14 @@ public class ChoiceScreen extends javax.swing.JFrame {
                 .addContainerGap(217, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(exitButton)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3)
+                .addComponent(exitButton)
                 .addGap(191, 191, 191)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SignUpButton)
@@ -98,14 +109,14 @@ public class ChoiceScreen extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(814, 607));
+        setSize(new java.awt.Dimension(800, 600));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpButtonActionPerformed
         try {
             User screen = new User();
-            dispose();
+            this.dispose();
         } catch (IOException ex) {
             Logger.getLogger(ChoiceScreen.class.getName()).log(Level.SEVERE, null, ex);
         } catch (GeneralSecurityException ex) {
@@ -115,6 +126,17 @@ public class ChoiceScreen extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_SignUpButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void LogInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogInButtonActionPerformed
+        SignInScreen screen = new SignInScreen();
+        screen.setVisible(true);
+        screen.toFront();
+        dispose();
+    }//GEN-LAST:event_LogInButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,7 +176,7 @@ public class ChoiceScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LogInButton;
     private javax.swing.JButton SignUpButton;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton exitButton;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

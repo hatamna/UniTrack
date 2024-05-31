@@ -4,6 +4,7 @@
  */
 import com.google.api.services.classroom.Classroom;
 import com.google.api.services.classroom.model.Course;
+import static java.awt.BorderLayout.SOUTH;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -42,6 +43,7 @@ public class User {
     private JLabel askImport;
     private JButton yes;
     private JButton no;
+    private JButton back;
     private JLabel welcomeText;
     private JLabel usernameText;
     private JLabel passwordText;
@@ -131,6 +133,7 @@ public class User {
         askImport = new JLabel("Would you like to your import grades from google classroom?"); 
         no = new JButton("no"); 
         yes = new JButton("yes"); 
+        back = new JButton("BACK");
         
         //adding elements to panel
         importing.add(askImport);
@@ -151,6 +154,15 @@ public class User {
             @Override
             public void actionPerformed(ActionEvent e){
                 MainScreen screen = new MainScreen();
+                screen.setVisible(true);
+                screen.toFront();
+                setUpMenu.dispose();
+            }
+        });
+        back.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                ChoiceScreen screen = new ChoiceScreen();
                 screen.setVisible(true);
                 screen.toFront();
                 setUpMenu.dispose();
@@ -191,13 +203,16 @@ public class User {
         
         //set window size and layout
         setUpMenu.setSize(800,600);
-        setUpMenu.getContentPane().setLayout(new java.awt.FlowLayout()); //random temp layout
+        setUpMenu.getContentPane().setLayout(new java.awt.BorderLayout()); //random temp layout
+        setUpMenu.getContentPane().add(back, SOUTH);
         
         //setting window locations
         setUpMenu.setLocationRelativeTo(null);
         
         //settingup account creation
         setUpMenu.add(accountCreation);
+        setUpMenu.setUndecorated(true);
+        setUpMenu.setResizable(false);
         setUpMenu.setVisible(true);
     }
     
