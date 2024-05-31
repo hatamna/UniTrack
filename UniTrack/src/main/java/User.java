@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -29,27 +30,48 @@ import javax.swing.JTextField;
  */
 public class User {
     
-    private static Scanner input = new Scanner(System.in);
     private static Classroom classroomData = null;
     private static SortedMap<UniCourse, Double> userCourses = new TreeMap<>();
-    private static ArrayList<Course> courseList = new ArrayList<>();
+    private static Course[] courseList;
     private static Thread OAuth = null;
     private static String username;
     
-    public User() throws IOException, GeneralSecurityException{
+    private JFrame setUpMenu;
+    private JPanel accountCreation;
+    private JPanel importing;
+    private JLabel askImport;
+    private JButton yes;
+    private JButton no;
+    private JLabel welcomeText;
+    private JLabel usernameText;
+    private JLabel passwordText;
+    private JTextField usernameInput;
+    private JPasswordField passwordInput;
+    private JButton createAccount;
+    private JLabel errorMessage;
+    private JPanel classSelection;
+    
+    public User() throws IOException, GeneralSecurityException, InterruptedException{
+        SwingUtilities.invokeLater(this::createAccountSetup); //creates seperate thread for the gui
+        waitForOAuth(); //pauses main code until OAuth complete
+        courseList= new Course[Import.getCourses(classroomData).size()];
+        
+    }
+    
+    private void createAccountSetup(){
         //Creating Frame and layout constraits
-        JFrame setUpMenu = new JFrame("UniTrack | Creating user");
+        setUpMenu = new JFrame("UniTrack | Creating user");
         GridBagConstraints layout = new GridBagConstraints();
         
         //panel and elements for account creation
-        JPanel accountCreation = new JPanel(new GridBagLayout());
-        JLabel welcomeText = new JLabel("Welcome to UniTrack account creation! ");
-        JLabel usernameText = new JLabel("Username:");
-        JLabel passwordText = new JLabel("Password:");
-        JTextField usernameInput = new JTextField();
-        JPasswordField passwordInput = new JPasswordField();
-        JButton createAccount = new JButton("Create account");
-        JLabel errorMessage = new JLabel();
+        accountCreation = new JPanel(new GridBagLayout());
+        welcomeText = new JLabel("Welcome to UniTrack account creation! ");
+        usernameText = new JLabel("Username:");
+        passwordText = new JLabel("Password:");
+        usernameInput = new JTextField();
+        passwordInput = new JPasswordField();
+        createAccount = new JButton("Create account");
+        errorMessage = new JLabel();
         
         //adding elements to pannel
         layout.gridx=0;
@@ -60,7 +82,7 @@ public class User {
         layout.gridx=2;
         layout.gridy=1;
         layout.gridwidth=3;
-        layout.gridheight=1;
+        layout. gridheight=1;
         layout.fill = GridBagConstraints.HORIZONTAL;
         accountCreation.add(usernameInput, layout);
         layout.gridx=2;
@@ -91,10 +113,10 @@ public class User {
         accountCreation.add(errorMessage, layout);
         
         //panel and elements for importing
-        JPanel importing = new JPanel();
-        JLabel askImport = new JLabel("Would you like to your import grades from google classroom?"); 
-        JButton no = new JButton("no"); 
-        JButton yes = new JButton("yes"); 
+        importing = new JPanel();
+        askImport = new JLabel("Would you like to your import grades from google classroom?"); 
+        no = new JButton("no"); 
+        yes = new JButton("yes"); 
         
         //adding elements to panel
         importing.add(askImport);
@@ -108,28 +130,7 @@ public class User {
         yes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                if(OAuth==null) {
-                    OAuth= new Thread(new Runnable(){
-                        @Override
-                        public void run(){
-                            try {
-                                classroomData = Import.getClassroomData();
-                            }
-                            catch (IOException ex) {
-                                Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            catch (GeneralSecurityException ex) {
-                                Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                    });
-                    OAuth.start();
-                }
-                else{
-                    yes.setEnabled(false);
-                    askImport.setText("OAuth in progress");
-                }
-                
+                startOAuth();
             }
         });
         no.addActionListener(new ActionListener(){
@@ -181,5 +182,32 @@ public class User {
         //settingup account creation
         setUpMenu.add(accountCreation);
         setUpMenu.setVisible(true);
+    }
+    
+    private void startOAuth(){
+        if(OAuth==null) {
+            OAuth= new Thread(new Runnable(){
+                @Override
+                public void run(){
+                    try {
+                        classroomData = Import.getClassroomData();
+                    }
+                    catch (IOException | GeneralSecurityException ex) {
+                        Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            OAuth.start();
+        }
+        else{
+            yes.setEnabled(false);
+            askImport.setText("OAuth in progress");
+        }
+    }
+    
+    private void waitForOAuth() throws InterruptedException{
+        if(OAuth!=null){
+            OAuth.join();
+        }
     }
 }
