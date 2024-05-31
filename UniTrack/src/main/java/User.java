@@ -57,18 +57,6 @@ public class User {
     public User() throws IOException, GeneralSecurityException, InterruptedException{
         SwingUtilities.invokeLater(this::createAccountSetup); //creates seperate thread for the gui
         waitForOAuth(); //pauses main code until OAuth complete
-        studentCourseList=Import.getCourses(classroomData);
-        size=Import.getCourses(classroomData).size();
-        courseList= new Course[size];
-        courseSelector = new JComponent[size][4]; //one array per course 4 Jcomponents per
-        courseAndID = new Object[size][size];
-        for(int x=0; x<size; x++){
-            if(!studentCourseList.get(x).getCourseState().equals("ACTIVE")) continue;
-            courseSelector[x][0]=new JLabel(studentCourseList.get(x).getName());
-            courseSelector[x][1]=new JLabel(studentCourseList.get(x).getSection());
-            courseSelector[x][2]=new JLabel(studentCourseList.get(x).getAlternateLink());
-            courseSelector[x][3]=new JButton(); 
-        }
         
     }
     
@@ -219,6 +207,25 @@ public class User {
         else{
             yes.setEnabled(false);
             askImport.setText("OAuth in progress");
+        }
+        studentCourseList=Import.getCourses(classroomData);
+        size=Import.getCourses(classroomData).size();
+        courseList= new Course[size];
+        courseSelector = new JComponent[size][4]; //one array per course 4 Jcomponents per
+        courseAndID = new Object[size][size];
+        for(int x=0; x<size; x++){
+            if(!studentCourseList.get(x).getCourseState().equals("ACTIVE")) continue;
+            courseSelector[x][0]=new JLabel(studentCourseList.get(x).getName());
+            courseSelector[x][1]=new JLabel(studentCourseList.get(x).getSection());
+            courseSelector[x][2]=new JButton("Open in classroom");
+            courseSelector[x][2].addActionListener(new ActionListener(){ 
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    Desktop.getDesktop().browse(new URI(studentCourseList.get(x).getAlternateLink()));
+                }
+            });
+            System.out.println(studentCourseList.get(x).getTeacherGroupEmail());
+            courseSelector[x][3]=new JButton(); 
         }
     }
     
