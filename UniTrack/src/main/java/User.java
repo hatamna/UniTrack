@@ -223,6 +223,7 @@ public class User {
             yes.setEnabled(false);
             askImport.setText("OAuth in progress");
         }
+        /*
         studentCourseList=Import.getCourses(classroomData);
         size=Import.getCourses(classroomData).size();
         courseList= new Course[size];
@@ -236,12 +237,12 @@ public class User {
             courseSelector[x][2].addActionListener(new ActionListener(){ 
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    Desktop.getDesktop().browse(new URI(studentCourseList.get(x).getAlternateLink()));
+                    //Desktop.getDesktop().browse(new URI(studentCourseList.get(x).getAlternateLink()));
                 }
             });
             System.out.println(studentCourseList.get(x).getTeacherGroupEmail());
             courseSelector[x][3]=new JButton(); 
-        }
+        }*/
     }
     
     private void waitForOAuth() throws InterruptedException{
