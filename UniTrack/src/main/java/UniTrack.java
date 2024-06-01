@@ -24,7 +24,7 @@ public class UniTrack {
     
     
     public static void main(String[] args) throws IOException, GeneralSecurityException, InterruptedException {
-        ChoiceScreen screen = new ChoiceScreen();
+        FirstView screen = new FirstView();
         screen.setVisible(true);
         screen.toFront();
     }

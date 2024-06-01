@@ -253,7 +253,6 @@ public class User {
             ((JButton)courseSelector[x][2]).addActionListener(new ActionListener(){ 
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    //Desktop.getDesktop().browse(new URI(studentCourseList.get(x).getAlternateLink()));
                     try {
                         Desktop.getDesktop().browse(new URI(studentCourse.getAlternateLink()));
                     } 
