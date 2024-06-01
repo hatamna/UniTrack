@@ -64,6 +64,11 @@ public class MainScreen extends javax.swing.JFrame {
         surroundButton2.setBorder(null);
         surroundButton2.setBorderPainted(false);
         surroundButton2.setContentAreaFilled(false);
+        surroundButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surroundButton2ActionPerformed(evt);
+            }
+        });
 
         surroundButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/greenSurroundButton.png"))); // NOI18N
         surroundButton4.setBorder(null);
@@ -225,6 +230,10 @@ public class MainScreen extends javax.swing.JFrame {
         screen.toFront();
         dispose();
     }//GEN-LAST:event_signOutButtonActionPerformed
+
+    private void surroundButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_surroundButton2ActionPerformed
 
     /**
      * @param args the command line arguments
