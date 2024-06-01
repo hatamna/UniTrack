@@ -9,7 +9,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
 import java.util.List;
 import java.util.SortedMap;
@@ -36,7 +39,8 @@ public class User {
     private List<Course> studentCourseList;
     private Course[] courseList;
     private Thread OAuth = null;
-    private String username;
+    public static String username;
+    public static String password;
     private JFrame setUpMenu;
     private JPanel accountCreation;
     private JPanel importing;
@@ -54,6 +58,7 @@ public class User {
     private JPanel courseSelection;
     private JComponent[][] courseSelector;
     private Object[][] courseAndID;
+    private boolean allowArchived;
     private int size;
     
     public User() throws IOException, GeneralSecurityException, InterruptedException{
@@ -135,7 +140,15 @@ public class User {
         yes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                startOAuth();
+                try {
+                    startOAuth();
+                } catch (IOException ex) {
+                    Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         no.addActionListener(new ActionListener(){
@@ -159,7 +172,8 @@ public class User {
         createAccount.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                username=usernameInput.getText();
+                username = usernameInput.getText();
+                password = passwordInput.getText();
                 if(UniTrack.getUserAndPass().get(username)!=null || username.length()<5){ //if username alr exists say invalid
                     errorMessage.setText("Invalid username");
                     
@@ -169,7 +183,7 @@ public class User {
                 }
                 else{
                     setUpMenu.remove(errorMessage); //remove invalid msg cuz its valid
-                    
+                    UniTrack.saveCreds();
                     //updating jframe visuals
                     setUpMenu.revalidate();
                     setUpMenu.repaint();
@@ -204,7 +218,7 @@ public class User {
         setUpMenu.setVisible(true);
     }
     
-    private void startOAuth(){
+    private void startOAuth() throws IOException, InterruptedException, URISyntaxException{
         if(OAuth==null) {
             OAuth= new Thread(new Runnable(){
                 @Override
@@ -218,6 +232,7 @@ public class User {
                 }
             });
             OAuth.start();
+            OAuth.join();
         }
         else{
             yes.setEnabled(false);
@@ -230,17 +245,24 @@ public class User {
         courseSelector = new JComponent[size][4]; //one array per course 4 Jcomponents per
         courseAndID = new Object[size][size];
         for(int x=0; x<size; x++){
-            if(!studentCourseList.get(x).getCourseState().equals("ACTIVE")) continue;
-            courseSelector[x][0]=new JLabel(studentCourseList.get(x).getName());
-            courseSelector[x][1]=new JLabel(studentCourseList.get(x).getSection());
+            Course studentCourse =studentCourseList.get(x);
+            if(!(studentCourse.getCourseState().equals("ARCHIVED")&&allowArchived) && !studentCourse.getCourseState().equals("ACTIVE")) continue;
+            courseSelector[x][0]=new JLabel(studentCourse.getName());
+            courseSelector[x][1]=new JLabel(studentCourse.getSection());
             courseSelector[x][2]=new JButton("Open in classroom");
-            courseSelector[x][2].addActionListener(new ActionListener(){ 
+            ((JButton)courseSelector[x][2]).addActionListener(new ActionListener(){ 
                 @Override
                 public void actionPerformed(ActionEvent e){
                     //Desktop.getDesktop().browse(new URI(studentCourseList.get(x).getAlternateLink()));
+                    try {
+                        Desktop.getDesktop().browse(new URI(studentCourse.getAlternateLink()));
+                    } 
+                    catch (IOException | URISyntaxException ex) {
+                        Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             });
-            System.out.println(studentCourseList.get(x).getTeacherGroupEmail());
+            
             courseSelector[x][3]=new JButton(); 
         }*/
     }
