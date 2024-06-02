@@ -24,9 +24,11 @@ public class UniTrack {
     
     
     public static void main(String[] args) throws IOException, GeneralSecurityException, InterruptedException {
-        FirstView screen = new FirstView();
+        /*FirstView screen = new FirstView();
         screen.setVisible(true);
         screen.toFront();
+        */
+        new User();
     }
    
     
