@@ -7,7 +7,16 @@
  *
  * @author Yahya
  */
+
+import java.io.*;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class SignInScreen extends javax.swing.JFrame {
+    
+    private String username;
+    private String password;
 
     /**
      * Creates new form SignInScreen
@@ -30,6 +39,7 @@ public class SignInScreen extends javax.swing.JFrame {
         usernameField = new javax.swing.JTextField();
         applyButton = new javax.swing.JButton();
         passwordField = new javax.swing.JPasswordField();
+        cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -55,7 +65,24 @@ public class SignInScreen extends javax.swing.JFrame {
             }
         });
 
-        passwordField.setText("jPasswordField1");
+        passwordField.setText("Password");
+        passwordField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passwordFieldMouseClicked(evt);
+            }
+        });
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
+            }
+        });
+
+        cancelButton.setText("CANCEL");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -64,7 +91,10 @@ public class SignInScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(208, 208, 208)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(applyButton)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(applyButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cancelButton))
                     .addComponent(jLabel1)
                     .addComponent(usernameField)
                     .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
@@ -80,7 +110,9 @@ public class SignInScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addComponent(applyButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(applyButton)
+                    .addComponent(cancelButton))
                 .addContainerGap(289, Short.MAX_VALUE))
         );
 
@@ -100,20 +132,41 @@ public class SignInScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
-        MainScreen screen = new MainScreen();
-        screen.setVisible(true);
-        screen.toFront();
-        dispose();
+        username = usernameField.getText();
+        password = passwordField.getText();
+        if (username.equals(User.username) && password.equals(User.password)){
+            MainScreen screen = new MainScreen();
+            screen.setVisible(true);
+            screen.toFront();
+            dispose();
+        } else {
+            
+        }
     }//GEN-LAST:event_applyButtonActionPerformed
 
     private void usernameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameFieldMouseClicked
         usernameField.setText("");
     }//GEN-LAST:event_usernameFieldMouseClicked
 
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordFieldActionPerformed
+
+    private void passwordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordFieldMouseClicked
+        passwordField.setText("");
+    }//GEN-LAST:event_passwordFieldMouseClicked
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        ChoiceScreen screen = new ChoiceScreen();
+        screen.setVisible(true);
+        screen.toFront();
+        dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -141,12 +194,15 @@ public class SignInScreen extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SignInScreen().setVisible(true);
+                
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton applyButton;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField passwordField;

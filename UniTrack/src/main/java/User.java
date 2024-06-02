@@ -39,7 +39,8 @@ public class User {
     private List<Course> studentCourseList;
     private Course[] courseList;
     private Thread OAuth = null;
-    private String username;
+    public static String username;
+    public static String password;
     private JFrame setUpMenu;
     private JPanel accountCreation;
     private JPanel importing;
@@ -171,7 +172,8 @@ public class User {
         createAccount.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                username=usernameInput.getText();
+                username = usernameInput.getText();
+                password = passwordInput.getText();
                 if(UniTrack.getUserAndPass().get(username)!=null || username.length()<5){ //if username alr exists say invalid
                     errorMessage.setText("Invalid username");
                     
@@ -181,7 +183,7 @@ public class User {
                 }
                 else{
                     setUpMenu.remove(errorMessage); //remove invalid msg cuz its valid
-                    
+                    UniTrack.saveCreds();
                     //updating jframe visuals
                     setUpMenu.revalidate();
                     setUpMenu.repaint();
@@ -236,6 +238,7 @@ public class User {
             yes.setEnabled(false);
             askImport.setText("OAuth in progress");
         }
+        /*
         studentCourseList=Import.getCourses(classroomData);
         size=Import.getCourses(classroomData).size();
         courseList= new Course[size];
@@ -260,7 +263,7 @@ public class User {
             });
             
             courseSelector[x][3]=new JButton(); 
-        }
+        }*/
     }
     
     private void waitForOAuth() throws InterruptedException{
