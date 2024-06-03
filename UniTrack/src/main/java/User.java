@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import static java.awt.GridBagConstraints.RELATIVE;
+import java.awt.Insets;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -270,7 +271,7 @@ public class User {
                 
                 //displays course name
                 courseSelector[x][0]=new JLabel(studentCourse.getName());
-                layout.gridx=1*(x+1)+(200*(x));
+                layout.gridx=1*(x+1)+(220*(x));
                 layout.gridy=0;
                 layout.gridwidth=3;
                 layout.gridheight=1;
@@ -278,13 +279,13 @@ public class User {
                 
                 //displays course section
                 courseSelector[x][1]=new JLabel(studentCourse.getSection());
-                if(x==0) layout.gridx=1*(x+1);
-                else layout.gridx=1*(x+1)+(200*(x));
+                layout.gridx=1*(x+1)+(220*(x));
                 layout.gridy=RELATIVE;
                 layout.gridwidth=2;
                 layout.gridheight=1;
+                layout.insets = new Insets(0, 0, 180, 0);
                 courseInfo.add(courseSelector[x][1], layout);
-                courseSelector[x][1].setBorder(BorderFactory.createEmptyBorder(0, 0, 180, 0));
+                layout.insets = new Insets(0, 0, 0, 0);
                
                 //button to open the course in google classroom
                 courseSelector[x][2]=new JButton("Open in classroom");
@@ -302,7 +303,7 @@ public class User {
                         }
                     }
                 });
-                layout.gridx=5*(x+1)+(200*(x));
+                layout.gridx=5*(x+1)+(220*(x));
                 layout.gridy=50;
                 layout.gridwidth=5;
                 layout.gridheight=1;
@@ -315,11 +316,9 @@ public class User {
                 layout.gridy=240;
                 layout.gridwidth=200;
                 layout.gridheight=240;
-                layout.ipadx=20;
-                layout.ipady=20;
+                layout.insets = new Insets(0, 0, 10, 10);
                 courseButtons.add(courseSelector[x][3], layout);
-                layout.ipadx=0;
-                layout.ipady=0;
+                layout.insets = new Insets(0, 0, 0, 0);
             }
             //adding panels to layered pane
             courseButtons.setBackground(Color.LIGHT_GRAY);
