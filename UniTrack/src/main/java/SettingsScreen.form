@@ -61,8 +61,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jComboBox2" pref="164" max="32767" attributes="0"/>
-                              <Component id="jComboBox1" max="32767" attributes="0"/>
+                              <Component id="uniDropDown" pref="164" max="32767" attributes="0"/>
+                              <Component id="programDropDown" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -82,12 +82,12 @@
                   <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="programDropDown" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="uniDropDown" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -123,14 +123,14 @@
             <Property name="text" type="java.lang.String" value="My Program: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="programDropDown">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
-                <StringItem index="0" value="Computer Science"/>
-                <StringItem index="1" value="Marketing"/>
-                <StringItem index="2" value="Business"/>
-                <StringItem index="3" value="Finance"/>
+                <StringItem index="0" value="-"/>
+                <StringItem index="1" value="-"/>
+                <StringItem index="2" value="-"/>
+                <StringItem index="3" value="-"/>
               </StringArray>
             </Property>
           </Properties>
@@ -149,14 +149,12 @@
             <Property name="text" type="java.lang.String" value="My University: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox2">
+        <Component class="javax.swing.JComboBox" name="uniDropDown">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="University of Ottawa"/>
-                <StringItem index="1" value="University of Toronto"/>
-                <StringItem index="2" value="University of McGill"/>
-                <StringItem index="3" value="Carleton University"/>
+              <StringArray count="2">
+                <StringItem index="0" value="-"/>
+                <StringItem index="1" value="-"/>
               </StringArray>
             </Property>
           </Properties>
