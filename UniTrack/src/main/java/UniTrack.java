@@ -24,7 +24,8 @@ public class UniTrack {
     public static int numProfiles = 0;
     
     public static void main(String[] args) throws IOException, GeneralSecurityException, InterruptedException {
-        /*FirstView screen = new FirstView();
+        /*
+        FirstView screen = new FirstView();
         screen.setVisible(true);
         screen.toFront();
         */
