@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -13,12 +15,12 @@ import java.util.logging.Logger;
  *
  * @author Yahya
  */
-public class ChoiceScreen extends javax.swing.JFrame {
+public class profileSelectScreen extends javax.swing.JFrame {
 
     /**
-     * Creates new form ChoiceScreen
+     * Creates new form profileSelectScreen
      */
-    public ChoiceScreen() {
+    public profileSelectScreen() {
         initComponents();
     }
 
@@ -32,34 +34,32 @@ public class ChoiceScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        LogInButton = new javax.swing.JButton();
-        SignUpButton = new javax.swing.JButton();
+        userOneProfileButton = new javax.swing.JButton();
+        addUserButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
+        setBackground(new java.awt.Color(0, 0, 128));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 128));
 
-        LogInButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LogInChoiceButton.png"))); // NOI18N
-        LogInButton.setBorder(null);
-        LogInButton.setBorderPainted(false);
-        LogInButton.setContentAreaFilled(false);
-        LogInButton.addActionListener(new java.awt.event.ActionListener() {
+        userOneProfileButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prof1.png"))); // NOI18N
+        userOneProfileButton.setBorder(null);
+        userOneProfileButton.setBorderPainted(false);
+        userOneProfileButton.setContentAreaFilled(false);
+        userOneProfileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogInButtonActionPerformed(evt);
+                userOneProfileButtonActionPerformed(evt);
             }
         });
 
-        SignUpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SingUpChoiceButton.png"))); // NOI18N
-        SignUpButton.setBorder(null);
-        SignUpButton.setBorderPainted(false);
-        SignUpButton.setContentAreaFilled(false);
-        SignUpButton.addActionListener(new java.awt.event.ActionListener() {
+        addUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addProfile.png"))); // NOI18N
+        addUserButton.setBorder(null);
+        addUserButton.setBorderPainted(false);
+        addUserButton.setContentAreaFilled(false);
+        addUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SignUpButtonActionPerformed(evt);
+                addUserButtonActionPerformed(evt);
             }
         });
 
@@ -73,54 +73,31 @@ public class ChoiceScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("You have been detected as a new user as there are no profiles saved on ");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("your computer. Would you like to:");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(exitButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(jLabel2)))
-                        .addGap(0, 92, Short.MAX_VALUE)))
+                .addGap(204, 204, 204)
+                .addComponent(userOneProfileButton)
+                .addGap(89, 89, 89)
+                .addComponent(addUserButton)
+                .addContainerGap(207, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(exitButton)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(217, 217, 217)
-                .addComponent(LogInButton)
-                .addGap(65, 65, 65)
-                .addComponent(SignUpButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(exitButton)
-                .addGap(67, 67, 67)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(69, 69, 69)
+                .addGap(180, 180, 180)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SignUpButton)
-                    .addComponent(LogInButton))
-                .addContainerGap(232, Short.MAX_VALUE))
+                    .addComponent(addUserButton)
+                    .addComponent(userOneProfileButton))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -134,11 +111,25 @@ public class ChoiceScreen extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(800, 600));
+        setSize(new java.awt.Dimension(814, 607));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpButtonActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        JFrame quitConfirm = new JFrame();
+        if(JOptionPane.showConfirmDialog(quitConfirm, "Are you sure you want to quit?", "QUIT", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void userOneProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userOneProfileButtonActionPerformed
+        SignInScreen screen = new SignInScreen();
+        screen.setVisible(true);
+        screen.toFront();
+        dispose();
+    }//GEN-LAST:event_userOneProfileButtonActionPerformed
+
+    private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButtonActionPerformed
         try {
             User screen = new User();
             this.dispose();
@@ -149,19 +140,7 @@ public class ChoiceScreen extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             Logger.getLogger(ChoiceScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }//GEN-LAST:event_SignUpButtonActionPerformed
-
-    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitButtonActionPerformed
-
-    private void LogInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogInButtonActionPerformed
-        SignInScreen screen = new SignInScreen();
-        screen.setVisible(true);
-        screen.toFront();
-        dispose();
-    }//GEN-LAST:event_LogInButtonActionPerformed
+    }//GEN-LAST:event_addUserButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,30 +159,28 @@ public class ChoiceScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChoiceScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(profileSelectScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChoiceScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(profileSelectScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChoiceScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(profileSelectScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChoiceScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(profileSelectScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChoiceScreen().setVisible(true);
+                new profileSelectScreen().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton LogInButton;
-    private javax.swing.JButton SignUpButton;
+    private javax.swing.JButton addUserButton;
     private javax.swing.JButton exitButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton userOneProfileButton;
     // End of variables declaration//GEN-END:variables
 }

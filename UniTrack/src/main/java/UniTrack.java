@@ -21,14 +21,22 @@ public class UniTrack {
     public static File credentials = new File("userCredentials.txt");
     private static HashMap<String, String> userAndPass = new HashMap<>(); //MAKE SURE THAT THIS IS INFO SAFE
     
-    
+    public static int numProfiles = 0;
     
     public static void main(String[] args) throws IOException, GeneralSecurityException, InterruptedException {
         /*FirstView screen = new FirstView();
         screen.setVisible(true);
         screen.toFront();
         */
-        new User();
+        if (numProfiles == 0){
+        ChoiceScreen screen = new ChoiceScreen();
+        screen.setVisible(true);
+        screen.toFront();
+        } else {
+            profileSelectScreen screen = new profileSelectScreen();
+            screen.setVisible(true);
+            screen.toFront();
+        }
     }
    
     
@@ -53,6 +61,7 @@ public class UniTrack {
                         userAndPass.put(User.username, User.password);
                         writer.write(userAndPass + " | ");
                         writer.close();
+                        numProfiles += 1;
                     } catch (IOException a){
                         System.out.println("An error has occured. ");
                     }

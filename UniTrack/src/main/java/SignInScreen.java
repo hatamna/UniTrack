@@ -17,6 +17,7 @@ public class SignInScreen extends javax.swing.JFrame {
     
     private String username;
     private String password;
+    private String outString;
 
     /**
      * Creates new form SignInScreen
@@ -40,6 +41,8 @@ public class SignInScreen extends javax.swing.JFrame {
         applyButton = new javax.swing.JButton();
         passwordField = new javax.swing.JPasswordField();
         cancelButton = new javax.swing.JButton();
+        passwordIncorrectBox = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -84,6 +87,27 @@ public class SignInScreen extends javax.swing.JFrame {
             }
         });
 
+        passwordIncorrectBox.setVisible(false);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/passwordIncorrect.png"))); // NOI18N
+
+        javax.swing.GroupLayout passwordIncorrectBoxLayout = new javax.swing.GroupLayout(passwordIncorrectBox);
+        passwordIncorrectBox.setLayout(passwordIncorrectBoxLayout);
+        passwordIncorrectBoxLayout.setHorizontalGroup(
+            passwordIncorrectBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(passwordIncorrectBoxLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel2)
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        passwordIncorrectBoxLayout.setVerticalGroup(
+            passwordIncorrectBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(passwordIncorrectBoxLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel2)
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -98,7 +122,9 @@ public class SignInScreen extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(usernameField)
                     .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
-                .addContainerGap(393, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addComponent(passwordIncorrectBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,14 +132,17 @@ public class SignInScreen extends javax.swing.JFrame {
                 .addGap(139, 139, 139)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(applyButton)
-                    .addComponent(cancelButton))
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(applyButton)
+                            .addComponent(cancelButton)))
+                    .addComponent(passwordIncorrectBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(285, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -131,17 +160,31 @@ public class SignInScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
         username = usernameField.getText();
         password = passwordField.getText();
-        if (username.equals(User.username) && password.equals(User.password)){
+        try {
+            Scanner in = new Scanner(new FileReader("userCredentials.txt"));
+            StringBuilder sb = new StringBuilder();
+            while(in.hasNext()) {
+                sb.append(in.next());
+            }
+            in.close();
+            outString = sb.toString();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(SignInScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (outString.contains(username + "=" + password)){
             MainScreen screen = new MainScreen();
             screen.setVisible(true);
             screen.toFront();
             dispose();
         } else {
-            
+            passwordIncorrectBox.setVisible(true);
         }
+        
+        
     }//GEN-LAST:event_applyButtonActionPerformed
 
     private void usernameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameFieldMouseClicked
@@ -204,8 +247,11 @@ public class SignInScreen extends javax.swing.JFrame {
     private javax.swing.JButton applyButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField passwordField;
+    private javax.swing.JPanel passwordIncorrectBox;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -1,3 +1,9 @@
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,6 +20,13 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
+    }
+    
+    public void openCourseScreen(){
+        CourseScreen screen = new CourseScreen();
+        screen.setVisible(true);
+        screen.toFront();
+        dispose();
     }
 
     /**
@@ -59,6 +72,11 @@ public class MainScreen extends javax.swing.JFrame {
         surroundButton1.setBorder(null);
         surroundButton1.setBorderPainted(false);
         surroundButton1.setContentAreaFilled(false);
+        surroundButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surroundButton1ActionPerformed(evt);
+            }
+        });
 
         surroundButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yellowSurroundButton.png"))); // NOI18N
         surroundButton2.setBorder(null);
@@ -225,15 +243,17 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void signOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signOutButtonActionPerformed
-        ChoiceScreen screen = new ChoiceScreen();
-        screen.setVisible(true);
-        screen.toFront();
-        dispose();
+        new UniTrack();
+        this.dispose();
     }//GEN-LAST:event_signOutButtonActionPerformed
 
     private void surroundButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_surroundButton2ActionPerformed
+
+    private void surroundButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundButton1ActionPerformed
+        openCourseScreen();
+    }//GEN-LAST:event_surroundButton1ActionPerformed
 
     /**
      * @param args the command line arguments
