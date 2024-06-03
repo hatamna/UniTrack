@@ -144,7 +144,7 @@ public class User {
         //panel and elements for importing
         importing = new JPanel();
         askImport = new JLabel("Would you like to your import grades from google classroom?"); 
-        no = new JButton("no"); 
+        no = new JButton("Add Classes Manually"); 
         yes = new JButton("yes"); 
         back = new JButton("BACK");
         
@@ -174,7 +174,7 @@ public class User {
         no.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                MainScreen screen = new MainScreen();
+                AddClassScreen screen = new AddClassScreen();
                 screen.setVisible(true);
                 screen.toFront();
                 setUpMenu.dispose();
