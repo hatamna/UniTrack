@@ -5,6 +5,7 @@
 import com.google.api.services.classroom.Classroom;
 import com.google.api.services.classroom.model.Course;
 import static java.awt.BorderLayout.SOUTH;
+import javax.swing.JToggleButton.isSelected;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -259,9 +260,9 @@ public class User {
             askImport.setText("OAuth in progress");
         }
         
-        studentCourseList=Import.getCourses(classroomData);
+        studentCourseList=Import.getCourses(classroomData); //used in for loop DO NOT TOUCH
         size=Import.getCourses(classroomData).size();
-        courseList= new Course[size];
+        courseList= new Course[size]; //list of courses that are selected
         courseSelector = new JComponent[size][4]; //one array per course 4 Jcomponents per
         courseAndID = new Object[size][size];
         SwingUtilities.invokeLater(() -> {
@@ -275,7 +276,9 @@ public class User {
                 layout.gridy=0;
                 layout.gridwidth=3;
                 layout.gridheight=1;
+                layout.insets = new Insets(0, 0, 0, 10);
                 courseInfo.add(courseSelector[x][0], layout);
+                layout.insets = new Insets(0,0,0,0);
                 
                 //displays course section
                 courseSelector[x][1]=new JLabel(studentCourse.getSection());
@@ -312,6 +315,14 @@ public class User {
                 //adds button to select course
                 courseSelector[x][3]=new JToggleButton();
                 courseSelector[x][3].setPreferredSize(new Dimension(200,240));
+                ((JToggleButton)courseSelector[x][3]).addActionListener(new ActionListener() {
+                   @Override
+                   public void actionPerformed(ActionEvent e){
+                        if(courseSelector[x][3].isSelected()){
+                           courseList[x]=studentCourse;
+                       }
+                   }
+                });
                 layout.gridx=5*(x+1)+(200*x);
                 layout.gridy=240;
                 layout.gridwidth=200;
