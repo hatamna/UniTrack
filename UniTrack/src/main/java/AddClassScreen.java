@@ -147,12 +147,16 @@ public class AddClassScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_tempBypassButtonActionPerformed
 
     private void centerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_centerButtonActionPerformed
-        final int mandatoryCourses = 3;
-        String[] courses;
+        final int mandatoryNum = 3;
+        String[] mandatoryCourses = {"SPH4U", "SCH4U", "ENG4U"};
         
-        for(int i = 0; i < mandatoryCourses; i++){
-            
+        JButton[] courses = {surround1, surround2, surround3, surround4, surround5, surround6};
+        for(int i = 0; i < mandatoryNum; i++){
+            courses[i].setText(mandatoryCourses[i]);
+            courses[i].setVisible(true);
         }
+        
+        
     }//GEN-LAST:event_centerButtonActionPerformed
 
     private void surround1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surround1ActionPerformed
