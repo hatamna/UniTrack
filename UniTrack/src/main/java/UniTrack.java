@@ -46,25 +46,24 @@ public class UniTrack {
     }
     
     public static void saveCreds(){
-        
-                    // new file with account info
-                    try{
-                        if (credentials.createNewFile()){
-                            System.out.println("File created successfully!");
-                        } else {
-                            System.out.println("File already exists. ");
-                        }
-                    } catch (IOException a){
-                        System.out.println("An error has occured. ");
-                    }
-                    try{
-                        FileWriter writer = new FileWriter("userCredentials.txt", true);
-                        userAndPass.put(User.username, User.password);
-                        writer.write(userAndPass + " | ");
-                        writer.close();
-                        numProfiles += 1;
-                    } catch (IOException a){
-                        System.out.println("An error has occured. ");
-                    }
+        // new file with account info
+        try{
+            if (credentials.createNewFile()){
+                System.out.println("File created successfully!");
+            } else {
+                System.out.println("File already exists. ");
+            }
+        } catch (IOException a){
+            System.out.println("An error has occured. ");
+        }
+        try{
+            FileWriter writer = new FileWriter("userCredentials.txt", true);
+            userAndPass.put(User.username, User.password);
+            writer.write(userAndPass + " | ");
+            writer.close();
+            numProfiles += 1;
+        } catch (IOException a){
+            System.out.println("An error has occured. ");
+        }
     }
 }
