@@ -57,6 +57,11 @@ public class AddClassScreen extends javax.swing.JFrame {
 
         surround2.setVisible(false);
         surround2.setText("jButton3");
+        surround2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surround2ActionPerformed(evt);
+            }
+        });
 
         surround3.setVisible(false);
         surround3.setText("jButton4");
@@ -149,13 +154,13 @@ public class AddClassScreen extends javax.swing.JFrame {
     private void centerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_centerButtonActionPerformed
         final int mandatoryNum = 3;
         String[] mandatoryCourses = {"SPH4U", "SCH4U", "ENG4U"};
-        
         JButton[] courses = {surround1, surround2, surround3, surround4, surround5, surround6};
         for(int i = 0; i < mandatoryNum; i++){
-            courses[i].setText(mandatoryCourses[i]);
             courses[i].setVisible(true);
+            courses[i].setText(mandatoryCourses[i]);
+            
         }
-        
+        centerButton.setText("Click to add Remaining Courses");
         
     }//GEN-LAST:event_centerButtonActionPerformed
 
@@ -163,10 +168,11 @@ public class AddClassScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_surround1ActionPerformed
 
+    private void surround2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surround2ActionPerformed
+        
+    }//GEN-LAST:event_surround2ActionPerformed
+
     
-    private void surround2ActionPerformed(java.awt.event.ActionEvent evt){
-    
-    }
     /**
      * @param args the command line arguments
      */
