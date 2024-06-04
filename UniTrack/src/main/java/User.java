@@ -5,7 +5,7 @@
 import com.google.api.services.classroom.Classroom;
 import com.google.api.services.classroom.model.Course;
 import static java.awt.BorderLayout.SOUTH;
-import javax.swing.JToggleButton.isSelected;
+//import javax.swing.JToggleButton.isSelected;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -315,14 +315,14 @@ public class User {
                 //adds button to select course
                 courseSelector[x][3]=new JToggleButton();
                 courseSelector[x][3].setPreferredSize(new Dimension(200,240));
-                ((JToggleButton)courseSelector[x][3]).addActionListener(new ActionListener() {
-                   @Override
-                   public void actionPerformed(ActionEvent e){
-                        if(courseSelector[x][3].isSelected()){
-                           courseList[x]=studentCourse;
-                       }
-                   }
-                });
+//                ((JToggleButton)courseSelector[x][3]).addActionListener(new ActionListener() {
+//                   @Override
+////                   public void actionPerformed(ActionEvent e){
+////                        if(courseSelector[x][3].isSelected()){
+////                           courseList[x]=studentCourse;
+////                       }
+////                   }
+//                });
                 layout.gridx=5*(x+1)+(200*x);
                 layout.gridy=240;
                 layout.gridwidth=200;
