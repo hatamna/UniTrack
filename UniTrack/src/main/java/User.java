@@ -5,8 +5,8 @@
 import com.google.api.services.classroom.Classroom;
 import com.google.api.services.classroom.model.Course;
 import static java.awt.BorderLayout.SOUTH;
-//import javax.swing.JToggleButton.isSelected;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -19,14 +19,13 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -47,7 +46,7 @@ public class User {
     private SortedMap<UniCourse, Double> userCourses = new TreeMap<>();
     GridBagConstraints layout = new GridBagConstraints();
     private List<Course> studentCourseList;
-    private Course[] courseList;
+    private ArrayList<Course> courseList;
     private Thread OAuth = null;
     public static String username;
     public static String password;
@@ -66,14 +65,14 @@ public class User {
     private JButton createAccount;
     private JLabel errorMessage;
     private JPanel courseSelection;
-    private JComponent[][] courseSelector;
-    private Object[][] courseAndID;
+    private Object[][] courseSelector;
     private boolean allowArchived;
     private int size;
     private JPanel courseButtons;
     private JPanel courseInfo;
     private JScrollPane scrollablePane;
     private JLayeredPane courseSelect;
+    private JButton submit;
     
     public User() throws IOException, GeneralSecurityException, InterruptedException{
         SwingUtilities.invokeLater(this::createAccountSetup); //creates seperate thread for the gui
@@ -262,40 +261,42 @@ public class User {
         
         studentCourseList=Import.getCourses(classroomData); //used in for loop DO NOT TOUCH
         size=Import.getCourses(classroomData).size();
-        courseList= new Course[size]; //list of courses that are selected
-        courseSelector = new JComponent[size][4]; //one array per course 4 Jcomponents per
-        courseAndID = new Object[size][size];
+        courseList = new ArrayList<>();
+        courseSelector = new Object[size][5]; //one array per course 4 Jcomponents per
         SwingUtilities.invokeLater(() -> {
             for(int x=0; x<size; x++){
                 Course studentCourse =studentCourseList.get(x);
                 //if(!(studentCourse.getCourseState().equals("ARCHIVED")&&allowArchived) && !studentCourse.getCourseState().equals("ACTIVE")) continue;
                 
+                //adds course
+                courseSelector[x][0]=studentCourse;
+                
                 //displays course name
-                courseSelector[x][0]=new JLabel(studentCourse.getName());
+                courseSelector[x][1]=new JLabel(studentCourse.getName());
                 layout.gridx=1*(x+1)+(220*(x));
                 layout.gridy=0;
                 layout.gridwidth=3;
                 layout.gridheight=1;
                 layout.insets = new Insets(0, 0, 0, 10);
-                courseInfo.add(courseSelector[x][0], layout);
+                courseInfo.add((Component)courseSelector[x][1], layout);
                 layout.insets = new Insets(0,0,0,0);
                 
                 //displays course section
-                courseSelector[x][1]=new JLabel(studentCourse.getSection());
+                courseSelector[x][2]=new JLabel(studentCourse.getSection());
                 layout.gridx=1*(x+1)+(220*(x));
                 layout.gridy=RELATIVE;
                 layout.gridwidth=2;
                 layout.gridheight=1;
                 layout.insets = new Insets(0, 0, 180, 0);
-                courseInfo.add(courseSelector[x][1], layout);
+                courseInfo.add((Component)courseSelector[x][2], layout);
                 layout.insets = new Insets(0, 0, 0, 0);
                
                 //button to open the course in google classroom
-                courseSelector[x][2]=new JButton("Open in classroom");
-                courseSelector[x][2].setOpaque(false);
-                ((JButton)courseSelector[x][2]).setContentAreaFilled(false);
-                ((JButton)courseSelector[x][2]).setBorderPainted(false);
-                ((JButton)courseSelector[x][2]).addActionListener(new ActionListener(){ 
+                courseSelector[x][3]=new JButton("Open in classroom");
+                ((JButton)courseSelector[x][3]).setOpaque(false);
+                ((JButton)courseSelector[x][3]).setContentAreaFilled(false);
+                ((JButton)courseSelector[x][3]).setBorderPainted(false);
+                ((JButton)courseSelector[x][3]).addActionListener(new ActionListener(){ 
                     @Override
                     public void actionPerformed(ActionEvent e){
                         try {
@@ -310,27 +311,33 @@ public class User {
                 layout.gridy=50;
                 layout.gridwidth=5;
                 layout.gridheight=1;
-                courseInfo.add(courseSelector[x][2], layout);
+                courseInfo.add((Component)courseSelector[x][3], layout);
                 
                 //adds button to select course
-                courseSelector[x][3]=new JToggleButton();
-                courseSelector[x][3].setPreferredSize(new Dimension(200,240));
-//                ((JToggleButton)courseSelector[x][3]).addActionListener(new ActionListener() {
-//                   @Override
-////                   public void actionPerformed(ActionEvent e){
-////                        if(courseSelector[x][3].isSelected()){
-////                           courseList[x]=studentCourse;
-////                       }
-////                   }
-//                });
+                courseSelector[x][4]=new JToggleButton();
+                ((JToggleButton)courseSelector[x][4]).setPreferredSize(new Dimension(200,240));
                 layout.gridx=5*(x+1)+(200*x);
                 layout.gridy=240;
                 layout.gridwidth=200;
                 layout.gridheight=240;
                 layout.insets = new Insets(0, 0, 10, 10);
-                courseButtons.add(courseSelector[x][3], layout);
+                courseButtons.add((Component)courseSelector[x][4], layout);
                 layout.insets = new Insets(0, 0, 0, 0);
             }
+            
+            //finish button
+            submit= new JButton("Import");
+            submit.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    for(int x=0; x<size; x++){
+                        if(((JToggleButton)courseSelector[x][4]).isSelected()){
+                            courseList.add((Course)courseSelector[x][0]);
+                        }
+                    }
+                }
+            });
+            
             //adding panels to layered pane
             courseButtons.setBackground(Color.LIGHT_GRAY);
             courseSelect.add(courseInfo, JLayeredPane.PALETTE_LAYER);
