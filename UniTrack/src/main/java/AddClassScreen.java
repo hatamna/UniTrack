@@ -1,12 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+import java.awt.*;
+import javax.swing.*;
 
-/**
- *
- * @author Yahya
- */
 public class AddClassScreen extends javax.swing.JFrame {
 
     /**
@@ -27,6 +21,13 @@ public class AddClassScreen extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         tempBypassButton = new javax.swing.JButton();
+        centerButton = new javax.swing.JButton();
+        surround1 = new javax.swing.JButton();
+        surround2 = new javax.swing.JButton();
+        surround3 = new javax.swing.JButton();
+        surround4 = new javax.swing.JButton();
+        surround5 = new javax.swing.JButton();
+        surround6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,19 +40,87 @@ public class AddClassScreen extends javax.swing.JFrame {
             }
         });
 
+        centerButton.setText("ADD COURSE");
+        centerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                centerButtonActionPerformed(evt);
+            }
+        });
+
+        surround1.setText("jButton2");
+        surround1.setVisible(false);
+        surround1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surround1ActionPerformed(evt);
+            }
+        });
+
+        surround2.setVisible(false);
+        surround2.setText("jButton3");
+
+        surround3.setVisible(false);
+        surround3.setText("jButton4");
+
+        surround4.setVisible(false);
+        surround4.setText("jButton5");
+
+        surround5.setVisible(false);
+        surround5.setText("jButton6");
+
+        surround6.setVisible(false);
+        surround6.setText("jButton7");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(667, Short.MAX_VALUE)
-                .addComponent(tempBypassButton)
-                .addContainerGap())
+                .addGap(0, 224, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(surround6)
+                    .addComponent(surround5))
+                .addGap(198, 198, 198)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(surround3)
+                    .addComponent(surround2))
+                .addGap(226, 226, 226))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(centerButton)
+                        .addGap(354, 354, 354))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(tempBypassButton)
+                        .addContainerGap())))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(361, 361, 361)
+                        .addComponent(surround4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(359, 359, 359)
+                        .addComponent(surround1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(571, Short.MAX_VALUE)
+                .addGap(151, 151, 151)
+                .addComponent(surround1)
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(surround6)
+                    .addComponent(surround2))
+                .addGap(33, 33, 33)
+                .addComponent(centerButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(surround3)
+                    .addComponent(surround5))
+                .addGap(34, 34, 34)
+                .addComponent(surround4)
+                .addGap(178, 178, 178)
                 .addComponent(tempBypassButton)
                 .addContainerGap())
         );
@@ -77,6 +146,23 @@ public class AddClassScreen extends javax.swing.JFrame {
         screen.toFront();
     }//GEN-LAST:event_tempBypassButtonActionPerformed
 
+    private void centerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_centerButtonActionPerformed
+        final int mandatoryCourses = 3;
+        String[] courses;
+        
+        for(int i = 0; i < mandatoryCourses; i++){
+            
+        }
+    }//GEN-LAST:event_centerButtonActionPerformed
+
+    private void surround1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surround1ActionPerformed
+        
+    }//GEN-LAST:event_surround1ActionPerformed
+
+    
+    private void surround2ActionPerformed(java.awt.event.ActionEvent evt){
+    
+    }
     /**
      * @param args the command line arguments
      */
@@ -113,7 +199,14 @@ public class AddClassScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton centerButton;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton surround1;
+    private javax.swing.JButton surround2;
+    private javax.swing.JButton surround3;
+    private javax.swing.JButton surround4;
+    private javax.swing.JButton surround5;
+    private javax.swing.JButton surround6;
     private javax.swing.JButton tempBypassButton;
     // End of variables declaration//GEN-END:variables
 }

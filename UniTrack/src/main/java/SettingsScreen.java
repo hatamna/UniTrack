@@ -17,6 +17,10 @@ public class SettingsScreen extends javax.swing.JFrame {
      */
     public SettingsScreen() {
         initComponents();
+        uniInfo.putty();
+        for (String i: uniInfo.universities){
+            uniDropDown.addItem(i);
+        }
     }
 
     /**
@@ -61,8 +65,6 @@ public class SettingsScreen extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("My University: ");
-
-        uniDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "-" }));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/redSurroundButton.png"))); // NOI18N
 

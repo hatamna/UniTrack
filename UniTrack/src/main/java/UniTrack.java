@@ -46,7 +46,6 @@ public class UniTrack {
     }
     
     public static void saveCreds(){
-        
         // new file with account info
         try{
             if (credentials.createNewFile()){
