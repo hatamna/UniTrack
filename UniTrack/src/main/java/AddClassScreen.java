@@ -28,6 +28,12 @@ public class AddClassScreen extends javax.swing.JFrame {
         surround4 = new javax.swing.JButton();
         surround5 = new javax.swing.JButton();
         surround6 = new javax.swing.JButton();
+        surroundField1 = new javax.swing.JTextField();
+        surroundField2 = new javax.swing.JTextField();
+        surroundField3 = new javax.swing.JTextField();
+        surroundField4 = new javax.swing.JTextField();
+        surroundField5 = new javax.swing.JTextField();
+        surroundField6 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,7 +46,7 @@ public class AddClassScreen extends javax.swing.JFrame {
             }
         });
 
-        centerButton.setText("ADD COURSE");
+        centerButton.setText("ADD PROGRAM");
         centerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 centerButtonActionPerformed(evt);
@@ -57,6 +63,11 @@ public class AddClassScreen extends javax.swing.JFrame {
 
         surround2.setVisible(false);
         surround2.setText("jButton3");
+        surround2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surround2ActionPerformed(evt);
+            }
+        });
 
         surround3.setVisible(false);
         surround3.setText("jButton4");
@@ -70,57 +81,137 @@ public class AddClassScreen extends javax.swing.JFrame {
         surround6.setVisible(false);
         surround6.setText("jButton7");
 
+        surroundField1.setText("ADD COURSE");
+        surroundField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surroundField1ActionPerformed(evt);
+            }
+        });
+
+        surroundField2.setText("ADD COURSE");
+        surroundField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surroundField2ActionPerformed(evt);
+            }
+        });
+
+        surroundField3.setText("ADD COURSE");
+        surroundField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surroundField3ActionPerformed(evt);
+            }
+        });
+
+        surroundField4.setText("ADD COURSE");
+        surroundField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surroundField4ActionPerformed(evt);
+            }
+        });
+
+        surroundField5.setText("ADD COURSE");
+        surroundField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surroundField5ActionPerformed(evt);
+            }
+        });
+
+        surroundField6.setText("ADD COURSE");
+        surroundField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surroundField6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 224, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(surround6)
-                    .addComponent(surround5))
-                .addGap(198, 198, 198)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(surround3)
-                    .addComponent(surround2))
-                .addGap(226, 226, 226))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(centerButton)
-                        .addGap(354, 354, 354))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(tempBypassButton)
-                        .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(361, 361, 361)
-                        .addComponent(surround4))
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(surroundField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(surround5)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(surround6)
+                        .addComponent(surroundField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(359, 359, 359)
-                        .addComponent(surround1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(surround1)
+                                        .addComponent(surroundField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(17, 17, 17)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(surround4)
+                                            .addComponent(centerButton)
+                                            .addComponent(surroundField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(surround3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(surroundField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(133, 133, 133))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(336, 336, 336)
+                                .addComponent(tempBypassButton)
+                                .addContainerGap())))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(surroundField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(surround2))
+                        .addGap(98, 98, 98))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
+                .addGap(93, 93, 93)
                 .addComponent(surround1)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(surroundField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(surround6)
                     .addComponent(surround2))
-                .addGap(33, 33, 33)
-                .addComponent(centerButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(surround3)
-                    .addComponent(surround5))
-                .addGap(34, 34, 34)
-                .addComponent(surround4)
-                .addGap(178, 178, 178)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(surroundField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(surroundField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(surround5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(surroundField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(78, 78, 78))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(centerButton)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(80, 80, 80)
+                                .addComponent(surround3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(surroundField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(surround4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))))
+                .addComponent(surroundField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113)
                 .addComponent(tempBypassButton)
                 .addContainerGap())
         );
@@ -147,22 +238,69 @@ public class AddClassScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_tempBypassButtonActionPerformed
 
     private void centerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_centerButtonActionPerformed
-        final int mandatoryCourses = 3;
-        String[] courses;
-        
-        for(int i = 0; i < mandatoryCourses; i++){
-            
+        final int mandatoryNum = 3;
+        String[] mandatoryCourses = {"SPH4U", "SCH4U", "ENG4U"};
+        JButton[] courses = {surround1, surround2, surround3, surround4, surround5, surround6};
+        JTextField[] fillIn = {surroundField1, surroundField2, surroundField3, surroundField4, surroundField5, surroundField6};
+        for(int i = 0; i < mandatoryNum; i++){
+            courses[i].setVisible(true);
+            fillIn[i].setVisible(false);
+            courses[i].setText(mandatoryCourses[i]);
         }
+        
     }//GEN-LAST:event_centerButtonActionPerformed
 
     private void surround1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surround1ActionPerformed
         
     }//GEN-LAST:event_surround1ActionPerformed
 
+    private void surround2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surround2ActionPerformed
+
+    }//GEN-LAST:event_surround2ActionPerformed
+
+    private void surroundField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundField2ActionPerformed
+        String input = surroundField2.getText();
+        surroundField2.setVisible(false);
+        surround2.setText(input);
+        surround2.setVisible(true);
+    }//GEN-LAST:event_surroundField2ActionPerformed
+
+    private void surroundField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundField1ActionPerformed
+        String input = surroundField1.getText();
+        surroundField1.setVisible(false);
+        surround1.setText(input);
+        surround1.setVisible(true);
+    }//GEN-LAST:event_surroundField1ActionPerformed
+
+    private void surroundField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundField3ActionPerformed
+        String input = surroundField3.getText();
+        surroundField3.setVisible(false);
+        surround3.setText(input);
+        surround3.setVisible(true);
+    }//GEN-LAST:event_surroundField3ActionPerformed
+
+    private void surroundField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundField4ActionPerformed
+        String input = surroundField4.getText();
+        surroundField4.setVisible(false);
+        surround4.setText(input);
+        surround4.setVisible(true);
+    }//GEN-LAST:event_surroundField4ActionPerformed
+
+    private void surroundField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundField6ActionPerformed
+        String input = surroundField6.getText();
+        surroundField6.setVisible(false);
+        surround6.setText(input);
+        surround6.setVisible(true);
+    }//GEN-LAST:event_surroundField6ActionPerformed
+
+    private void surroundField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundField5ActionPerformed
+        String input = surroundField5.getText();
+        surroundField5.setVisible(false);
+        surround5.setText(input);
+        surround5.setVisible(true);
+    }//GEN-LAST:event_surroundField5ActionPerformed
+
     
-    private void surround2ActionPerformed(java.awt.event.ActionEvent evt){
-    
-    }
     /**
      * @param args the command line arguments
      */
@@ -207,6 +345,12 @@ public class AddClassScreen extends javax.swing.JFrame {
     private javax.swing.JButton surround4;
     private javax.swing.JButton surround5;
     private javax.swing.JButton surround6;
+    private javax.swing.JTextField surroundField1;
+    private javax.swing.JTextField surroundField2;
+    private javax.swing.JTextField surroundField3;
+    private javax.swing.JTextField surroundField4;
+    private javax.swing.JTextField surroundField5;
+    private javax.swing.JTextField surroundField6;
     private javax.swing.JButton tempBypassButton;
     // End of variables declaration//GEN-END:variables
 }
