@@ -1,6 +1,8 @@
 
+import static java.lang.Double.parseDouble;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Set;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -21,6 +23,9 @@ public class uniInfo {
     static HashMap<String, Double> UOPrograms = new HashMap<>();
     static HashMap<String, Double> UTPrograms = new HashMap<>();
     
+    public static Set<String> ottawa;
+    public static double[] ottGrades = {0, 0, 0, 0};
+    
     static String[] universities = {"uOttawa", "uToronto"};
     
     public static void putty(){
@@ -34,7 +39,17 @@ public class uniInfo {
         UTPrograms.put("Life Sciences", 85.00);
         uToronto.put("uToronto", UTPrograms);
         
-        System.out.println(UOPrograms.toString());
+        ottawa = UOPrograms.keySet();
+        
+        System.out.println(UOPrograms.entrySet());
+        
+        System.out.println(ottawa);
+        
+        for (int i = 0; i < 3; i++){
+            ottGrades[i] = parseDouble(String.valueOf(UOPrograms.values().toArray()[i]));
+        }
+        
+        System.out.println(UOPrograms.keySet().toArray()[1]);
     }
 
     
