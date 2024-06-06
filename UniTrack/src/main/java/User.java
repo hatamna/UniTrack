@@ -4,6 +4,7 @@
  */
 import com.google.api.services.classroom.Classroom;
 import com.google.api.services.classroom.model.Course;
+import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.SOUTH;
 import java.awt.Color;
 import java.awt.Component;
@@ -73,6 +74,7 @@ public class User {
     private JScrollPane scrollablePane;
     private JLayeredPane courseSelect;
     private JButton submit;
+    private JPanel importPanel;
     
     public User() throws IOException, GeneralSecurityException, InterruptedException{
         SwingUtilities.invokeLater(this::createAccountSetup); //creates seperate thread for the gui
@@ -91,6 +93,7 @@ public class User {
         courseButtons.setBounds(0,0,500,500);
         courseInfo = new JPanel(new GridBagLayout());
         courseInfo.setBounds(0,0,500,500);
+        importPanel = new JPanel(new GridBagLayout());
         
         //panel and elements for account creation
         accountCreation = new JPanel(new GridBagLayout());
@@ -273,8 +276,8 @@ public class User {
                 
                 //displays course name
                 courseSelector[x][1]=new JLabel(studentCourse.getName());
-                layout.gridx=1*(x+1)+(220*(x));
-                layout.gridy=0;
+                layout.gridx=1*(x+1)+(220*(x%3));
+                layout.gridy=0+(260*(x/3));
                 layout.gridwidth=3;
                 layout.gridheight=1;
                 layout.insets = new Insets(0, 0, 0, 10);
@@ -283,7 +286,6 @@ public class User {
                 
                 //displays course section
                 courseSelector[x][2]=new JLabel(studentCourse.getSection());
-                layout.gridx=1*(x+1)+(220*(x));
                 layout.gridy=RELATIVE;
                 layout.gridwidth=2;
                 layout.gridheight=1;
@@ -307,22 +309,27 @@ public class User {
                         }
                     }
                 });
-                layout.gridx=5*(x+1)+(220*(x));
-                layout.gridy=50;
+                layout.gridx=5*(x+1)+(220*(x%3));
+                layout.gridy=50+(260*(x/3));
                 layout.gridwidth=5;
                 layout.gridheight=1;
                 courseInfo.add((Component)courseSelector[x][3], layout);
                 
                 //adds button to select course
-                courseSelector[x][4]=new JToggleButton();
-                ((JToggleButton)courseSelector[x][4]).setPreferredSize(new Dimension(200,240));
-                layout.gridx=5*(x+1)+(200*x);
-                layout.gridy=240;
-                layout.gridwidth=200;
-                layout.gridheight=240;
-                layout.insets = new Insets(0, 0, 10, 10);
+                courseSelector[x][4]=new JToggleButton(String.valueOf(x));
+                ((JToggleButton)courseSelector[x][4]).setMinimumSize(new Dimension(200,240));
+                layout.ipadx=200; //1*(x+1)+(200*(x%3));
+                layout.ipady=240; //1*(x+1)+(240*(x/3));
+                layout.gridwidth=0;
+                layout.gridheight=0;
+                layout.gridx=0;
+                layout.gridy=0;
+                layout.fill = GridBagConstraints.NONE;
+                layout.insets = new Insets(0, 0, 0, 0);
                 courseButtons.add((Component)courseSelector[x][4], layout);
                 layout.insets = new Insets(0, 0, 0, 0);
+                layout.ipadx=0;
+                layout.ipady=0;
             }
             
             //finish button
@@ -335,8 +342,16 @@ public class User {
                             courseList.add((Course)courseSelector[x][0]);
                         }
                     }
+                    
+                    //done importing
+                    setUpMenu.remove(importPanel);
+                    
+                    //update gui
+                    setUpMenu.revalidate();
+                    setUpMenu.repaint();
                 }
             });
+            submit.setPreferredSize(new Dimension(100,100));
             
             //adding panels to layered pane
             courseButtons.setBackground(Color.LIGHT_GRAY);
@@ -346,7 +361,10 @@ public class User {
             
             //setup scrollable pane
             scrollablePane = new JScrollPane(courseSelect);
-            setUpMenu.add(scrollablePane);
+            scrollablePane.setMinimumSize(new Dimension(500,500));
+            importPanel.add(scrollablePane);
+            importPanel.add(submit, layout);
+            setUpMenu.add(importPanel, CENTER);
             setUpMenu.remove(importing);
             
             //update gui
