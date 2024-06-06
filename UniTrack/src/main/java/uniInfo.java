@@ -46,7 +46,7 @@ public class uniInfo {
         System.out.println(ottawa);
         
         for (int i = 0; i < 3; i++){
-            ottGrades[i] = parseDouble(String.valueOf(UOPrograms.values().toArray()[i]));
+            ottGrades[i] = parseDouble(String.valueOf(UOPrograms.values().toArray()[i])); //FIX
         }
         
         System.out.println(UOPrograms.keySet().toArray()[1]);
