@@ -13,6 +13,10 @@ import javax.swing.JLayeredPane;
  * @author Yahya
  */
 public class SettingsScreen extends javax.swing.JFrame {
+    
+    public static double currentAvg = 90.56;
+    public double currentGoal;
+    public static int centerButtonColour = 0;
 
     /**
      * Creates new form SettingsScreen
@@ -33,6 +37,57 @@ public class SettingsScreen extends javax.swing.JFrame {
             programDropDown.addItem(i);
         }
     }
+    
+    public void dropDownActPer(){
+        switch (String.valueOf(uniDropDown.getSelectedItem())){
+            case "uOttawa":
+                switch (String.valueOf(programDropDown.getSelectedItem())){
+                    case uniInfo.PROG_NAME_01:
+                        tempGradeText.setText(String.valueOf(uniInfo.ottGrades[0]));
+                        currentGoal = uniInfo.ottGrades[0];
+                        break;
+                    case uniInfo.PROG_NAME_02:
+                        tempGradeText.setText(String.valueOf(uniInfo.ottGrades[1]));
+                        currentGoal = uniInfo.ottGrades[1];
+                        break;
+                    case uniInfo.PROG_NAME_03:
+                        tempGradeText.setText(String.valueOf(uniInfo.ottGrades[2]));
+                        currentGoal = uniInfo.ottGrades[2];
+                        break;
+                    default:
+                        System.out.println("Error.");
+                    }
+                    break;
+            case "uToronto":
+                switch (String.valueOf(programDropDown.getSelectedItem())){
+                    case "Computer Science":
+                        tempGradeText.setText(String.valueOf(uniInfo.torGrades[0]));
+                        currentGoal = uniInfo.torGrades[0];
+                        break;
+                    case "Biology":
+                        tempGradeText.setText(String.valueOf(uniInfo.torGrades[1]));
+                        currentGoal = uniInfo.torGrades[1];
+                        break;
+                    case "Life Sciences":
+                        tempGradeText.setText(String.valueOf(uniInfo.torGrades[2]));
+                        currentGoal = uniInfo.torGrades[2];
+                        break;
+                    default:
+                        System.out.println("Error.");
+                    }
+                    break;
+        }
+        if (currentAvg == currentGoal || ((currentAvg > (currentGoal - 2)) && (currentAvg < (currentGoal + 2)))){
+            gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yellowSurroundButton.png/")));
+            centerButtonColour = 0;
+        } else if (currentAvg < (currentGoal - 2)){
+            gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/redSurroundButton.png/")));
+            centerButtonColour = 1;
+        } else if (currentAvg > (currentGoal + 2)){
+            gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/greenSurroundButton.png/")));
+            centerButtonColour = 2;
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,7 +104,7 @@ public class SettingsScreen extends javax.swing.JFrame {
         programDropDown = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         uniDropDown = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        gradeRecBG = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         tempGradeText = new javax.swing.JLabel();
 
@@ -95,7 +150,13 @@ public class SettingsScreen extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("My University: ");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/redSurroundButton.png"))); // NOI18N
+        uniDropDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uniDropDownActionPerformed(evt);
+            }
+        });
+
+        gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/redSurroundButton.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,7 +178,7 @@ public class SettingsScreen extends javax.swing.JFrame {
                             .addComponent(programDropDown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(125, 125, 125)
-                        .addComponent(jLabel3)))
+                        .addComponent(gradeRecBG)))
                 .addContainerGap(371, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -134,7 +195,7 @@ public class SettingsScreen extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(uniDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(105, 105, 105)
-                .addComponent(jLabel3)
+                .addComponent(gradeRecBG)
                 .addContainerGap(172, Short.MAX_VALUE))
         );
 
@@ -157,8 +218,8 @@ public class SettingsScreen extends javax.swing.JFrame {
             .addGap(0, 105, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(44, 44, 44)
-                    .addComponent(tempGradeText, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(56, 56, 56)
+                    .addComponent(tempGradeText)
                     .addContainerGap(33, Short.MAX_VALUE)))
         );
 
@@ -203,20 +264,12 @@ public class SettingsScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_programDropDownMouseMoved
 
     private void programDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_programDropDownActionPerformed
-        switch (String.valueOf(programDropDown.getSelectedItem())){
-            case "Software Engineering":
-                tempGradeText.setText(String.valueOf(uniInfo.ottGrades[0]));
-                break;
-            case "Computer Science":
-                tempGradeText.setText(String.valueOf(uniInfo.ottGrades[1]));
-                break;
-            case "Biology":
-                tempGradeText.setText(String.valueOf(uniInfo.ottGrades[2]));
-                break;
-            default:
-                System.out.println("Error.");
-        }
+        dropDownActPer();
     }//GEN-LAST:event_programDropDownActionPerformed
+
+    private void uniDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uniDropDownActionPerformed
+        dropDownActPer();
+    }//GEN-LAST:event_uniDropDownActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,9 +308,9 @@ public class SettingsScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JLabel gradeRecBG;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JComboBox<String> programDropDown;

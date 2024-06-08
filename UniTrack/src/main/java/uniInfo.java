@@ -16,6 +16,10 @@ import java.util.Set;
 public class uniInfo {
     
     
+    public static final String PROG_NAME_01 = "Computer Science";
+    public static final String PROG_NAME_02 = "Biology";
+    public static final String PROG_NAME_03 = "Life Sciences";
+    
     
     static HashMap<String, HashMap> uOttawa = new HashMap<>();
     static HashMap<String, HashMap> uToronto = new HashMap<>();
@@ -24,32 +28,33 @@ public class uniInfo {
     static HashMap<String, Double> UTPrograms = new HashMap<>();
     
     public static Set<String> ottawa;
-    public static double[] ottGrades = {0, 0, 0, 0};
+    public static Set<String> toronto;
+    public static double[] ottGrades = {0, 0, 0};
+    public static double[] torGrades = {0, 0, 0};
     
     static String[] universities = {"uOttawa", "uToronto"};
     
     public static void putty(){
-        UOPrograms.put("Computer Science", 93.00); 
-        UOPrograms.put("Biology", 85.00); 
-        UOPrograms.put("Software Engineering", 89.00); 
+        UOPrograms.put(PROG_NAME_01, 90.00); 
+        UOPrograms.put(PROG_NAME_02, 89.00); 
+        UOPrograms.put(PROG_NAME_03, 87.00); 
         uOttawa.put("uOttawa", UOPrograms);
         
-        UTPrograms.put("Computer Science", 95.00);
-        UTPrograms.put("Civil Engineering", 85.00);
-        UTPrograms.put("Life Sciences", 85.00);
+        UTPrograms.put(PROG_NAME_01, 99.00);
+        UTPrograms.put(PROG_NAME_02, 95.00);
+        UTPrograms.put(PROG_NAME_03, 97.00);
         uToronto.put("uToronto", UTPrograms);
         
         ottawa = UOPrograms.keySet();
-        
-        System.out.println(UOPrograms.entrySet());
-        
-        System.out.println(ottawa);
+        toronto = UTPrograms.keySet();
         
         for (int i = 0; i < 3; i++){
             ottGrades[i] = parseDouble(String.valueOf(UOPrograms.values().toArray()[i])); //FIX
         }
         
-        System.out.println(UOPrograms.keySet().toArray()[1]);
+        for (int i = 0; i < 3; i++){
+            torGrades[i] = parseDouble(String.valueOf(UTPrograms.values().toArray()[i])); //FIX
+        }
     }
 
     

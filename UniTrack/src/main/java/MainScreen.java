@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLayeredPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -20,6 +21,20 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
+        currentAvgLabel.setText(String.valueOf(SettingsScreen.currentAvg) + "%");
+        remove(jPanel1);
+        remove(jPanel2);
+        JLayeredPane layers = new JLayeredPane();
+        jPanel2.setOpaque(false);
+        layers.add(jPanel1, JLayeredPane.PALETTE_LAYER);
+        layers.add(jPanel2, JLayeredPane.DEFAULT_LAYER);
+        if (SettingsScreen.centerButtonColour == 0){
+            MainScreen.CenterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yellowCenterButton.png/")));
+        } else if (SettingsScreen.centerButtonColour == 1){
+            MainScreen.CenterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/redCenterButton.png/")));
+        } else if (SettingsScreen.centerButtonColour == 2){
+            MainScreen.CenterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/greenCenterButton.png/")));
+        }
     }
     
     public void openCourseScreen(){
@@ -50,6 +65,9 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         exitButton = new javax.swing.JButton();
         signOutButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        currentAvgLabel = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("UniTrack");
@@ -209,11 +227,41 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(signOutButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(143, 143, 143)
+                .addGap(149, 149, 149)
                 .addComponent(surroundButton2)
                 .addGap(80, 80, 80)
                 .addComponent(surround3)
                 .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        currentAvgLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        currentAvgLabel.setForeground(new java.awt.Color(255, 255, 255));
+        currentAvgLabel.setText("90%");
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("ABC4U");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(166, 166, 166)
+                .addComponent(currentAvgLabel)
+                .addContainerGap(172, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(184, 184, 184))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel3)
+                .addGap(102, 102, 102)
+                .addComponent(currentAvgLabel)
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -221,10 +269,20 @@ public class MainScreen extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(155, 155, 155)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(220, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(71, 71, 71)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(146, Short.MAX_VALUE)))
         );
 
         setSize(new java.awt.Dimension(786, 593));
@@ -291,11 +349,14 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CenterButton;
+    public static javax.swing.JButton CenterButton;
+    private javax.swing.JLabel currentAvgLabel;
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JButton signOutButton;
     private javax.swing.JButton surround3;
     private javax.swing.JButton surroundButton1;
