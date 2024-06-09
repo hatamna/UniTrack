@@ -20,7 +20,8 @@ public class uniInfo {
     public static final String PROG_NAME_02 = "Biology";
     public static final String PROG_NAME_03 = "Life Sciences";
     
-    
+    static HashMap<String, String> uMandatoryCourses = new HashMap<>();
+    static HashMap<String, String> tMandatoryCourses = new HashMap<>();
     static HashMap<String, HashMap> uOttawa = new HashMap<>();
     static HashMap<String, HashMap> uToronto = new HashMap<>();
     
@@ -36,11 +37,23 @@ public class uniInfo {
     
     public static void putty(){
         UOPrograms.put(PROG_NAME_01, 90.00); 
+        uMandatoryCourses.put(PROG_NAME_01, "ENG4U");
+        uMandatoryCourses.put(PROG_NAME_01, "MHF4U");
+        uMandatoryCourses.put(PROG_NAME_01, "MCV4U");
+        
         UOPrograms.put(PROG_NAME_02, 89.00); 
+//        uMandatoryCourses.put(PROG_NAME_02, "ENG4U");
+//        uMandatoryCourses.put(PROG_NAME_02, "MHF4U");
+//        uMandatoryCourses.put(PROG_NAME_02, "MCV4U");
+        
         UOPrograms.put(PROG_NAME_03, 87.00); 
         uOttawa.put("uOttawa", UOPrograms);
         
         UTPrograms.put(PROG_NAME_01, 99.00);
+        tMandatoryCourses.put(PROG_NAME_01, "ENG4U");
+        tMandatoryCourses.put(PROG_NAME_01, "MHF4U");
+        tMandatoryCourses.put(PROG_NAME_01, "MCV4U");
+        
         UTPrograms.put(PROG_NAME_02, 95.00);
         UTPrograms.put(PROG_NAME_03, 97.00);
         uToronto.put("uToronto", UTPrograms);

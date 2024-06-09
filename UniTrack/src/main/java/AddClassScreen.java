@@ -1,15 +1,68 @@
-import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class AddClassScreen extends javax.swing.JFrame {
+    public static ArrayList<String> mandatoryCourses = new ArrayList();
+    public static String programName = null;
+    public static JLabel[] labels;
 
-    /**
-     * Creates new form AddClassScreen
-     */
-    public AddClassScreen() {
+    public AddClassScreen(){
+        
         initComponents();
+        uniInfo.putty();
+        for (String i: uniInfo.universities){
+            uniDropDown.addItem(i);
+        }
+        for (String i: uniInfo.ottawa){
+            programDropDown.addItem(i);
+        }
+        labels = new JLabel[]{jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6};
     }
-
+    
+    public void choiceTrack() {
+    switch (String.valueOf(uniDropDown.getSelectedItem())) {
+        case "uOttawa":
+            
+            switch (String.valueOf(programDropDown.getSelectedItem())) {
+                case uniInfo.PROG_NAME_01:
+                    programName = uniInfo.PROG_NAME_01;
+                    for (String i : uniInfo.uMandatoryCourses.values()) {
+                        mandatoryCourses.add(i); 
+                    } 
+                    break;
+                case uniInfo.PROG_NAME_02:
+                    // Handle program 2 if needed
+                    break;
+                case uniInfo.PROG_NAME_03:
+                    // Handle program 3 if needed
+                    break;
+                default:
+                    System.out.println("Error: Invalid program selected for uOttawa.");
+            }
+            break;
+        case "uToronto":
+            switch (String.valueOf(programDropDown.getSelectedItem())) {
+                case uniInfo.PROG_NAME_01:
+                    // Handle program 1 at uToronto if needed
+                    break;
+                case uniInfo.PROG_NAME_02:
+                    // Handle program 2 at uToronto if needed
+                    break;
+                case uniInfo.PROG_NAME_03:
+                    // Handle program 3 at uToronto if needed
+                    break;
+                default:
+                    System.out.println("Error: Invalid program selected for uToronto.");
+            }
+            break;
+        default:
+            System.out.println("Error: Invalid university selected.");
+    }
+//    for (int j = 0; j <= mandatoryCourses.size(); j++){
+//        labels[j].setText(mandatoryCourses.get(j));
+//        }
+    
+} 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -21,19 +74,20 @@ public class AddClassScreen extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         tempBypassButton = new javax.swing.JButton();
-        centerButton = new javax.swing.JButton();
-        surround1 = new javax.swing.JButton();
-        surround2 = new javax.swing.JButton();
-        surround3 = new javax.swing.JButton();
-        surround4 = new javax.swing.JButton();
-        surround5 = new javax.swing.JButton();
-        surround6 = new javax.swing.JButton();
-        surroundField1 = new javax.swing.JTextField();
-        surroundField2 = new javax.swing.JTextField();
-        surroundField3 = new javax.swing.JTextField();
-        surroundField4 = new javax.swing.JTextField();
-        surroundField5 = new javax.swing.JTextField();
-        surroundField6 = new javax.swing.JTextField();
+        programDropDown = new javax.swing.JComboBox<>();
+        uniDropDown = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jComboBox5 = new javax.swing.JComboBox<>();
+        jComboBox6 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,172 +100,145 @@ public class AddClassScreen extends javax.swing.JFrame {
             }
         });
 
-        centerButton.setText("ADD PROGRAM");
-        centerButton.addActionListener(new java.awt.event.ActionListener() {
+        programDropDown.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                programDropDownMouseMoved(evt);
+            }
+        });
+        programDropDown.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                programDropDownMouseClicked(evt);
+            }
+        });
+        programDropDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                centerButtonActionPerformed(evt);
+                programDropDownActionPerformed(evt);
             }
         });
 
-        surround1.setText("jButton2");
-        surround1.setVisible(false);
-        surround1.addActionListener(new java.awt.event.ActionListener() {
+        uniDropDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                surround1ActionPerformed(evt);
+                uniDropDownActionPerformed(evt);
             }
         });
 
-        surround2.setVisible(false);
-        surround2.setText("jButton3");
-        surround2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                surround2ActionPerformed(evt);
-            }
-        });
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        surround3.setVisible(false);
-        surround3.setText("jButton4");
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        surround4.setVisible(false);
-        surround4.setText("jButton5");
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        surround5.setVisible(false);
-        surround5.setText("jButton6");
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        surround6.setVisible(false);
-        surround6.setText("jButton7");
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        surroundField1.setText("ADD COURSE");
-        surroundField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                surroundField1ActionPerformed(evt);
-            }
-        });
-
-        surroundField2.setText("ADD COURSE");
-        surroundField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                surroundField2ActionPerformed(evt);
-            }
-        });
-
-        surroundField3.setText("ADD COURSE");
-        surroundField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                surroundField3ActionPerformed(evt);
-            }
-        });
-
-        surroundField4.setText("ADD COURSE");
-        surroundField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                surroundField4ActionPerformed(evt);
-            }
-        });
-
-        surroundField5.setText("ADD COURSE");
-        surroundField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                surroundField5ActionPerformed(evt);
-            }
-        });
-
-        surroundField6.setText("ADD COURSE");
-        surroundField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                surroundField6ActionPerformed(evt);
-            }
-        });
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(surroundField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(surround5)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(surround6)
-                        .addComponent(surroundField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(142, 142, 142)
+                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(164, 164, 164)
+                        .addComponent(jLabel6)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                        .addGap(102, 102, 102)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(surround1)
-                                        .addComponent(surroundField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(17, 17, 17)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(surround4)
-                                            .addComponent(centerButton)
-                                            .addComponent(surroundField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(surround3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(surroundField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(133, 133, 133))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(336, 336, 336)
+                                .addGap(350, 350, 350)
                                 .addComponent(tempBypassButton)
-                                .addContainerGap())))
+                                .addContainerGap())
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(programDropDown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(uniDropDown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(346, 346, 346))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(surroundField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(surround2))
-                        .addGap(98, 98, 98))))
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(141, 141, 141))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addGap(358, 358, 358)))
+                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(154, 154, 154))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(167, 167, 167))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(161, 161, 161))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(348, 348, 348)
+                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(354, 354, 354)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(371, 371, 371)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(362, 362, 362)
+                        .addComponent(jLabel4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(surround1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(surroundField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(surround6)
-                    .addComponent(surround2))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(surroundField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(surroundField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(surround5)
+                        .addGap(182, 182, 182)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(surroundField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78))
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(programDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)))
+                .addComponent(uniDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(centerButton)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(80, 80, 80)
-                                .addComponent(surround3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(surroundField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(surround4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))))
-                .addComponent(surroundField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(113, 113, 113)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(127, 127, 127)
                 .addComponent(tempBypassButton)
                 .addContainerGap())
         );
@@ -237,68 +264,21 @@ public class AddClassScreen extends javax.swing.JFrame {
         screen.toFront();
     }//GEN-LAST:event_tempBypassButtonActionPerformed
 
-    private void centerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_centerButtonActionPerformed
-        final int mandatoryNum = 3;
-        String[] mandatoryCourses = {"SPH4U", "SCH4U", "ENG4U"};
-        JButton[] courses = {surround1, surround2, surround3, surround4, surround5, surround6};
-        JTextField[] fillIn = {surroundField1, surroundField2, surroundField3, surroundField4, surroundField5, surroundField6};
-        for(int i = 0; i < mandatoryNum; i++){
-            courses[i].setVisible(true);
-            fillIn[i].setVisible(false);
-            courses[i].setText(mandatoryCourses[i]);
-        }
-        
-    }//GEN-LAST:event_centerButtonActionPerformed
+    private void programDropDownMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_programDropDownMouseMoved
 
-    private void surround1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surround1ActionPerformed
-        
-    }//GEN-LAST:event_surround1ActionPerformed
+    }//GEN-LAST:event_programDropDownMouseMoved
 
-    private void surround2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surround2ActionPerformed
+    private void programDropDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_programDropDownMouseClicked
 
-    }//GEN-LAST:event_surround2ActionPerformed
+    }//GEN-LAST:event_programDropDownMouseClicked
 
-    private void surroundField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundField2ActionPerformed
-        String input = surroundField2.getText();
-        surroundField2.setVisible(false);
-        surround2.setText(input);
-        surround2.setVisible(true);
-    }//GEN-LAST:event_surroundField2ActionPerformed
+    private void programDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_programDropDownActionPerformed
+        choiceTrack();
+    }//GEN-LAST:event_programDropDownActionPerformed
 
-    private void surroundField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundField1ActionPerformed
-        String input = surroundField1.getText();
-        surroundField1.setVisible(false);
-        surround1.setText(input);
-        surround1.setVisible(true);
-    }//GEN-LAST:event_surroundField1ActionPerformed
-
-    private void surroundField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundField3ActionPerformed
-        String input = surroundField3.getText();
-        surroundField3.setVisible(false);
-        surround3.setText(input);
-        surround3.setVisible(true);
-    }//GEN-LAST:event_surroundField3ActionPerformed
-
-    private void surroundField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundField4ActionPerformed
-        String input = surroundField4.getText();
-        surroundField4.setVisible(false);
-        surround4.setText(input);
-        surround4.setVisible(true);
-    }//GEN-LAST:event_surroundField4ActionPerformed
-
-    private void surroundField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundField6ActionPerformed
-        String input = surroundField6.getText();
-        surroundField6.setVisible(false);
-        surround6.setText(input);
-        surround6.setVisible(true);
-    }//GEN-LAST:event_surroundField6ActionPerformed
-
-    private void surroundField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundField5ActionPerformed
-        String input = surroundField5.getText();
-        surroundField5.setVisible(false);
-        surround5.setText(input);
-        surround5.setVisible(true);
-    }//GEN-LAST:event_surroundField5ActionPerformed
+    private void uniDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uniDropDownActionPerformed
+        choiceTrack();
+    }//GEN-LAST:event_uniDropDownActionPerformed
 
     
     /**
@@ -337,20 +317,21 @@ public class AddClassScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton centerButton;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton surround1;
-    private javax.swing.JButton surround2;
-    private javax.swing.JButton surround3;
-    private javax.swing.JButton surround4;
-    private javax.swing.JButton surround5;
-    private javax.swing.JButton surround6;
-    private javax.swing.JTextField surroundField1;
-    private javax.swing.JTextField surroundField2;
-    private javax.swing.JTextField surroundField3;
-    private javax.swing.JTextField surroundField4;
-    private javax.swing.JTextField surroundField5;
-    private javax.swing.JTextField surroundField6;
+    private javax.swing.JComboBox<String> programDropDown;
     private javax.swing.JButton tempBypassButton;
+    private javax.swing.JComboBox<String> uniDropDown;
     // End of variables declaration//GEN-END:variables
 }
