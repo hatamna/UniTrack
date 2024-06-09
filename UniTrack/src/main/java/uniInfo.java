@@ -37,7 +37,7 @@ public class uniInfo {
     public static double[] ottGrades = {0, 0, 0};
     public static double[] torGrades = {0, 0, 0};
 
-    public static String[] HSCourses = {"MCV4U", "ENG4U", "FIF4U", "MAF4U", "SPH4U", "SCH4U"};
+    public static String[] HSCourses = {"MCV4U", "ENG4U", "FIF4U", "MHF4U", "SPH4U", "SCH4U","SBI4U", "SES4U", "MDM4U"};
 
     static String[] universities = {"uOttawa", "uToronto"};
 
