@@ -13,65 +13,60 @@ import java.util.Set;
  *
  * @author Yahya
  */
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+
 public class uniInfo {
 
     public static final String PROG_NAME_01 = "Computer Science";
     public static final String PROG_NAME_02 = "Biology";
     public static final String PROG_NAME_03 = "Life Sciences";
-    
-    static HashMap<String, String> uMandatoryCourses = new HashMap<>();
-    static HashMap<String, String> tMandatoryCourses = new HashMap<>();
-    static HashMap<String, HashMap> uOttawa = new HashMap<>();
-    static HashMap<String, HashMap> uToronto = new HashMap<>();
-    
+
+    static HashMap<String, List<String>> uMandatoryCourses = new HashMap<>();
+    static HashMap<String, List<String>> tMandatoryCourses = new HashMap<>();
+    static HashMap<String, HashMap<String, Double>> uOttawa = new HashMap<>();
+    static HashMap<String, HashMap<String, Double>> uToronto = new HashMap<>();
+
     static HashMap<String, Double> UOPrograms = new HashMap<>();
     static HashMap<String, Double> UTPrograms = new HashMap<>();
-    
+
     public static Set<String> ottawa;
     public static Set<String> toronto;
     public static double[] ottGrades = {0, 0, 0};
     public static double[] torGrades = {0, 0, 0};
-    
+
     public static String[] HSCourses = {"MCV4U", "ENG4U", "FIF4U", "MAF4U", "SPH4U", "SCH4U"};
-    
-    
+
     static String[] universities = {"uOttawa", "uToronto"};
-    
-    public static void putty(){
-        UOPrograms.put(PROG_NAME_01, 90.00); 
-        uMandatoryCourses.put(PROG_NAME_01, "ENG4U");
-        uMandatoryCourses.put(PROG_NAME_01, "MHF4U");
-        uMandatoryCourses.put(PROG_NAME_01, "MCV4U");
-        
-        UOPrograms.put(PROG_NAME_02, 89.00); 
-//        uMandatoryCourses.put(PROG_NAME_02, "ENG4U");
-//        uMandatoryCourses.put(PROG_NAME_02, "MHF4U");
-//        uMandatoryCourses.put(PROG_NAME_02, "MCV4U");
-        
-        UOPrograms.put(PROG_NAME_03, 87.00); 
+
+    public static void putty() {
+        UOPrograms.put(PROG_NAME_01, 90.00);
+        uMandatoryCourses.put(PROG_NAME_01, Arrays.asList("ENG4U", "MHF4U", "MCV4U"));
+
+        UOPrograms.put(PROG_NAME_02, 89.00);
+        uMandatoryCourses.put(PROG_NAME_02, Arrays.asList("ENG4U", "MHF4U", "MCV4U"));
+
+        UOPrograms.put(PROG_NAME_03, 87.00);
         uOttawa.put("uOttawa", UOPrograms);
-        
+
         UTPrograms.put(PROG_NAME_01, 99.00);
-        tMandatoryCourses.put(PROG_NAME_01, "ENG4U");
-        tMandatoryCourses.put(PROG_NAME_01, "MHF4U");
-        tMandatoryCourses.put(PROG_NAME_01, "MCV4U");
-        
+        tMandatoryCourses.put(PROG_NAME_01, Arrays.asList("ENG4U", "MHF4U", "MCV4U"));
+
         UTPrograms.put(PROG_NAME_02, 95.00);
         UTPrograms.put(PROG_NAME_03, 97.00);
         uToronto.put("uToronto", UTPrograms);
-        
+
         ottawa = UOPrograms.keySet();
         toronto = UTPrograms.keySet();
-        
-        for (int i = 0; i < 3; i++){
-            ottGrades[i] = parseDouble(String.valueOf(UOPrograms.values().toArray()[i])); //FIX
+
+        for (int i = 0; i < 3; i++) {
+            ottGrades[i] = UOPrograms.get(PROG_NAME_01);
         }
-        
-        for (int i = 0; i < 3; i++){
-            torGrades[i] = parseDouble(String.valueOf(UTPrograms.values().toArray()[i])); //FIX
+
+        for (int i = 0; i < 3; i++) {
+            torGrades[i] = UTPrograms.get(PROG_NAME_01);
         }
     }
-
-    
-    
 }

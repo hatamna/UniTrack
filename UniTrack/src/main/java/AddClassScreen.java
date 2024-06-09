@@ -20,15 +20,21 @@ public class AddClassScreen extends javax.swing.JFrame {
     }
     
     public void choiceTrack() {
-    switch (String.valueOf(uniDropDown.getSelectedItem())) {
+    String university = String.valueOf(uniDropDown.getSelectedItem());
+    String program = String.valueOf(programDropDown.getSelectedItem());
+    switch (university) {
         case "uOttawa":
-            
-            switch (String.valueOf(programDropDown.getSelectedItem())) {
+            switch (program) {
                 case uniInfo.PROG_NAME_01:
                     programName = uniInfo.PROG_NAME_01;
-                    for (String i : uniInfo.uMandatoryCourses.values()) {
-                        mandatoryCourses.add(i); 
-                    } 
+                    mandatoryCourses.clear();
+                    for (String course : uniInfo.uMandatoryCourses.get(program)) {
+                        mandatoryCourses.add(course);
+                    }
+                    System.out.println("Mandatory Courses for uOttawa Program 01: " + mandatoryCourses);
+                    for (int j = 0; j < labels.length && j < mandatoryCourses.size(); j++) {
+                        labels[j].setText(mandatoryCourses.get(j));
+                    }
                     break;
                 case uniInfo.PROG_NAME_02:
                     // Handle program 2 if needed
