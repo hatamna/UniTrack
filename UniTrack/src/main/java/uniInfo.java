@@ -14,8 +14,7 @@ import java.util.Set;
  * @author Yahya
  */
 public class uniInfo {
-    
-    
+
     public static final String PROG_NAME_01 = "Computer Science";
     public static final String PROG_NAME_02 = "Biology";
     public static final String PROG_NAME_03 = "Life Sciences";
@@ -32,6 +31,9 @@ public class uniInfo {
     public static Set<String> toronto;
     public static double[] ottGrades = {0, 0, 0};
     public static double[] torGrades = {0, 0, 0};
+    
+    public static String[] HSCourses = {"MCV4U", "ENG4U", "FIF4U", "MAF4U", "SPH4U", "SCH4U"};
+    
     
     static String[] universities = {"uOttawa", "uToronto"};
     
