@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import static java.awt.GridBagConstraints.RELATIVE;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.io.IOException;
 import java.net.URI;
@@ -77,22 +78,26 @@ public class User {
     private JPanel importPanel;
     
     public User() throws IOException, GeneralSecurityException, InterruptedException{
-        SwingUtilities.invokeLater(this::createAccountSetup); //creates seperate thread for the gui
+        SwingUtilities.invokeLater(() -> {
+            try {
+                this.createAccountSetup();
+            } catch (IOException ex) {
+                Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }); //creates seperate thread for the gui
         waitForOAuth(); //pauses main code until OAuth complete
         
     }
     
-    private void createAccountSetup(){
+    private void createAccountSetup() throws IOException{
         //Creating Frame and layout constraits
         setUpMenu = new JFrame("UniTrack | Creating user");
         
         //creating & setting up panes and panels for course selection
         courseSelect = new JLayeredPane();
-        courseSelect.setPreferredSize(new Dimension(500,500));
-        courseButtons = new JPanel(new GridBagLayout());
-        courseButtons.setBounds(0,0,500,500);
+        courseSelect.setPreferredSize(new Dimension(640,500));
         courseInfo = new JPanel(new GridBagLayout());
-        courseInfo.setBounds(0,0,500,500);
+        courseInfo.setBounds(0,0,640,500);
         importPanel = new JPanel(new GridBagLayout());
         
         //panel and elements for account creation
@@ -264,6 +269,8 @@ public class User {
         
         studentCourseList=Import.getCourses(classroomData); //used in for loop DO NOT TOUCH
         size=Import.getCourses(classroomData).size();
+        courseButtons = new JPanel(new GridLayout(((size+2)/3),3,5 ,5 ));
+        courseButtons.setBounds(0,0,640,500);
         courseList = new ArrayList<>();
         courseSelector = new Object[size][5]; //one array per course 4 Jcomponents per
         SwingUtilities.invokeLater(() -> {
@@ -276,7 +283,7 @@ public class User {
                 
                 //displays course name
                 courseSelector[x][1]=new JLabel(studentCourse.getName());
-                layout.gridx=1*(x+1)+(220*(x%3));
+                layout.gridx=(x % 4 == 0 || x % 4 == 3) ? 0 : (x % 4 == 1) ? 225 : 450;
                 layout.gridy=0+(260*(x/3));
                 layout.gridwidth=3;
                 layout.gridheight=1;
@@ -309,27 +316,21 @@ public class User {
                         }
                     }
                 });
-                layout.gridx=5*(x+1)+(220*(x%3));
+                layout.gridx=layout.gridx+180;
                 layout.gridy=50+(260*(x/3));
                 layout.gridwidth=5;
                 layout.gridheight=1;
                 courseInfo.add((Component)courseSelector[x][3], layout);
                 
                 //adds button to select course
-                courseSelector[x][4]=new JToggleButton(String.valueOf(x));
-                ((JToggleButton)courseSelector[x][4]).setMinimumSize(new Dimension(200,240));
-                layout.ipadx=200; //1*(x+1)+(200*(x%3));
-                layout.ipady=240; //1*(x+1)+(240*(x/3));
-                layout.gridwidth=0;
-                layout.gridheight=0;
-                layout.gridx=0;
-                layout.gridy=0;
-                layout.fill = GridBagConstraints.NONE;
-                layout.insets = new Insets(0, 0, 0, 0);
-                courseButtons.add((Component)courseSelector[x][4], layout);
-                layout.insets = new Insets(0, 0, 0, 0);
-                layout.ipadx=0;
-                layout.ipady=0;
+                courseSelector[x][4]=new JToggleButton();
+                ((JToggleButton)courseSelector[x][4]).setPreferredSize(new Dimension(200,240));
+                courseButtons.add((Component)courseSelector[x][4]);
+            }
+            
+            //keep grid patern
+            for(int x=0;x<(((size+2)/3)*3)-size; x++){
+                courseButtons.add(new JLabel());
             }
             
             //finish button
@@ -361,7 +362,7 @@ public class User {
             
             //setup scrollable pane
             scrollablePane = new JScrollPane(courseSelect);
-            scrollablePane.setMinimumSize(new Dimension(500,500));
+            scrollablePane.setMinimumSize(new Dimension(660,500));
             importPanel.add(scrollablePane);
             importPanel.add(submit, layout);
             setUpMenu.add(importPanel, CENTER);
