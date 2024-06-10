@@ -120,7 +120,10 @@ public class CourseScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
-        // TODO add your handling code here:
+        MainScreen screen = new MainScreen();
+        screen.setVisible(true);
+        screen.toFront();
+        dispose();
     }//GEN-LAST:event_ExitButtonActionPerformed
 
     /**

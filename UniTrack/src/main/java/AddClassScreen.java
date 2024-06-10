@@ -1,12 +1,16 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.*;
 
 public class AddClassScreen extends javax.swing.JFrame {
     public static ArrayList<String> mandatoryCourses = new ArrayList();
-    public static ArrayList<String> chosenCourses = new ArrayList();
+    public static HashMap<JComboBox, String> chosenCourses = new HashMap<>();
     public static String programName = null;
     public static JLabel[] labels;
     public static JComboBox[] courses;
+//    private boolean isSelectionMade = false;
+//    private int choicesNum = 0;
+    
 
     public AddClassScreen(){
         initComponents();
@@ -24,6 +28,7 @@ public class AddClassScreen extends javax.swing.JFrame {
                 courses[i].addItem(j);
             }
         }
+//        nextButton.setEnabled(false);
     }
     
     public void choiceTrack() {
@@ -72,13 +77,6 @@ public class AddClassScreen extends javax.swing.JFrame {
         default:
             System.out.println("Error: Invalid university selected.");
     }
-    
-    
-    
-//    for (int j = 0; j <= mandatoryCourses.size(); j++){
-//        labels[j].setText(mandatoryCourses.get(j));
-//        }
-    
 } 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -328,19 +326,61 @@ public class AddClassScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        System.out.print(chosenCourses);
-        if (chosenCourses.size() >= 6 && !mandatoryCourses.isEmpty() && chosenCourses.containsAll(mandatoryCourses)) {
-        MainScreen screen = new MainScreen();
-        screen.setVisible(true);
-        screen.toFront();
-        dispose();
-        } 
-        else if (chosenCourses.size() < 6) {
+//        if (chosenCourses.size() < 6) {
+//        nextButton.setText("ENTER AT LEAST 6 COURSES");
+//        return;
+//        }
+//    
+//        if (!mandatoryCourses.isEmpty() && !chosenCourses.keySet().containsAll(mandatoryCourses)) {
+//        nextButton.setText("SELECT ALL MANDATORY COURSES");
+//        return;
+//        }
+//        System.out.print(chosenCourses);
+//        if (!mandatoryCourses.isEmpty() && chosenCourses.keySet().containsAll(mandatoryCourses)) {
+//        MainScreen screen = new MainScreen();
+//        screen.setVisible(true);
+//        screen.toFront();
+//        dispose();
+//        } 
+//        else if (chosenCourses.size() < 6) {
+//        nextButton.setText("ENTER AT LEAST 6 COURSES");
+//        } 
+//        else {
+//        nextButton.setText("ENTER MANDATORY COURSES");
+//        } 
+//        
+    System.out.print(chosenCourses.values());
+            if (chosenCourses.size() < 6) {
         nextButton.setText("ENTER AT LEAST 6 COURSES");
-        } 
-        else {
-        nextButton.setText("ENTER MANDATORY COURSES");
-        } 
+        return;
+    }
+
+    if (!mandatoryCourses.isEmpty()) {
+        boolean allMandatorySelected = true;
+        for (String course : mandatoryCourses) {
+            boolean found = false;
+            for (String selectedCourse : chosenCourses.values()) {
+                if (selectedCourse.equals(course)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                allMandatorySelected = false;
+                break;
+            }
+        }
+        if (!allMandatorySelected) {
+            nextButton.setText("SELECT ALL MANDATORY COURSES");
+            return;
+        }
+    }
+
+    // Proceed to the next step
+    MainScreen screen = new MainScreen();
+    screen.setVisible(true);
+    screen.toFront();
+    dispose();
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void programDropDownMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_programDropDownMouseMoved
@@ -367,27 +407,63 @@ public class AddClassScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_AddFirstClassButtonActionPerformed
 
     private void courses1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courses1ActionPerformed
-        chosenCourses.add((String)courses1.getSelectedItem());
+        chosenCourses.remove(courses1);
+        chosenCourses.put(courses1, (String)courses1.getSelectedItem());
+//        choicesNum++;
+//        if(choicesNum >= 6){
+//            isSelectionMade = true;
+//            nextButton.setEnabled(true);
+//        }
     }//GEN-LAST:event_courses1ActionPerformed
 
     private void courses2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courses2ActionPerformed
-        chosenCourses.add((String)courses2.getSelectedItem());
+        chosenCourses.remove(courses2);
+        chosenCourses.put(courses2, (String)courses2.getSelectedItem());
+//        choicesNum++;
+//        if(choicesNum >= 6){
+//            isSelectionMade = true;
+//            nextButton.setEnabled(true);
+//        }
     }//GEN-LAST:event_courses2ActionPerformed
 
     private void courses3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courses3ActionPerformed
-        chosenCourses.add((String)courses3.getSelectedItem());
+        chosenCourses.remove(courses3);
+        chosenCourses.put(courses3, (String)courses3.getSelectedItem());
+//        choicesNum++;
+//        if(choicesNum >= 6){
+//            isSelectionMade = true;
+//            nextButton.setEnabled(true);
+//        }
     }//GEN-LAST:event_courses3ActionPerformed
 
     private void courses4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courses4ActionPerformed
-        chosenCourses.add((String)courses4.getSelectedItem());
+        chosenCourses.remove(courses4);
+        chosenCourses.put(courses4, (String)courses4.getSelectedItem());
+//        choicesNum++;
+//        if(choicesNum >= 6){
+//            isSelectionMade = true;
+//            nextButton.setEnabled(true);
+//        }
     }//GEN-LAST:event_courses4ActionPerformed
 
     private void courses5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courses5ActionPerformed
-        chosenCourses.add((String)courses5.getSelectedItem());
+        chosenCourses.remove(courses5);
+        chosenCourses.put(courses5, (String)courses5.getSelectedItem());
+//        choicesNum++;
+//        if(choicesNum >= 6){
+//            isSelectionMade = true;
+//            nextButton.setEnabled(true);
+//        }
     }//GEN-LAST:event_courses5ActionPerformed
 
     private void courses6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courses6ActionPerformed
-        chosenCourses.add((String)courses6.getSelectedItem());
+        chosenCourses.remove(courses6);
+        chosenCourses.put(courses6, (String)courses6.getSelectedItem());
+//        choicesNum++;
+//        if(choicesNum >= 6){
+//            isSelectionMade = true;
+//            nextButton.setEnabled(true);
+//        }
     }//GEN-LAST:event_courses6ActionPerformed
 
     
