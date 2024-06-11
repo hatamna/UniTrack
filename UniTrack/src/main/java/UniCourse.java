@@ -1,3 +1,6 @@
+
+import java.util.LinkedList;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -9,7 +12,7 @@
  */
 public class UniCourse {
     
-    private LinkedList<Assignement> assignments = new LinkedList<>();
+    //private LinkedList<Assignement> assignments = new LinkedList<>();
     private String name;
     
     public UniCourse(){
@@ -17,6 +20,6 @@ public class UniCourse {
     }
     
     public void addAssignment(Assignment a){
-        assignments.add(a);
+        //assignments.add(a);
     }
 }

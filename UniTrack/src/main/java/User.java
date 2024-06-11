@@ -22,6 +22,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -341,10 +342,10 @@ public class User {
             submit.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    for(int x=0; x<size; x++){
-                        if(!((JToggleButton)courseSelector[x][4]).isSelected()) continue;
-                        classroomCourses.add(courseSelector[x][0]);                    
-                    }
+                    //for(int x=0; x<size; x++){
+                    //    if(!((JToggleButton)courseSelector[x][4]).isSelected()) continue;
+                    //    classroomCourses.add(courseSelector[x][0]);                    
+                    //}
                     
                     addUniCourses();
                     
@@ -389,13 +390,13 @@ public class User {
     public void addUniCourses(){
         //loop through classes to add courses
         for(Course x :classroomCourses){
-            linkedCourses.add(x, new UniCourse());
+            //linkedCourses.add(x, new UniCourse());
             userCourses.add(linkedCourses.get(x));
             //loop through assignments and add them
-            for(CourseWork y: x.courseWork().list(courseId).execute().getCourseWork();){
-                linkedCourses.get(x).addAssignment(new Assignment()); //add assignment info to assignment constructor
-                //get weight using GradeCategory whatever da hell that is
-            }
+            //for(CourseWork y: x.courseWork().list(courseId).execute().getCourseWork();){
+            //    linkedCourses.get(x).addAssignment(new Assignment()); //add assignment info to assignment constructor
+            //    //get weight using GradeCategory whatever da hell that is
+            //}
         }
     }
         
