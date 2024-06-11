@@ -46,7 +46,7 @@ public class AddClassScreen extends javax.swing.JFrame {
         for (String i: uniInfo.ottawa){
             programDropDown.addItem(i);
         }
-        
+        labels = new JLabel[]{jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6};
         if (one.equals("Add Class")){
             one = courseNames[0];
             AddButton1.setText(courseNames[0]);
@@ -75,13 +75,7 @@ public class AddClassScreen extends javax.swing.JFrame {
         
         
         
-        /*courses = new JComboBox[]{courses2, courses2, courses3, courses4, courses5, courses6};
-        labels = new JLabel[]{jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6};
-        for (int i = 0; i < courses.length; i++ ){
-            for (String j : uniInfo.HSCourses){
-                courses[i].addItem(j);
-            }
-        }*/
+        
 //        nextButton.setEnabled(false);
     }
     
@@ -98,9 +92,13 @@ public class AddClassScreen extends javax.swing.JFrame {
                         mandatoryCourses.add(course);
                     }
                     System.out.println("Mandatory Courses for uOttawa Program 01: " + mandatoryCourses);
-                    for (int j = 0; j < labels.length && j < mandatoryCourses.size(); j++) {
-                        labels[j].setVisible(true);
-                        labels[j].setText(mandatoryCourses.get(j));
+                    for (int j = 0; j < labels.length; j++) {
+                        if (j < mandatoryCourses.size()) {
+                            labels[j].setVisible(true);
+                            labels[j].setText(mandatoryCourses.get(j));
+                        } else {
+                            labels[j].setVisible(false);
+                        }
                     }
                     break;
                 case uniInfo.PROG_NAME_02:
