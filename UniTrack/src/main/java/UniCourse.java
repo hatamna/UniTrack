@@ -9,14 +9,14 @@
  */
 public class UniCourse {
     
-    private static boolean isFromGoogleClassroom;
+    private LinkedList<Assignement> assignments = new LinkedList<>();
+    private String name;
     
-    public UniCourse(boolean i){
-        isFromGoogleClassroom=i;
+    public UniCourse(){
         
     }
     
-    public static boolean getIsFromGoogleClassroom(){
-        return isFromGoogleClassroom;
+    public void addAssignment(Assignment a){
+        assignments.add(a);
     }
 }

@@ -44,8 +44,11 @@ import javax.swing.SwingUtilities;
  */
 public class User {
     
+    private ArrayList<UniCourse> userCourses = new ArrayList<>();
+    private ArrayList<Course> classroomCourses = new ArrayList<>();
+    private HashMap<Course, UniCourse> linkedCourses = new HashMap<>();
+    
     private Classroom classroomData = null;
-    private SortedMap<UniCourse, Double> userCourses = new TreeMap<>();
     GridBagConstraints layout = new GridBagConstraints();
     private List<Course> studentCourseList;
     private ArrayList<Course> courseList;
@@ -339,10 +342,11 @@ public class User {
                 @Override
                 public void actionPerformed(ActionEvent e){
                     for(int x=0; x<size; x++){
-                        if(((JToggleButton)courseSelector[x][4]).isSelected()){
-                            courseList.add((Course)courseSelector[x][0]);
-                        }
+                        if(!((JToggleButton)courseSelector[x][4]).isSelected()) continue;
+                        classroomCourses.add(courseSelector[x][0]);                    
                     }
+                    
+                    addUniCourses();
                     
                     //done importing
                     setUpMenu.remove(importPanel);
@@ -380,6 +384,19 @@ public class User {
             OAuth.join();
         }
         
+    }
+    
+    public void addUniCourses(){
+        //loop through classes to add courses
+        for(Course x :classroomCourses){
+            linkedCourses.add(x, new UniCourse());
+            userCourses.add(linkedCourses.get(x));
+            //loop through assignments and add them
+            for(CourseWork y: x.courseWork().list(courseId).execute().getCourseWork();){
+                linkedCourses.get(x).addAssignment(new Assignment()); //add assignment info to assignment constructor
+                //get weight using GradeCategory whatever da hell that is
+            }
+        }
     }
         
 }
