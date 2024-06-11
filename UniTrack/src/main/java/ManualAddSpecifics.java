@@ -2,6 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import java.awt.Dimension;
+import java.awt.Point;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
@@ -22,13 +24,9 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     public static int added = 0;
     
     public void printResults(){
-        String str = null;
-        for (String i : codes){
-            str += i;
-        }
-        codeLabel.setText(str);
-        percentLabel.setText("<html>" + percentLabel.getText() + "<br>" + PercentField.getText() + "</html>");
-        weightLabel.setText("<html>" + weightLabel.getText() + "<br>" + WeightField.getText() + "</html>");
+        codeLabel.setText(codeLabel.getText() + "\n" + CodeField.getText());
+        percentLabel.setText(percentLabel.getText() + "\n" + PercentField.getText());
+        weightLabel.setText(weightLabel.getText() + "\n" + WeightField.getText());
     }
 
     /**
@@ -65,9 +63,9 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
         AddButton = new javax.swing.JButton();
         nextButton = new javax.swing.JButton();
         percentSignLabel = new javax.swing.JLabel();
-        codeLabel = new javax.swing.JLabel();
-        percentLabel = new javax.swing.JLabel();
-        weightLabel = new javax.swing.JLabel();
+        weightLabel = new javax.swing.JTextPane();
+        codeLabel = new javax.swing.JTextPane();
+        percentLabel = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,11 +128,18 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
         percentSignLabel.setForeground(new java.awt.Color(255, 255, 255));
         percentSignLabel.setText("%");
 
+        weightLabel.setBackground(new java.awt.Color(0, 5, 128));
+        weightLabel.setBorder(null);
+        weightLabel.setForeground(new java.awt.Color(255, 255, 255));
+        weightLabel.setSelectedTextColor(new java.awt.Color(0, 0, 128));
+
+        codeLabel.setBackground(new java.awt.Color(0, 0, 128));
+        codeLabel.setBorder(null);
         codeLabel.setForeground(new java.awt.Color(255, 255, 255));
 
+        percentLabel.setBackground(new java.awt.Color(0, 0, 128));
+        percentLabel.setBorder(null);
         percentLabel.setForeground(new java.awt.Color(255, 255, 255));
-
-        weightLabel.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,29 +158,34 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
                         .addComponent(currentAverageInput, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(CourseCode2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(177, 177, 177)
-                        .addComponent(jLabel3)
-                        .addGap(213, 213, 213)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(codeLabel)
-                        .addGap(205, 205, 205)
-                        .addComponent(percentLabel))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(CodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(codeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(134, 134, 134)
-                        .addComponent(PercentField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(percentSignLabel)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(PercentField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(percentSignLabel))
+                            .addComponent(percentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(184, 184, 184)
-                        .addComponent(WeightField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(73, 73, 73)
-                        .addComponent(AddButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(nextButton)
-                        .addGap(59, 59, 59)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(WeightField, javax.swing.GroupLayout.PREFERRED_SIZE, 63, Short.MAX_VALUE)
+                                .addGap(81, 81, 81)
+                                .addComponent(AddButton))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(weightLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(56, 56, 56))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(nextButton)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,24 +207,30 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addGap(8, 8, 8)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(codeLabel)
-                    .addComponent(percentLabel))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PercentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(percentSignLabel))
-                    .addComponent(WeightField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
-                .addComponent(nextButton)
-                .addGap(112, 112, 112))
+                        .addComponent(weightLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(codeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(percentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PercentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(percentSignLabel))
+                            .addComponent(WeightField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AddButton))
+                        .addGap(235, 235, 235)
+                        .addComponent(nextButton)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -250,17 +266,19 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
                 System.out.println("Error.");
             }
             printResults();
-            AddButton.setLocation(AddButton.location().x, AddButton.location().y + 30);
+            //AddButton.setLocation(AddButton.location().x, AddButton.location().y + 30);
             CodeField.setLocation(CodeField.location().x, CodeField.location().y + 30);
             PercentField.setLocation(PercentField.location().x, PercentField.location().y + 30);
             WeightField.setLocation(WeightField.location().x, WeightField.location().y + 30);
             percentSignLabel.setLocation(percentSignLabel.location().x, percentSignLabel.location().y + 30);
+            AddButton.setLocation(new Point(AddButton.getLocation().x, AddButton.getLocation().y + 30));
             CodeField.setText("");
             PercentField.setText("");
             WeightField.setText("");
         } else {
             AddButton.setEnabled(false);
         }
+        codeLabel.setPreferredSize(new Dimension(62 , codeLabel.getHeight()+10));
         
     }//GEN-LAST:event_AddButtonActionPerformed
 
@@ -326,16 +344,16 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> CourseCodeDropDown;
     private javax.swing.JTextField PercentField;
     private javax.swing.JTextField WeightField;
-    private javax.swing.JLabel codeLabel;
+    private javax.swing.JTextPane codeLabel;
     private javax.swing.JTextField currentAverageInput;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton nextButton;
-    private javax.swing.JLabel percentLabel;
+    private javax.swing.JTextPane percentLabel;
     private javax.swing.JLabel percentSignLabel;
-    private javax.swing.JLabel weightLabel;
+    private javax.swing.JTextPane weightLabel;
     // End of variables declaration//GEN-END:variables
 /*
                 JPanel grades = new JPanel();
