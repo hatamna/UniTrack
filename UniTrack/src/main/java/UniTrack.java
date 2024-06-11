@@ -18,6 +18,9 @@ import java.io.FileWriter;
 public class UniTrack {
     
     
+    public static int universalNum = 0;
+    
+    
     public static File credentials = new File("userCredentials.txt");
     private static HashMap<String, String> userAndPass = new HashMap<>(); //MAKE SURE THAT THIS IS INFO SAFE
     

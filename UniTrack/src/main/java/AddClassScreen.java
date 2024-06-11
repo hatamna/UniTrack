@@ -8,9 +8,34 @@ public class AddClassScreen extends javax.swing.JFrame {
     public static String programName = null;
     public static JLabel[] labels;
     public static JComboBox[] courses;
+    
+    public static String one = "Add Class";
+    public static String two = "Add Class";
+    public static String three = "Add Class";
+    public static String four = "Add Class";
+    public static String five = "Add Class";
+    public static String six = "Add Class";
+    
+    public static boolean b1Enabled = true;
+    public static boolean b2Enabled = true;
+    public static boolean b3Enabled = true;
+    public static boolean b4Enabled = true;
+    public static boolean b5Enabled = true;
+    public static boolean b6Enabled = true;
+    
+    public static String[] courseNames = {"Add Class", "Add Class", "Add Class", "Add Class", "Add Class", "Add Class"};
+    
+    
+    
 //    private boolean isSelectionMade = false;
 //    private int choicesNum = 0;
-    
+ 
+    public void openSpecifics(){
+        ManualAddSpecifics screen = new ManualAddSpecifics();
+        screen.setVisible(true);
+        screen.toFront();
+        dispose();
+    }
 
     public AddClassScreen(){
         initComponents();
@@ -21,13 +46,42 @@ public class AddClassScreen extends javax.swing.JFrame {
         for (String i: uniInfo.ottawa){
             programDropDown.addItem(i);
         }
-        courses = new JComboBox[]{courses1, courses2, courses3, courses4, courses5, courses6};
+        
+        if (one.equals("Add Class")){
+            one = courseNames[0];
+            AddButton1.setText(courseNames[0]);
+            AddButton1.setEnabled(b1Enabled);
+        } else if ((two.equals("Add Class"))){
+            two = courseNames[1];
+            AddButton2.setText(courseNames[1]);
+            AddButton2.setEnabled(b2Enabled);
+        } else if ((three.equals("Add Class"))){
+            three = courseNames[2];
+            AddButton3.setText(courseNames[2]);
+            AddButton3.setEnabled(b3Enabled);
+        } else if ((four.equals("Add Class"))){
+            four = courseNames[3];
+            AddButton4.setText(courseNames[3]);
+            AddButton4.setEnabled(b4Enabled);
+        } else if ((five.equals("Add Class"))){
+            five = courseNames[4];
+            AddButton5.setText(courseNames[4]);
+            AddButton5.setEnabled(b5Enabled);
+        } else if ((six.equals("Add Class"))){
+            six = courseNames[5];
+            AddButton6.setText(courseNames[5]);
+            AddButton6.setEnabled(b6Enabled);
+        }
+        
+        
+        
+        /*courses = new JComboBox[]{courses2, courses2, courses3, courses4, courses5, courses6};
         labels = new JLabel[]{jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6};
         for (int i = 0; i < courses.length; i++ ){
             for (String j : uniInfo.HSCourses){
                 courses[i].addItem(j);
             }
-        }
+        }*/
 //        nextButton.setEnabled(false);
     }
     
@@ -91,19 +145,18 @@ public class AddClassScreen extends javax.swing.JFrame {
         nextButton = new javax.swing.JButton();
         programDropDown = new javax.swing.JComboBox<>();
         uniDropDown = new javax.swing.JComboBox<>();
-        courses1 = new javax.swing.JComboBox<>();
-        courses2 = new javax.swing.JComboBox<>();
-        courses3 = new javax.swing.JComboBox<>();
-        courses4 = new javax.swing.JComboBox<>();
-        courses5 = new javax.swing.JComboBox<>();
-        courses6 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        AddFirstClassButton = new javax.swing.JButton();
+        AddButton1 = new javax.swing.JButton();
+        AddButton2 = new javax.swing.JButton();
+        AddButton3 = new javax.swing.JButton();
+        AddButton4 = new javax.swing.JButton();
+        AddButton5 = new javax.swing.JButton();
+        AddButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -138,42 +191,6 @@ public class AddClassScreen extends javax.swing.JFrame {
             }
         });
 
-        courses1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                courses1ActionPerformed(evt);
-            }
-        });
-
-        courses2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                courses2ActionPerformed(evt);
-            }
-        });
-
-        courses3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                courses3ActionPerformed(evt);
-            }
-        });
-
-        courses4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                courses4ActionPerformed(evt);
-            }
-        });
-
-        courses5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                courses5ActionPerformed(evt);
-            }
-        });
-
-        courses6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                courses6ActionPerformed(evt);
-            }
-        });
-
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -192,10 +209,45 @@ public class AddClassScreen extends javax.swing.JFrame {
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        AddFirstClassButton.setText("Add First Class");
-        AddFirstClassButton.addActionListener(new java.awt.event.ActionListener() {
+        AddButton1.setText("Add Class");
+        AddButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddFirstClassButtonActionPerformed(evt);
+                AddButton1ActionPerformed(evt);
+            }
+        });
+
+        AddButton2.setText("Add Class");
+        AddButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButton2ActionPerformed(evt);
+            }
+        });
+
+        AddButton3.setText("Add Class");
+        AddButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButton3ActionPerformed(evt);
+            }
+        });
+
+        AddButton4.setText("Add Class");
+        AddButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButton4ActionPerformed(evt);
+            }
+        });
+
+        AddButton5.setText("Add Class");
+        AddButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButton5ActionPerformed(evt);
+            }
+        });
+
+        AddButton6.setText("Add Class");
+        AddButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButton6ActionPerformed(evt);
             }
         });
 
@@ -204,36 +256,26 @@ public class AddClassScreen extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addComponent(courses5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(courses3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(154, 154, 154))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(163, Short.MAX_VALUE)
-                        .addComponent(courses6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(171, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AddButton6)
+                            .addComponent(AddButton5))
+                        .addGap(99, 99, 99)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 8, Short.MAX_VALUE)
-                        .addComponent(AddFirstClassButton))
+                        .addGap(0, 18, Short.MAX_VALUE)
+                        .addComponent(AddButton1))
                     .addComponent(programDropDown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(uniDropDown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(346, 346, 346))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(348, 348, 348)
-                        .addComponent(courses4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -242,22 +284,28 @@ public class AddClassScreen extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(267, 267, 267)
-                        .addComponent(courses1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(357, 357, 357)
+                        .addComponent(AddButton4)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(courses2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(141, 141, 141))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(nextButton)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AddButton2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(AddButton3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(151, 151, 151))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,12 +313,12 @@ public class AddClassScreen extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(AddFirstClassButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(courses1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(courses2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
+                        .addComponent(AddButton1)
+                        .addGap(58, 58, 58)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AddButton2)
+                            .addComponent(AddButton6))
+                        .addGap(25, 25, 25)
                         .addComponent(programDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -285,20 +333,15 @@ public class AddClassScreen extends javax.swing.JFrame {
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(courses6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)))
+                        .addGap(77, 77, 77)))
                 .addComponent(uniDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(courses3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(courses5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                .addComponent(courses4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(127, 127, 127)
+                .addGap(45, 45, 45)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AddButton3)
+                    .addComponent(AddButton5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addComponent(AddButton4)
+                .addGap(88, 88, 88)
                 .addComponent(nextButton)
                 .addContainerGap())
         );
@@ -399,72 +442,35 @@ public class AddClassScreen extends javax.swing.JFrame {
         choiceTrack();
     }//GEN-LAST:event_uniDropDownActionPerformed
 
-    private void AddFirstClassButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddFirstClassButtonActionPerformed
-        ManualAddSpecifics screen = new ManualAddSpecifics();
-        screen.setVisible(true);
-        screen.toFront();
-        dispose();
-    }//GEN-LAST:event_AddFirstClassButtonActionPerformed
+    private void AddButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton1ActionPerformed
+        b1Enabled = false;
+        openSpecifics();
+    }//GEN-LAST:event_AddButton1ActionPerformed
 
-    private void courses1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courses1ActionPerformed
-        chosenCourses.remove(courses1);
-        chosenCourses.put(courses1, (String)courses1.getSelectedItem());
-//        choicesNum++;
-//        if(choicesNum >= 6){
-//            isSelectionMade = true;
-//            nextButton.setEnabled(true);
-//        }
-    }//GEN-LAST:event_courses1ActionPerformed
+    private void AddButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton2ActionPerformed
+        b2Enabled = false;
+        openSpecifics();
+    }//GEN-LAST:event_AddButton2ActionPerformed
 
-    private void courses2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courses2ActionPerformed
-        chosenCourses.remove(courses2);
-        chosenCourses.put(courses2, (String)courses2.getSelectedItem());
-//        choicesNum++;
-//        if(choicesNum >= 6){
-//            isSelectionMade = true;
-//            nextButton.setEnabled(true);
-//        }
-    }//GEN-LAST:event_courses2ActionPerformed
+    private void AddButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton3ActionPerformed
+        b3Enabled = false;
+        openSpecifics();
+    }//GEN-LAST:event_AddButton3ActionPerformed
 
-    private void courses3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courses3ActionPerformed
-        chosenCourses.remove(courses3);
-        chosenCourses.put(courses3, (String)courses3.getSelectedItem());
-//        choicesNum++;
-//        if(choicesNum >= 6){
-//            isSelectionMade = true;
-//            nextButton.setEnabled(true);
-//        }
-    }//GEN-LAST:event_courses3ActionPerformed
+    private void AddButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton4ActionPerformed
+        b4Enabled = false;
+        openSpecifics();
+    }//GEN-LAST:event_AddButton4ActionPerformed
 
-    private void courses4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courses4ActionPerformed
-        chosenCourses.remove(courses4);
-        chosenCourses.put(courses4, (String)courses4.getSelectedItem());
-//        choicesNum++;
-//        if(choicesNum >= 6){
-//            isSelectionMade = true;
-//            nextButton.setEnabled(true);
-//        }
-    }//GEN-LAST:event_courses4ActionPerformed
+    private void AddButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton5ActionPerformed
+        b5Enabled = false;
+        openSpecifics();
+    }//GEN-LAST:event_AddButton5ActionPerformed
 
-    private void courses5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courses5ActionPerformed
-        chosenCourses.remove(courses5);
-        chosenCourses.put(courses5, (String)courses5.getSelectedItem());
-//        choicesNum++;
-//        if(choicesNum >= 6){
-//            isSelectionMade = true;
-//            nextButton.setEnabled(true);
-//        }
-    }//GEN-LAST:event_courses5ActionPerformed
-
-    private void courses6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courses6ActionPerformed
-        chosenCourses.remove(courses6);
-        chosenCourses.put(courses6, (String)courses6.getSelectedItem());
-//        choicesNum++;
-//        if(choicesNum >= 6){
-//            isSelectionMade = true;
-//            nextButton.setEnabled(true);
-//        }
-    }//GEN-LAST:event_courses6ActionPerformed
+    private void AddButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton6ActionPerformed
+        b6Enabled = false;
+        openSpecifics();
+    }//GEN-LAST:event_AddButton6ActionPerformed
 
     
     /**
@@ -503,13 +509,12 @@ public class AddClassScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddFirstClassButton;
-    private javax.swing.JComboBox<String> courses1;
-    private javax.swing.JComboBox<String> courses2;
-    private javax.swing.JComboBox<String> courses3;
-    private javax.swing.JComboBox<String> courses4;
-    private javax.swing.JComboBox<String> courses5;
-    private javax.swing.JComboBox<String> courses6;
+    private javax.swing.JButton AddButton1;
+    private javax.swing.JButton AddButton2;
+    private javax.swing.JButton AddButton3;
+    private javax.swing.JButton AddButton4;
+    private javax.swing.JButton AddButton5;
+    private javax.swing.JButton AddButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
