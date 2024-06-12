@@ -1,6 +1,9 @@
 
+import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLayeredPane;
 
 /*
@@ -78,13 +81,13 @@ public class SettingsScreen extends javax.swing.JFrame {
                     break;
         }
         if (currentAvg == currentGoal || ((currentAvg > (currentGoal - 2)) && (currentAvg < (currentGoal + 2)))){
-            gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yellowSurroundButton.png/")));
+            gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/requiredAVGyellow.png/")));
             centerButtonColour = 0;
         } else if (currentAvg < (currentGoal - 2)){
-            gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/redSurroundButton.png/")));
+            gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/requiredAVGred.png/")));
             centerButtonColour = 1;
         } else if (currentAvg > (currentGoal + 2)){
-            gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/greenSurroundButton.png/")));
+            gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/requiredAVGgreen.png/")));
             centerButtonColour = 2;
         }
     }
@@ -105,6 +108,9 @@ public class SettingsScreen extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         uniDropDown = new javax.swing.JComboBox<>();
         gradeRecBG = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        uoinfoButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         tempGradeText = new javax.swing.JLabel();
 
@@ -156,7 +162,25 @@ public class SettingsScreen extends javax.swing.JFrame {
             }
         });
 
-        gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/redSurroundButton.png"))); // NOI18N
+        gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/requiredAVGred.png"))); // NOI18N
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("This is the estimated required average of your top 6 high school classes to be admitted into this program:");
+
+        uoinfoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uoinfoLOGO2.png"))); // NOI18N
+        uoinfoButton.setBorder(null);
+        uoinfoButton.setBorderPainted(false);
+        uoinfoButton.setContentAreaFilled(false);
+        uoinfoButton.setMaximumSize(new java.awt.Dimension(100, 50));
+        uoinfoButton.setMinimumSize(new java.awt.Dimension(100, 50));
+        uoinfoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uoinfoButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Open program in:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -165,21 +189,30 @@ public class SettingsScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(backButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(backButton))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel1))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(uniDropDown, 0, 164, Short.MAX_VALUE)
+                                            .addComponent(programDropDown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(gradeRecBG))))
+                        .addGap(0, 166, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(uniDropDown, 0, 164, Short.MAX_VALUE)
-                            .addComponent(programDropDown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(gradeRecBG)))
-                .addContainerGap(371, Short.MAX_VALUE))
+                        .addComponent(uoinfoButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,33 +227,44 @@ public class SettingsScreen extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(uniDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(105, 105, 105)
+                .addGap(53, 53, 53)
+                .addComponent(jLabel3)
+                .addGap(44, 44, 44)
                 .addComponent(gradeRecBG)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(19, 19, 19))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(uoinfoButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(15, Short.MAX_VALUE))))
         );
 
-        tempGradeText.setForeground(new java.awt.Color(255, 255, 255));
+        tempGradeText.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        tempGradeText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tempGradeText.setText("GRADE");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 397, Short.MAX_VALUE)
+            .addGap(0, 211, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(26, 26, 26)
-                    .addComponent(tempGradeText, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(323, Short.MAX_VALUE)))
+                    .addGap(48, 48, 48)
+                    .addComponent(tempGradeText, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(45, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 105, Short.MAX_VALUE)
+            .addGap(0, 221, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(56, 56, 56)
-                    .addComponent(tempGradeText)
-                    .addContainerGap(33, Short.MAX_VALUE)))
+                    .addGap(112, 112, 112)
+                    .addComponent(tempGradeText, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(52, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -230,9 +274,9 @@ public class SettingsScreen extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(114, 114, 114)
+                    .addGap(52, 52, 52)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(290, Short.MAX_VALUE)))
+                    .addContainerGap(538, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,7 +285,7 @@ public class SettingsScreen extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(332, 332, 332)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(163, Short.MAX_VALUE)))
+                    .addContainerGap(47, Short.MAX_VALUE)))
         );
 
         setSize(new java.awt.Dimension(801, 600));
@@ -270,6 +314,14 @@ public class SettingsScreen extends javax.swing.JFrame {
     private void uniDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uniDropDownActionPerformed
         dropDownActPer();
     }//GEN-LAST:event_uniDropDownActionPerformed
+
+    private void uoinfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uoinfoButtonActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(java.net.URI.create("https://www.ouinfo.ca/"));
+        } catch (IOException ex) {
+            Logger.getLogger(SettingsScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_uoinfoButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,10 +363,13 @@ public class SettingsScreen extends javax.swing.JFrame {
     private javax.swing.JLabel gradeRecBG;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JComboBox<String> programDropDown;
     private javax.swing.JLabel tempGradeText;
     private javax.swing.JComboBox<String> uniDropDown;
+    private javax.swing.JButton uoinfoButton;
     // End of variables declaration//GEN-END:variables
 }
