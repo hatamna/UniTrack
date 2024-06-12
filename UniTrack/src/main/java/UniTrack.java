@@ -17,6 +17,7 @@ import java.io.FileWriter;
  */
 public class UniTrack {
     
+    public static String[] top6Courses = new String[6];
     
     public static int universalNum = 0;
     

@@ -21,6 +21,9 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
+        for (String s : UniTrack.top6Courses) {
+        System.out.println(s);
+          }   
         currentAvgLabel.setText(String.valueOf(SettingsScreen.currentAvg) + "%");
         remove(jPanel1);
         remove(jPanel2);
@@ -54,15 +57,15 @@ public class MainScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        surround3 = new javax.swing.JButton();
+        UniTrack = new javax.swing.JLabel();
         surroundButton1 = new javax.swing.JButton();
         surroundButton2 = new javax.swing.JButton();
+        surroundButton3 = new javax.swing.JButton();
         surroundButton4 = new javax.swing.JButton();
         surroundButton5 = new javax.swing.JButton();
         surroundButton6 = new javax.swing.JButton();
         CenterButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        GoldenExperience = new javax.swing.JLabel();
         exitButton = new javax.swing.JButton();
         signOutButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -77,14 +80,9 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 128));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("UniTrack");
-
-        surround3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/greenSurroundButton.png"))); // NOI18N
-        surround3.setBorder(null);
-        surround3.setBorderPainted(false);
-        surround3.setContentAreaFilled(false);
+        UniTrack.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        UniTrack.setForeground(new java.awt.Color(255, 255, 255));
+        UniTrack.setText("UniTrack");
 
         surroundButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/redSurroundButton.png"))); // NOI18N
         surroundButton1.setBorder(null);
@@ -105,6 +103,11 @@ public class MainScreen extends javax.swing.JFrame {
                 surroundButton2ActionPerformed(evt);
             }
         });
+
+        surroundButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/greenSurroundButton.png"))); // NOI18N
+        surroundButton3.setBorder(null);
+        surroundButton3.setBorderPainted(false);
+        surroundButton3.setContentAreaFilled(false);
 
         surroundButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/greenSurroundButton.png"))); // NOI18N
         surroundButton4.setBorder(null);
@@ -132,10 +135,10 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("By GoldExperience");
+        GoldenExperience.setBackground(new java.awt.Color(255, 255, 255));
+        GoldenExperience.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        GoldenExperience.setForeground(new java.awt.Color(255, 255, 255));
+        GoldenExperience.setText("By GoldExperience");
 
         exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exitButton.png"))); // NOI18N
         exitButton.setBorder(null);
@@ -165,7 +168,7 @@ public class MainScreen extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(192, 192, 192)
                                 .addComponent(surroundButton6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(surroundButton5)
@@ -183,20 +186,20 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGap(62, 62, 62))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
+                        .addComponent(UniTrack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(surroundButton2)
-                            .addComponent(surround3))
-                        .addGap(227, 227, 227))
+                            .addComponent(surroundButton3))
+                        .addGap(270, 270, 270))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(exitButton)
                         .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(GoldenExperience)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(signOutButton)
                 .addContainerGap())
@@ -208,29 +211,29 @@ public class MainScreen extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addComponent(surroundButton1)
-                        .addGap(18, 18, 18)
+                        .addGap(32, 32, 32)
                         .addComponent(CenterButton)
                         .addGap(34, 34, 34)
                         .addComponent(surroundButton4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
+                            .addComponent(UniTrack)
                             .addComponent(exitButton))
                         .addGap(130, 130, 130)
                         .addComponent(surroundButton6)
                         .addGap(60, 60, 60)
                         .addComponent(surroundButton5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(GoldenExperience, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(signOutButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(149, 149, 149)
                 .addComponent(surroundButton2)
                 .addGap(80, 80, 80)
-                .addComponent(surround3)
+                .addComponent(surroundButton3)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -273,7 +276,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(155, 155, 155)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(220, Short.MAX_VALUE)))
+                    .addContainerGap(237, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,17 +353,17 @@ public class MainScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton CenterButton;
+    private javax.swing.JLabel GoldenExperience;
+    private javax.swing.JLabel UniTrack;
     private javax.swing.JLabel currentAvgLabel;
     private javax.swing.JButton exitButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton signOutButton;
-    private javax.swing.JButton surround3;
     private javax.swing.JButton surroundButton1;
     private javax.swing.JButton surroundButton2;
+    private javax.swing.JButton surroundButton3;
     private javax.swing.JButton surroundButton4;
     private javax.swing.JButton surroundButton5;
     private javax.swing.JButton surroundButton6;

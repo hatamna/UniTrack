@@ -63,30 +63,36 @@ public static ArrayList<String> mandatoryCourses = new ArrayList();
             button = AddButton1;
 //            isEnabled = chosen[0];
             one = courseName;
+            UniTrack.top6Courses[i] = courseName;
             break;
         case 1:
             button = AddButton2;
 //            isEnabled = chosen[1];
+            UniTrack.top6Courses[i] = courseName;
             two = courseName;
             break;
         case 2:
             button = AddButton3;
 //            isEnabled = chosen[2];
+            UniTrack.top6Courses[i] = courseName;
             three = courseName;
             break;
         case 3:
             button = AddButton4;
 //            isEnabled = chosen[3];
             four = courseName;
+            UniTrack.top6Courses[i] = courseName;
             break;
         case 4:
             button = AddButton5;
 //            isEnabled = chosen[4];
+            UniTrack.top6Courses[i] = courseName;
             five = courseName;
             break;
         case 5:
             button = AddButton6;
 //            isEnabled = chosen[5];
+            UniTrack.top6Courses[i] = courseName;
             six = courseName;
             break;
     }

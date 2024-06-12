@@ -324,7 +324,7 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     }//GEN-LAST:event_currentAverageInputMouseClicked
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-         System.out.println(codes);
+        System.out.println(codes);
         System.out.println(percents);
         System.out.println(weights);
         
