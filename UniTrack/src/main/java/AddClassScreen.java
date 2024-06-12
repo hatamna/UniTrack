@@ -3,11 +3,12 @@ import java.util.HashMap;
 import javax.swing.*;
 
 public class AddClassScreen extends javax.swing.JFrame {
-    public static ArrayList<String> mandatoryCourses = new ArrayList();
-    public static HashMap<JComboBox, String> chosenCourses = new HashMap<>();
+public static ArrayList<String> mandatoryCourses = new ArrayList();
     public static String programName = null;
     public static JLabel[] labels;
-    public static JComboBox[] courses;
+    
+    private String university;
+    private String program;
     
     public static String one = "Add Class";
     public static String two = "Add Class";
@@ -16,14 +17,15 @@ public class AddClassScreen extends javax.swing.JFrame {
     public static String five = "Add Class";
     public static String six = "Add Class";
     
-    public static boolean b1Enabled = true;
-    public static boolean b2Enabled = true;
-    public static boolean b3Enabled = true;
-    public static boolean b4Enabled = true;
-    public static boolean b5Enabled = true;
-    public static boolean b6Enabled = true;
+//    public static boolean b1Enabled = true;
+//    public static boolean b2Enabled = true;
+//    public static boolean b3Enabled = true;
+//    public static boolean b4Enabled = true;
+//    public static boolean b5Enabled = true;
+//    public static boolean b6Enabled = true;
     
     public static String[] courseNames = {"Add Class", "Add Class", "Add Class", "Add Class", "Add Class", "Add Class"};
+//    public Boolean[] chosen = {b1Enabled, b2Enabled, b3Enabled, b4Enabled, b5Enabled, b6Enabled};
     
     
     
@@ -39,39 +41,61 @@ public class AddClassScreen extends javax.swing.JFrame {
 
     public AddClassScreen(){
         initComponents();
-        uniInfo.putty();
+        uniInfo.putty();      
         for (String i: uniInfo.universities){
             uniDropDown.addItem(i);
         }
         for (String i: uniInfo.ottawa){
             programDropDown.addItem(i);
         }
-        labels = new JLabel[]{jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6};
-        if (one.equals("Add Class")){
-            one = courseNames[0];
-            AddButton1.setText(courseNames[0]);
-            AddButton1.setEnabled(b1Enabled);
-        } else if ((two.equals("Add Class"))){
-            two = courseNames[1];
-            AddButton2.setText(courseNames[1]);
-            AddButton2.setEnabled(b2Enabled);
-        } else if ((three.equals("Add Class"))){
-            three = courseNames[2];
-            AddButton3.setText(courseNames[2]);
-            AddButton3.setEnabled(b3Enabled);
-        } else if ((four.equals("Add Class"))){
-            four = courseNames[3];
-            AddButton4.setText(courseNames[3]);
-            AddButton4.setEnabled(b4Enabled);
-        } else if ((five.equals("Add Class"))){
-            five = courseNames[4];
-            AddButton5.setText(courseNames[4]);
-            AddButton5.setEnabled(b5Enabled);
-        } else if ((six.equals("Add Class"))){
-            six = courseNames[5];
-            AddButton6.setText(courseNames[5]);
-            AddButton6.setEnabled(b6Enabled);
+        if (university != null && program != null) {
+            uniDropDown.setSelectedItem(university);
+            programDropDown.setSelectedItem(program);
         }
+        labels = new JLabel[]{jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6};
+        for (int i = 0; i < courseNames.length; i++) {
+        String courseName = courseNames[i];
+        JButton button = null;
+        boolean isEnabled = false;
+    
+    switch (i) {
+        case 0:
+            button = AddButton1;
+//            isEnabled = chosen[0];
+            one = courseName;
+            break;
+        case 1:
+            button = AddButton2;
+//            isEnabled = chosen[1];
+            two = courseName;
+            break;
+        case 2:
+            button = AddButton3;
+//            isEnabled = chosen[2];
+            three = courseName;
+            break;
+        case 3:
+            button = AddButton4;
+//            isEnabled = chosen[3];
+            four = courseName;
+            break;
+        case 4:
+            button = AddButton5;
+//            isEnabled = chosen[4];
+            five = courseName;
+            break;
+        case 5:
+            button = AddButton6;
+//            isEnabled = chosen[5];
+            six = courseName;
+            break;
+    }
+    
+    if (button != null) {
+        button.setText(courseName);
+//        button.setEnabled(isEnabled);
+    }
+}
         
         
         
@@ -80,8 +104,8 @@ public class AddClassScreen extends javax.swing.JFrame {
     }
     
     public void choiceTrack() {
-    String university = String.valueOf(uniDropDown.getSelectedItem());
-    String program = String.valueOf(programDropDown.getSelectedItem());
+    university = String.valueOf(uniDropDown.getSelectedItem());
+    program = String.valueOf(programDropDown.getSelectedItem());
     switch (university) {
         case "uOttawa":
             switch (program) {
@@ -130,6 +154,7 @@ public class AddClassScreen extends javax.swing.JFrame {
             System.out.println("Error: Invalid university selected.");
     }
 } 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -367,61 +392,37 @@ public class AddClassScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-//        if (chosenCourses.size() < 6) {
-//        nextButton.setText("ENTER AT LEAST 6 COURSES");
-//        return;
-//        }
-//    
-//        if (!mandatoryCourses.isEmpty() && !chosenCourses.keySet().containsAll(mandatoryCourses)) {
-//        nextButton.setText("SELECT ALL MANDATORY COURSES");
-//        return;
-//        }
-//        System.out.print(chosenCourses);
-//        if (!mandatoryCourses.isEmpty() && chosenCourses.keySet().containsAll(mandatoryCourses)) {
-//        MainScreen screen = new MainScreen();
-//        screen.setVisible(true);
-//        screen.toFront();
-//        dispose();
-//        } 
-//        else if (chosenCourses.size() < 6) {
-//        nextButton.setText("ENTER AT LEAST 6 COURSES");
-//        } 
-//        else {
-//        nextButton.setText("ENTER MANDATORY COURSES");
-//        } 
-//        
-    System.out.print(chosenCourses.values());
-            if (chosenCourses.size() < 6) {
-        nextButton.setText("ENTER AT LEAST 6 COURSES");
-        return;
-    }
+        if (courseNames.length < 6) {
+            nextButton.setText("ENTER AT LEAST 6 COURSES");
+            return;
+        }
 
-    if (!mandatoryCourses.isEmpty()) {
-        boolean allMandatorySelected = true;
-        for (String course : mandatoryCourses) {
-            boolean found = false;
-            for (String selectedCourse : chosenCourses.values()) {
-                if (selectedCourse.equals(course)) {
+        if (!mandatoryCourses.isEmpty()) {
+            boolean allMandatorySelected = true;
+            for (String course : mandatoryCourses) {
+                boolean found = false;
+                for (String selectedCourse : courseNames) {
+                    if (selectedCourse.equals(course)) {
                     found = true;
                     break;
                 }
-            }
-            if (!found) {
+                }
+                if (!found) {
                 allMandatorySelected = false;
                 break;
+                }
             }
-        }
         if (!allMandatorySelected) {
             nextButton.setText("SELECT ALL MANDATORY COURSES");
             return;
         }
-    }
+        }   
 
-    // Proceed to the next step
     MainScreen screen = new MainScreen();
     screen.setVisible(true);
     screen.toFront();
     dispose();
+
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void programDropDownMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_programDropDownMouseMoved
@@ -441,32 +442,32 @@ public class AddClassScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_uniDropDownActionPerformed
 
     private void AddButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton1ActionPerformed
-        b1Enabled = false;
+//        b1Enabled = false;
         openSpecifics();
     }//GEN-LAST:event_AddButton1ActionPerformed
 
     private void AddButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton2ActionPerformed
-        b2Enabled = false;
+ //       b2Enabled = false;
         openSpecifics();
     }//GEN-LAST:event_AddButton2ActionPerformed
 
     private void AddButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton3ActionPerformed
-        b3Enabled = false;
+ //       b3Enabled = false;
         openSpecifics();
     }//GEN-LAST:event_AddButton3ActionPerformed
 
     private void AddButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton4ActionPerformed
-        b4Enabled = false;
+ //       b4Enabled = false;
         openSpecifics();
     }//GEN-LAST:event_AddButton4ActionPerformed
 
     private void AddButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton5ActionPerformed
-        b5Enabled = false;
+ //       b5Enabled = false;
         openSpecifics();
     }//GEN-LAST:event_AddButton5ActionPerformed
 
     private void AddButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton6ActionPerformed
-        b6Enabled = false;
+ //       b6Enabled = false;
         openSpecifics();
     }//GEN-LAST:event_AddButton6ActionPerformed
 

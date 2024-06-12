@@ -7,6 +7,7 @@ import java.awt.Point;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
@@ -18,6 +19,7 @@ import javax.swing.JPanel;
  */
 public class ManualAddSpecifics extends javax.swing.JFrame {
     
+    public static String[] HSCourses = Arrays.stream(uniInfo.HSCourses).toArray(String[]::new);
     public static ArrayList<String> codes = new ArrayList<>();
     public static ArrayList<Double> percents = new ArrayList<>();
     public static ArrayList<Integer> weights = new ArrayList<>();
@@ -32,16 +34,14 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
         weightLabel.setText(weightLabel.getText() + "\n" + WeightField.getText());
     }
 
-    /**
-     * Creates new form ManualAddSpecifics
-     */
-    public ManualAddSpecifics() {
+     public ManualAddSpecifics() {
         initComponents();
         maxMSG.setVisible(false);
-        for (String i : uniInfo.HSCourses){
+        for (String i : HSCourses){
             CourseCodeDropDown.addItem(i);
         }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -293,7 +293,7 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     }//GEN-LAST:event_currentAverageInputActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-        if (addCount < 9){
+               if (addCount < 9){
             try{
                 percents.add(parseDouble(PercentField.getText()));
                 weights.add(parseInt(WeightField.getText()));
@@ -316,8 +316,7 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
             AddButton.setEnabled(false);
             maxMSG.setVisible(true);
         }
-        //codeLabel.setPreferredSize(new Dimension(62 , codeLabel.getHeight()+10));
-        
+        //codeLabel.setPreferredSize(new Dimension(62 , codeLabel.getHeight()+10));       
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void currentAverageInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentAverageInputMouseClicked
@@ -325,17 +324,28 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     }//GEN-LAST:event_currentAverageInputMouseClicked
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        System.out.println(codes);
+         System.out.println(codes);
         System.out.println(percents);
         System.out.println(weights);
         
+        
+        if (CourseCodeDropDown.getSelectedItem().equals("Select Course")){
+            nextButton.setText("Please Choose a Course");
+        }
+        else {
         AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
+        list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
+        HSCourses  = list.toArray(HSCourses);
+        
         UniTrack.universalNum += 1;
         
         AddClassScreen screen = new AddClassScreen();
         screen.setVisible(true);
         screen.toFront();
         dispose();
+        }
+
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void CAinfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CAinfoActionPerformed
