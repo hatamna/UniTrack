@@ -332,7 +332,7 @@ public class User {
                 courseButtons.add((Component)courseSelector[x][4]);
             }
             
-            //keep grid patern
+            //add labels to keep grid patern
             for(int x=0;x<(((size+2)/3)*3)-size; x++){
                 courseButtons.add(new JLabel());
             }
@@ -342,10 +342,10 @@ public class User {
             submit.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    //for(int x=0; x<size; x++){
-                    //    if(!((JToggleButton)courseSelector[x][4]).isSelected()) continue;
-                    //    classroomCourses.add(courseSelector[x][0]);                    
-                    //}
+                    for(int x=0; x<size; x++){
+                        if(!((JToggleButton)courseSelector[x][4]).isSelected()) continue;
+                        classroomCourses.add(courseSelector[x][0]);                    
+                    }
                     
                     addUniCourses();
                     
@@ -390,13 +390,20 @@ public class User {
     public void addUniCourses(){
         //loop through classes to add courses
         for(Course x :classroomCourses){
-            //linkedCourses.add(x, new UniCourse());
+            linkedCourses.add(x, new UniCourse());
             userCourses.add(linkedCourses.get(x));
             //loop through assignments and add them
-            //for(CourseWork y: x.courseWork().list(courseId).execute().getCourseWork();){
-            //    linkedCourses.get(x).addAssignment(new Assignment()); //add assignment info to assignment constructor
-            //    //get weight using GradeCategory whatever da hell that is
-            //}
+            for(CourseWork y: x.courseWork().list(x).execute().getCourseWork()){
+                if (y.getAssignedGrade()==null) continue; //if its not marked dont add it
+                
+                if(y.getGradeCategory==null){
+                    linkedCourses.get(x).addAssignment(new Assignment(y.getTitle(),y.getAssignedGrade())); //only name and grade
+                }
+                
+                else{ //adds name grade and category (weight is assigned to categories not assignments)
+                    linkedCourses.get(x).addAssignment(new Assignment(y.getTitle(),y.getAssignedGrade(),y.getGradeCategory())); 
+                }
+            }
         }
     }
         

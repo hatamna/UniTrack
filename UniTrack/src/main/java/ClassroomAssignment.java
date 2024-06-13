@@ -10,14 +10,25 @@
 public class ClassroomAssignment extends Assignment {
     
     private boolean classroomCourse;
+    private String name;
+    private String category;
+    private double grade;
     
     public ClassroomAssignment(){
         super();
         classroomCourse=true;
     }
     
-    public ClassroomAssignment(String code,double grade,int weight){
-        super(code, grade, weight);
+    public ClassroomAssignment(String n,double g, String c){
+        name=n;
+        grade=g;
+        category=c;
+        classroomCourse=true;
+    }
+    
+    public ClassroomAssignment(String n,double g){
+        name=n;
+        grade=g;
         classroomCourse=true;
     }
     
