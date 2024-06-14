@@ -1,8 +1,10 @@
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
 /*
@@ -15,15 +17,16 @@ import javax.swing.JLayeredPane;
  * @author Yahya
  */
 public class MainScreen extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MainScreen
-     */
-    public MainScreen() {
+    public JLabel[] top6;
+    public JLabel[] avgLabels;
+    public ArrayList<String> avgValues = new ArrayList();
+    
+    private int x = 0;
+    
+    public MainScreen() { 
         initComponents();
-        for (String s : UniTrack.top6Courses) {
-        System.out.println(s);
-          }   
+        this.top6 = new JLabel[]{class1, class2, class3, class4, class5, class6};
+        this.avgLabels = new JLabel[]{avg1, avg2, avg3, avg4, avg5, avg6};
         currentAvgLabel.setText(String.valueOf(SettingsScreen.currentAvg) + "%");
         remove(jPanel1);
         remove(jPanel2);
@@ -38,6 +41,14 @@ public class MainScreen extends javax.swing.JFrame {
         } else if (SettingsScreen.centerButtonColour == 2){
             MainScreen.CenterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/greenCenterButton.png/")));
         }
+        for (String i : ManualAddSpecifics.course_Avg.values()){
+            avgValues.add(i);
+        }
+        for (int i = 0; i < AddClassScreen.courseNames.length; i++) {
+            top6[i].setText(AddClassScreen.courseNames[i]);
+            avgLabels[i].setText(avgValues.get(i));
+          } 
+        
     }
     
     public void openCourseScreen(){
@@ -70,7 +81,18 @@ public class MainScreen extends javax.swing.JFrame {
         signOutButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         currentAvgLabel = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        class1 = new javax.swing.JLabel();
+        class2 = new javax.swing.JLabel();
+        class3 = new javax.swing.JLabel();
+        class4 = new javax.swing.JLabel();
+        class5 = new javax.swing.JLabel();
+        class6 = new javax.swing.JLabel();
+        avg1 = new javax.swing.JLabel();
+        avg2 = new javax.swing.JLabel();
+        avg3 = new javax.swing.JLabel();
+        avg4 = new javax.swing.JLabel();
+        avg5 = new javax.swing.JLabel();
+        avg6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("UniTrack");
@@ -224,7 +246,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addComponent(surroundButton6)
                         .addGap(60, 60, 60)
                         .addComponent(surroundButton5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(GoldenExperience, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(signOutButton, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -241,8 +263,41 @@ public class MainScreen extends javax.swing.JFrame {
         currentAvgLabel.setForeground(new java.awt.Color(255, 255, 255));
         currentAvgLabel.setText("90%");
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("ABC4U");
+        class1.setForeground(new java.awt.Color(255, 255, 255));
+        class1.setText("ABC4U");
+
+        class2.setForeground(new java.awt.Color(255, 255, 255));
+        class2.setText("ABC4U");
+
+        class3.setForeground(new java.awt.Color(255, 255, 255));
+        class3.setText("ABC4U");
+
+        class4.setForeground(new java.awt.Color(255, 255, 255));
+        class4.setText("ABC4U");
+
+        class5.setForeground(new java.awt.Color(255, 255, 255));
+        class5.setText("ABC4U");
+
+        class6.setForeground(new java.awt.Color(255, 255, 255));
+        class6.setText("ABC4U");
+
+        avg1.setForeground(new java.awt.Color(255, 255, 255));
+        avg1.setText("ABC4U");
+
+        avg2.setForeground(new java.awt.Color(255, 255, 255));
+        avg2.setText("ABC4U");
+
+        avg3.setForeground(new java.awt.Color(255, 255, 255));
+        avg3.setText("ABC4U");
+
+        avg4.setForeground(new java.awt.Color(255, 255, 255));
+        avg4.setText("ABC4U");
+
+        avg5.setForeground(new java.awt.Color(255, 255, 255));
+        avg5.setText("ABC4U");
+
+        avg6.setForeground(new java.awt.Color(255, 255, 255));
+        avg6.setText("ABC4U");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -251,20 +306,130 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(166, 166, 166)
                 .addComponent(currentAvgLabel)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(219, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(184, 184, 184))
+                .addComponent(class1)
+                .addGap(240, 240, 240))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(320, Short.MAX_VALUE)
+                    .addComponent(class2)
+                    .addGap(101, 101, 101)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(323, Short.MAX_VALUE)
+                    .addComponent(class3)
+                    .addGap(98, 98, 98)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(186, Short.MAX_VALUE)
+                    .addComponent(class4)
+                    .addGap(235, 235, 235)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(43, Short.MAX_VALUE)
+                    .addComponent(class5)
+                    .addGap(378, 378, 378)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(57, 57, 57)
+                    .addComponent(class6)
+                    .addContainerGap(364, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(180, 180, 180)
+                    .addComponent(avg1)
+                    .addContainerGap(194, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(319, Short.MAX_VALUE)
+                    .addComponent(avg2)
+                    .addGap(102, 102, 102)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(314, Short.MAX_VALUE)
+                    .addComponent(avg3)
+                    .addGap(107, 107, 107)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(184, Short.MAX_VALUE)
+                    .addComponent(avg4)
+                    .addGap(237, 237, 237)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(37, 37, 37)
+                    .addComponent(avg5)
+                    .addContainerGap(384, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(56, 56, 56)
+                    .addComponent(avg6)
+                    .addContainerGap(365, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel3)
+                .addComponent(class1)
                 .addGap(102, 102, 102)
                 .addComponent(currentAvgLabel)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(256, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(86, 86, 86)
+                    .addComponent(class2)
+                    .addContainerGap(341, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(242, 242, 242)
+                    .addComponent(class3)
+                    .addContainerGap(185, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(310, 310, 310)
+                    .addComponent(class4)
+                    .addContainerGap(117, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(238, Short.MAX_VALUE)
+                    .addComponent(class5)
+                    .addGap(189, 189, 189)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(100, Short.MAX_VALUE)
+                    .addComponent(class6)
+                    .addGap(327, 327, 327)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(47, 47, 47)
+                    .addComponent(avg1)
+                    .addContainerGap(313, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(116, 116, 116)
+                    .addComponent(avg2)
+                    .addContainerGap(311, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(273, 273, 273)
+                    .addComponent(avg3)
+                    .addContainerGap(87, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(353, Short.MAX_VALUE)
+                    .addComponent(avg4)
+                    .addGap(74, 74, 74)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(272, Short.MAX_VALUE)
+                    .addComponent(avg5)
+                    .addGap(155, 155, 155)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(128, 128, 128)
+                    .addComponent(avg6)
+                    .addContainerGap(299, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -276,7 +441,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(155, 155, 155)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(237, Short.MAX_VALUE)))
+                    .addContainerGap(190, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,7 +450,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(71, 71, 71)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(146, Short.MAX_VALUE)))
+                    .addContainerGap(79, Short.MAX_VALUE)))
         );
 
         setSize(new java.awt.Dimension(786, 593));
@@ -355,9 +520,20 @@ public class MainScreen extends javax.swing.JFrame {
     public static javax.swing.JButton CenterButton;
     private javax.swing.JLabel GoldenExperience;
     private javax.swing.JLabel UniTrack;
+    private javax.swing.JLabel avg1;
+    private javax.swing.JLabel avg2;
+    private javax.swing.JLabel avg3;
+    private javax.swing.JLabel avg4;
+    private javax.swing.JLabel avg5;
+    private javax.swing.JLabel avg6;
+    private javax.swing.JLabel class1;
+    private javax.swing.JLabel class2;
+    private javax.swing.JLabel class3;
+    private javax.swing.JLabel class4;
+    private javax.swing.JLabel class5;
+    private javax.swing.JLabel class6;
     private javax.swing.JLabel currentAvgLabel;
     private javax.swing.JButton exitButton;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton signOutButton;

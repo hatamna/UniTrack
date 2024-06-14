@@ -70,4 +70,7 @@ public class UniTrack {
             System.out.println("An error has occured. ");
         }
     }
+    public static String[] getTop6() {
+        return top6Courses;
+    }
 }

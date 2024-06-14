@@ -8,6 +8,7 @@ import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
@@ -23,8 +24,15 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     public static ArrayList<String> codes = new ArrayList<>();
     public static ArrayList<Double> percents = new ArrayList<>();
     public static ArrayList<Integer> weights = new ArrayList<>();
+    public static HashMap<String, String> course_Avg = new HashMap<>();
+    
+    public static double perweightSum = 0;
+    public static int weightSum = 0;
+    public static double grade;
+    public static String courseName = null;
     
     private static int addCount = 0;
+    
     
     public static int added = 0;
     
@@ -328,6 +336,14 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
         System.out.println(percents);
         System.out.println(weights);
         
+        for (int i = 0; i < percents.size() && i < weights.size(); i++){
+            perweightSum = perweightSum + (percents.get(i)*weights.get(i));
+            weightSum = weightSum + weights.get(i);
+            
+        }
+        grade = perweightSum / weightSum;
+        courseName = (String)CourseCodeDropDown.getSelectedItem();
+        course_Avg.put(courseName, (String.format("%.2f", grade)));
         
         if (CourseCodeDropDown.getSelectedItem().equals("Select Course")){
             nextButton.setText("Please Choose a Course");

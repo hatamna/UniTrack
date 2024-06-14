@@ -12,7 +12,7 @@ import java.util.LinkedList;
  */
 public class UniCourse {
     
-    private LinkedList<Assignement> assignments = new LinkedList<>();
+    private LinkedList<Assignment> assignments = new LinkedList<>();
     private String name;
     
     public UniCourse(){

@@ -423,6 +423,10 @@ public static ArrayList<String> mandatoryCourses = new ArrayList();
             return;
         }
         }   
+        String[] top6Courses = UniTrack.getTop6();
+        for (String s : top6Courses) {
+        System.out.println(s);
+          }  
 
     MainScreen screen = new MainScreen();
     screen.setVisible(true);
