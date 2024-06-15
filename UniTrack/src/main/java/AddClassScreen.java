@@ -1,5 +1,8 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 public class AddClassScreen extends javax.swing.JFrame {
@@ -428,10 +431,16 @@ public static ArrayList<String> mandatoryCourses = new ArrayList();
         System.out.println(s);
           }  
 
-    MainScreen screen = new MainScreen();
-    screen.setVisible(true);
-    screen.toFront();
-    dispose();
+    MainScreen screen;
+    try {
+        screen = new MainScreen();
+        screen.setVisible(true);
+        screen.toFront();
+        dispose();
+    } catch (IOException ex) {
+        Logger.getLogger(AddClassScreen.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
 
     }//GEN-LAST:event_nextButtonActionPerformed
 

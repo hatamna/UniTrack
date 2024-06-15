@@ -14,9 +14,16 @@ public class UniCourse {
     
     private LinkedList<Assignment> assignments = new LinkedList<>();
     private String name;
+    private double average;
     
     public UniCourse(){
-        
+        name = "Course";
+        average = 0.0;
+    }
+    
+    public UniCourse(String n, double a){
+        name = n;
+        average = a;
     }
     
     public void addAssignment(Assignment a){

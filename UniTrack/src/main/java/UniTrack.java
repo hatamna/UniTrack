@@ -22,7 +22,7 @@ public class UniTrack {
     public static int universalNum = 0;
     
     
-    public static File credentials = new File("userCredentials.txt");
+    public static File credentials = new File("" + User.username + ".txt");
     private static HashMap<String, String> userAndPass = new HashMap<>(); //MAKE SURE THAT THIS IS INFO SAFE
     
     public static int numProfiles = 0;
@@ -61,7 +61,7 @@ public class UniTrack {
             System.out.println("An error has occured. ");
         }
         try{
-            FileWriter writer = new FileWriter("userCredentials.txt", true);
+            FileWriter writer = new FileWriter("" + User.username + ".txt", true);
             userAndPass.put(User.username, User.password);
             writer.write(userAndPass + " | ");
             writer.close();

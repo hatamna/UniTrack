@@ -4,6 +4,8 @@
  */
 import java.awt.Dimension;
 import java.awt.Point;
+import java.io.FileWriter;
+import java.io.IOException;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
@@ -338,9 +340,9 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
         
         for (int i = 0; i < percents.size() && i < weights.size(); i++){
             perweightSum = perweightSum + (percents.get(i)*weights.get(i));
-            weightSum = weightSum + weights.get(i);
-            
+            weightSum = weightSum + weights.get(i);  
         }
+        
         grade = perweightSum / weightSum;
         courseName = (String)CourseCodeDropDown.getSelectedItem();
         course_Avg.put(courseName, (String.format("%.2f", grade)));
@@ -349,17 +351,26 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
             nextButton.setText("Please Choose a Course");
         }
         else {
-        AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
-        ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
-        list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
-        HSCourses  = list.toArray(HSCourses);
-        
-        UniTrack.universalNum += 1;
-        
-        AddClassScreen screen = new AddClassScreen();
-        screen.setVisible(true);
-        screen.toFront();
-        dispose();
+            AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
+            ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
+            list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
+            HSCourses  = list.toArray(HSCourses);
+
+            UniTrack.universalNum += 1;
+
+        try{
+            FileWriter writer = new FileWriter("" + User.username + ".txt", true);
+            writer.write("\n" + UniTrack.universalNum + "\n" + CourseCodeDropDown.getSelectedItem() + "\n" + grade + "\n" + codes + "\n" + percents + "\n" + weights);
+            
+            writer.close();
+        } catch (IOException a){
+            System.out.println("An error has occured. ");
+        }
+            
+            AddClassScreen screen = new AddClassScreen();
+            screen.setVisible(true);
+            screen.toFront();
+            dispose();
         }
 
     }//GEN-LAST:event_nextButtonActionPerformed

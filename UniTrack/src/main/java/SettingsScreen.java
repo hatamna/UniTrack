@@ -293,10 +293,15 @@ public class SettingsScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MainScreen screen = new MainScreen();
-        screen.setVisible(true);
-        screen.toFront();
-        dispose();
+        MainScreen screen;
+        try {
+            screen = new MainScreen();
+            screen.setVisible(true);
+            screen.toFront();
+            dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(SettingsScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void programDropDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_programDropDownMouseClicked

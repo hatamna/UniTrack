@@ -176,10 +176,16 @@ public class SignInScreen extends javax.swing.JFrame {
             Logger.getLogger(SignInScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (outString.contains(username + "=" + password)){
-            MainScreen screen = new MainScreen();
-            screen.setVisible(true);
-            screen.toFront();
-            dispose();
+            MainScreen screen;
+            try {
+                screen = new MainScreen();
+                screen.setVisible(true);
+                screen.toFront();
+                dispose();
+            } catch (IOException ex) {
+                Logger.getLogger(SignInScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         } else {
             passwordIncorrectBox.setVisible(true);
         }
