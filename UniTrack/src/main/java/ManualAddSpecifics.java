@@ -32,6 +32,7 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     public static int weightSum = 0;
     public static double grade;
     public static String courseName = null;
+    public static String oldCourse = null;
     
     private static int addCount = 0;
     
@@ -351,12 +352,25 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
             nextButton.setText("Please Choose a Course");
         }
         else {
+            if (AddClassScreen.courseNames[UniTrack.universalNum].equals("Add Class")){
             AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
             ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
             list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
             HSCourses  = list.toArray(HSCourses);
 
             UniTrack.universalNum += 1;
+            }
+            else{
+            ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
+            oldCourse = AddClassScreen.courseNames[UniTrack.universalNum];
+            AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
+            list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
+            list.add(oldCourse);
+            HSCourses  = list.toArray(HSCourses);
+            
+            UniTrack.universalNum += 1;
+            }
+            
             
         String poopoo = "";
         for (String i : codes){
