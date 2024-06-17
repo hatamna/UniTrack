@@ -357,16 +357,19 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
             HSCourses  = list.toArray(HSCourses);
 
             UniTrack.universalNum += 1;
+            
+        String poopoo = "";
+        for (String i : codes){
+            poopoo += " " + i;
+        }
 
         try{
             FileWriter writer = new FileWriter("" + User.username + ".txt", true);
-            writer.write("\n" + UniTrack.universalNum + "\n" + CourseCodeDropDown.getSelectedItem() + "\n" + grade + "\n" + codes + "\n" + percents + "\n" + weights);
-            
+            writer.write("\n" + UniTrack.universalNum + "\n" + CourseCodeDropDown.getSelectedItem() + "\n" + grade + "\n" + poopoo + "\n" + percents + "\n" + weights);
             writer.close();
         } catch (IOException a){
             System.out.println("An error has occured. ");
         }
-            
             AddClassScreen screen = new AddClassScreen();
             screen.setVisible(true);
             screen.toFront();
