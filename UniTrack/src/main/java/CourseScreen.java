@@ -4,9 +4,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.awt.Graphics;
-import java.awt.Color;
-import java.util.HashMap;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -19,25 +16,18 @@ import java.util.HashMap;
  */
 public class CourseScreen extends javax.swing.JFrame {
 
-    private String[] codeLine;
-    private String[] gradeLine;
-    private String[] weightLine;
-    private int[][] coords;
-    private int weightSum;
-    private int weightedGradeSum;
-    
     public CourseScreen() throws IOException {
-        codeLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(4).split(",");
-        gradeLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(5).split(",");
-        weightLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(6).split(",");
-        coords = new int[codeLine.length][2];
         initComponents();
         CourseNameLabel.setText(Files.readAllLines(Paths.get("" + User.username + ".txt")).get(2));
-        for (String i : codeLine) codeArea.setText(codeArea.getText( ) + "\n" + i);
-        for (String i : gradeLine) percentArea.setText(percentArea.getText( ) + "\n" + i);
-        for (String i : weightLine) weightArea.setText(weightArea.getText( ) + "\n" + i);
-        
-        
+        String[] codeLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(4).split(",");
+        for (String i : codeLine)
+            codeArea.setText(codeArea.getText( ) + "\n" + i);
+        String[] gradeLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(5).split(",");
+        for (String i : gradeLine)
+            percentArea.setText(percentArea.getText( ) + "\n" + i);
+        String[] weightLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(6).split(",");
+        for (String i : weightLine)
+            weightArea.setText(weightArea.getText( ) + "\n" + i);
     }
 
     @SuppressWarnings("unchecked")
@@ -53,26 +43,6 @@ public class CourseScreen extends javax.swing.JFrame {
         codeArea = new javax.swing.JTextArea();
         percentArea = new javax.swing.JTextArea();
         weightArea = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        canvas1 = new java.awt.Canvas(){
-            @Override
-            public void paint(Graphics g){
-                g.setColor(Color.RED);
-                for(int x=0; x<codeLine.length-1 ; x++){
-                    for(int y=0; y<x; y++){
-                        weightSum += Integer.parseInt(weightLine[y]);
-                        weightedGradeSum  += Integer.parseInt(gradeLine[y])*Integer.parseInt(weightLine[y]);
-                    }
-                    if(weightSum==0) continue;
-                    g.fillOval(10*x, weightedGradeSum/weightSum, 1, 1);
-                    coords[x][0]=10*x;
-                    coords[x][1]=weightedGradeSum/weightSum;
-                }
-                for(int z=0; z<coords.length-1; z++){
-                    g.drawLine(coords[z][0], coords[z][1], coords[z+1][0], coords[z=1][1]);
-                }
-            }
-        };
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -114,13 +84,6 @@ public class CourseScreen extends javax.swing.JFrame {
         weightArea.setColumns(20);
         weightArea.setRows(5);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -132,13 +95,8 @@ public class CourseScreen extends javax.swing.JFrame {
                         .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(104, 104, 104)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(codeArea, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1)))))
-                .addContainerGap())
+                        .addComponent(codeArea, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 83, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,23 +124,17 @@ public class CourseScreen extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addComponent(CourseNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(percentArea, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(codeArea, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(codeArea, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(percentArea, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(weightArea, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(19, 19, 19))))
+                .addGap(184, 184, 184))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -212,10 +164,6 @@ public class CourseScreen extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_ExitButtonActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        canvas1.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,9 +207,7 @@ public class CourseScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CourseNameLabel;
     private javax.swing.JButton ExitButton;
-    private java.awt.Canvas canvas1;
     private javax.swing.JTextArea codeArea;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
