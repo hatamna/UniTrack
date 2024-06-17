@@ -4,6 +4,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.awt.Color;
+import java.awt.Graphics;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -16,16 +18,23 @@ import java.util.logging.Logger;
  */
 public class CourseScreen extends javax.swing.JFrame {
 
+    private String[] codeLine;
+    private String[] weightLine;
+    private String[] gradeLine;
+    private int weightSum;
+    private int weightedGradeSum;
+    private int[][] coords;
+    
     public CourseScreen() throws IOException {
+        gradeLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(5).split(",");
+        weightLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(6).split(",");
+        codeLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(4).split(" ");
         initComponents();
         CourseNameLabel.setText(Files.readAllLines(Paths.get("" + User.username + ".txt")).get(2));
-        String[] codeLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(4).split(" ");
         for (String i : codeLine)
             codeArea.setText(codeArea.getText( ) + "\n" + i);
-        String[] gradeLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(5).split(",");
         for (String i : gradeLine)
             percentArea.setText(percentArea.getText( ) + "\n" + i);
-        String[] weightLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(6).split(",");
         for (String i : weightLine)
             weightArea.setText(weightArea.getText( ) + "\n" + i);
     }
@@ -43,6 +52,26 @@ public class CourseScreen extends javax.swing.JFrame {
         codeArea = new javax.swing.JTextArea();
         percentArea = new javax.swing.JTextArea();
         weightArea = new javax.swing.JTextArea();
+        canvas1 = new java.awt.Canvas(){
+            @Override
+            public void paint(Graphics g){
+                g.setColor(Color.RED);
+                for(int x=0; x<codeLine.length-1 ; x++){
+                    for(int y=0; y<x; y++){
+                        weightSum += Integer.parseInt(weightLine[y]);
+                        weightedGradeSum  += Integer.parseInt(gradeLine[y])*Integer.parseInt(weightLine[y]);
+                    }
+                    if(weightSum==0) continue;
+                    g.fillOval(10*x, weightedGradeSum/weightSum, 1, 1);
+                    coords[x][0]=10*x;
+                    coords[x][1]=weightedGradeSum/weightSum;
+                }
+                for(int z=0; z<coords.length-1; z++){
+                    g.drawLine(coords[z][0], coords[z][1], coords[z+1][0], coords[z=1][1]);
+                }
+            }
+        }
+        ;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -96,7 +125,7 @@ public class CourseScreen extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addComponent(codeArea, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(649, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 83, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,6 +144,9 @@ public class CourseScreen extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                             .addComponent(weightArea, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addGap(149, 149, 149))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(canvas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(32, 32, 32))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +165,9 @@ public class CourseScreen extends javax.swing.JFrame {
                     .addComponent(percentArea, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(codeArea, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(weightArea, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(184, 184, 184))
+                .addGap(25, 25, 25)
+                .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -206,6 +240,7 @@ public class CourseScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CourseNameLabel;
     private javax.swing.JButton ExitButton;
+    private java.awt.Canvas canvas1;
     private javax.swing.JTextArea codeArea;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
