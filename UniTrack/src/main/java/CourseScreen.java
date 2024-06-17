@@ -26,13 +26,41 @@ public class CourseScreen extends javax.swing.JFrame {
     private int weightedGradeSum;
     private int[][] coords;
     
-    public CourseScreen() throws IOException {
-        gradeLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(5).split(" ");
+    public static int courseNumber;
+    
+    public int getNameNum(){
+        switch (courseNumber){
+            case 1: 
+                return 2;
+            case 2:
+                return 8;
+            case 3:
+                return 14;
+            case 4:
+                return 20;
+            case 5:
+                return 26;
+            case 6:
+                return 32;
+        }
+        return 0;
+    }
+    
+    public void setOGtext(String un) throws IOException{
+        gradeLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(5).split(" ");
         System.out.print(Arrays.toString(gradeLine));
-        weightLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(6).split(" ");
-        codeLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(4).split(" ");
+        weightLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(6).split(" ");
+        codeLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(4).split(" ");
         initComponents();
-        CourseNameLabel.setText(Files.readAllLines(Paths.get("" + User.username + ".txt")).get(2));
+        CourseNameLabel.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(getNameNum()));
+    }
+    
+    public CourseScreen() throws IOException {
+        try {
+            setOGtext(User.username);
+        } catch (IndexOutOfBoundsException e){
+            setOGtext(SignInScreen.username);
+        } 
         for (String i : codeLine)
             codeArea.setText(codeArea.getText( ) + "\n" + i);
         for (String i : gradeLine)

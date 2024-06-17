@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 public class SignInScreen extends javax.swing.JFrame {
     
-    private String username;
+    public static String username;
     private String password;
     private String outString;
 
@@ -165,7 +165,7 @@ public class SignInScreen extends javax.swing.JFrame {
         username = usernameField.getText();
         password = passwordField.getText();
         try {
-            Scanner in = new Scanner(new FileReader("userCredentials.txt"));
+            Scanner in = new Scanner(new FileReader("" + username + ".txt"));
             StringBuilder sb = new StringBuilder();
             while(in.hasNext()) {
                 sb.append(in.next());

@@ -334,10 +334,6 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     }//GEN-LAST:event_currentAverageInputMouseClicked
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        System.out.println(codes);
-        System.out.println(percents);
-        System.out.println(weights);
-        
         for (int i = 0; i < percents.size() && i < weights.size(); i++){
             perweightSum = perweightSum + (percents.get(i)*weights.get(i));
             weightSum = weightSum + weights.get(i);  
@@ -373,11 +369,12 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
 
         try{
             FileWriter writer = new FileWriter("" + User.username + ".txt", true);
-            writer.write("\n" + UniTrack.universalNum + "\n" + CourseCodeDropDown.getSelectedItem() + "\n" + grade + "\n" + poopoo + "\n" + poopoo2 + "\n" + poopoo3);
+            writer.write("\n" + UniTrack.universalNum + "\n" + CourseCodeDropDown.getSelectedItem() + "\n" + String.format("%.2f", grade) + "\n" + poopoo + "\n" + poopoo2 + "\n" + poopoo3);
             writer.close();
         } catch (IOException a){
             System.out.println("An error has occured. ");
         }
+            addCount = 0;
             AddClassScreen screen = new AddClassScreen();
             screen.setVisible(true);
             screen.toFront();
