@@ -360,12 +360,20 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
             
         String poopoo = "";
         for (String i : codes){
-            poopoo += " " + i;
+            poopoo += i+" ";
+        }
+        String poopoo2 ="";
+        for(double j : percents){
+            poopoo2+=j+" ";
+        }
+        String poopoo3=" ";
+        for(int k:weights){
+            poopoo3+=k+" ";
         }
 
         try{
             FileWriter writer = new FileWriter("" + User.username + ".txt", true);
-            writer.write("\n" + UniTrack.universalNum + "\n" + CourseCodeDropDown.getSelectedItem() + "\n" + grade + "\n" + poopoo + "\n" + percents + "\n" + weights);
+            writer.write("\n" + UniTrack.universalNum + "\n" + CourseCodeDropDown.getSelectedItem() + "\n" + grade + "\n" + poopoo + "\n" + poopoo2 + "\n" + poopoo3);
             writer.close();
         } catch (IOException a){
             System.out.println("An error has occured. ");

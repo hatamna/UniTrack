@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.*;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -26,8 +27,9 @@ public class CourseScreen extends javax.swing.JFrame {
     private int[][] coords;
     
     public CourseScreen() throws IOException {
-        gradeLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(5).split(",");
-        weightLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(6).split(",");
+        gradeLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(5).split(" ");
+        System.out.print(Arrays.toString(gradeLine));
+        weightLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(6).split(" ");
         codeLine = Files.readAllLines(Paths.get("" + User.username + ".txt")).get(4).split(" ");
         initComponents();
         CourseNameLabel.setText(Files.readAllLines(Paths.get("" + User.username + ".txt")).get(2));
