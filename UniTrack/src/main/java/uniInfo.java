@@ -23,6 +23,7 @@ public class uniInfo {
     public static final String PROG_NAME_01 = "Computer Science";
     public static final String PROG_NAME_02 = "Biology";
     public static final String PROG_NAME_03 = "Life Sciences";
+    public static final String PROG_NAME_04 = "Chemical Engineering";
 
     static HashMap<String, List<String>> uMandatoryCourses = new HashMap<>();
     static HashMap<String, List<String>> tMandatoryCourses = new HashMap<>();

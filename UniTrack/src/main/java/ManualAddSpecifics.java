@@ -304,7 +304,7 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     }//GEN-LAST:event_currentAverageInputActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-               if (addCount < 9){
+               if (addCount < 100){
             try{
                 percents.add(parseDouble(PercentField.getText()));
                 weights.add(parseInt(WeightField.getText()));
@@ -348,22 +348,23 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
             nextButton.setText("Please Choose a Course");
         }
         else {
-            if (AddClassScreen.courseNames[UniTrack.universalNum].equals("Add Class")){
+            if (!AddClassScreen.courseNames[UniTrack.universalNum].equals("Add Class")){
+                ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
+                oldCourse = AddClassScreen.courseNames[UniTrack.universalNum];
+                AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
+                list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
+                list.add(oldCourse);
+            HSCourses  = list.toArray(HSCourses);
+            
+            UniTrack.universalNum += 1;
+            }
+            else{
+            
             AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
             ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
             list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
             HSCourses  = list.toArray(HSCourses);
 
-            UniTrack.universalNum += 1;
-            }
-            else{
-            ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
-            oldCourse = AddClassScreen.courseNames[UniTrack.universalNum];
-            AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
-            list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
-            list.add(oldCourse);
-            HSCourses  = list.toArray(HSCourses);
-            
             UniTrack.universalNum += 1;
             }
             

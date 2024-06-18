@@ -6,6 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Color;
 import java.awt.Graphics;
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
 import java.util.*;
 
 /*
@@ -47,26 +49,37 @@ public class CourseScreen extends javax.swing.JFrame {
     }
     
     public void setOGtext(String un) throws IOException{
-        gradeLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(5).split(" ");
-        System.out.print(Arrays.toString(gradeLine));
-        weightLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(6).split(" ");
-        codeLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(4).split(" ");
-        initComponents();
-        CourseNameLabel.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(getNameNum()));
+         gradeLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(5).split(" ");
+    weightLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(6).split(" ");
+    codeLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(4).split(" ");
+    initComponents();
+    CourseNameLabel.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(getNameNum()));
+
+    updateJTextAreaContents();
     }
     
     public CourseScreen() throws IOException {
-        try {
-            setOGtext(User.username);
-        } catch (IndexOutOfBoundsException e){
-            setOGtext(SignInScreen.username);
-        } 
-        for (String i : codeLine)
-            codeArea.setText(codeArea.getText( ) + "\n" + i);
-        for (String i : gradeLine)
-            percentArea.setText(percentArea.getText( ) + "\n" + i);
-        for (String i : weightLine)
-            weightArea.setText(weightArea.getText( ) + "\n" + i);
+       try {
+        setOGtext(User.username);
+    } catch (IndexOutOfBoundsException e) {
+        setOGtext(SignInScreen.username);
+    }
+
+    
+    codeArea.setText("");
+    percentArea.setText("");
+    weightArea.setText("");
+
+    
+    for (String i : codeLine) {
+        codeArea.append(i + "\n");
+    }
+    for (String i : gradeLine) {
+        percentArea.append(i + "\n");
+    }
+    for (String i : weightLine) {
+        weightArea.append(i + "\n");
+    }
     }
 
     @SuppressWarnings("unchecked")
@@ -82,26 +95,11 @@ public class CourseScreen extends javax.swing.JFrame {
         codeArea = new javax.swing.JTextArea();
         percentArea = new javax.swing.JTextArea();
         weightArea = new javax.swing.JTextArea();
-        canvas1 = new java.awt.Canvas(){
-            @Override
-            public void paint(Graphics g){
-                g.setColor(Color.RED);
-                for(int x=0; x<codeLine.length-1 ; x++){
-                    for(int y=0; y<x; y++){
-                        weightSum += Integer.parseInt(weightLine[y]);
-                        weightedGradeSum  += Integer.parseInt(gradeLine[y])*Integer.parseInt(weightLine[y]);
-                    }
-                    if(weightSum==0) continue;
-                    g.fillOval(10*x, weightedGradeSum/weightSum, 1, 1);
-                    coords[x][0]=10*x;
-                    coords[x][1]=weightedGradeSum/weightSum;
-                }
-                for(int z=0; z<coords.length-1; z++){
-                    g.drawLine(coords[z][0], coords[z][1], coords[z+1][0], coords[z=1][1]);
-                }
-            }
-        }
-        ;
+        CodeField = new javax.swing.JTextField();
+        PercentField = new javax.swing.JTextField();
+        WeightField = new javax.swing.JTextField();
+        AddButton = new javax.swing.JButton();
+        percentSignLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -143,6 +141,37 @@ public class CourseScreen extends javax.swing.JFrame {
         weightArea.setColumns(20);
         weightArea.setRows(5);
 
+        CodeField.setText("                ");
+        CodeField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CodeFieldActionPerformed(evt);
+            }
+        });
+
+        PercentField.setText("                ");
+        PercentField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PercentFieldActionPerformed(evt);
+            }
+        });
+
+        WeightField.setText("                 ");
+        WeightField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WeightFieldActionPerformed(evt);
+            }
+        });
+
+        AddButton.setText("ADD");
+        AddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButtonActionPerformed(evt);
+            }
+        });
+
+        percentSignLabel.setForeground(new java.awt.Color(0, 0, 0));
+        percentSignLabel.setText("%");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -155,28 +184,41 @@ public class CourseScreen extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addComponent(codeArea, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(649, Short.MAX_VALUE))
+                .addGap(49, 649, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 83, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CourseNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(247, 247, 247)
                                 .addComponent(percentArea, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                            .addComponent(weightArea, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(CodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(PercentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 227, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                                    .addComponent(weightArea, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(percentSignLabel)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(149, 149, 149))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(canvas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(32, 32, 32))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(WeightField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86)
+                .addComponent(AddButton)
+                .addGap(67, 67, 67))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,14 +232,20 @@ public class CourseScreen extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(percentArea, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(codeArea, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(weightArea, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(90, 90, 90)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(percentSignLabel)
+                        .addComponent(WeightField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PercentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(AddButton))
+                .addGap(34, 34, 34))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -227,6 +275,84 @@ public class CourseScreen extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_ExitButtonActionPerformed
+
+    private void WeightFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WeightFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_WeightFieldActionPerformed
+
+    private void CodeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CodeFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CodeFieldActionPerformed
+
+    private void PercentFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PercentFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PercentFieldActionPerformed
+
+    
+    private void updateJTextAreaContents() {
+    // Clear existing text
+    codeArea.setText("");
+    percentArea.setText("");
+    weightArea.setText("");
+
+    // Display original values read from file
+    for (String code : codeLine) {
+        codeArea.append(code + "\n");
+    }
+    for (String percent : gradeLine) {
+        percentArea.append(percent + "\n");
+    }
+    for (String weight : weightLine) {
+        weightArea.append(weight + "\n");
+    }
+
+    // Display manually added values
+    for (String code : ManualAddSpecifics.codes) {
+        codeArea.append(code + "\n");
+    }
+    for (Double percent : ManualAddSpecifics.percents) {
+        percentArea.append(percent.toString() + "\n");
+    }
+    for (Integer weight : ManualAddSpecifics.weights) {
+        weightArea.append(weight.toString() + "\n");
+    }
+}
+    
+    
+    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
+         try {
+        // Add values to the lists
+        ManualAddSpecifics.codes.add(CodeField.getText());
+        ManualAddSpecifics.percents.add(Double.parseDouble(PercentField.getText()));
+        ManualAddSpecifics.weights.add(Integer.parseInt(WeightField.getText()));
+
+        // Clear text fields after adding values
+        CodeField.setText("");
+        PercentField.setText("");
+        WeightField.setText("");
+
+        // Clear JTextAreas
+        codeArea.setText("");
+        percentArea.setText("");
+        weightArea.setText("");
+
+        // Reprint entire lists to JTextAreas
+        for (String code : ManualAddSpecifics.codes) {
+            codeArea.append(code + "\n");
+        }
+        for (Double percent : ManualAddSpecifics.percents) {
+            percentArea.append(percent.toString() + "\n");
+        }
+        for (Integer weight : ManualAddSpecifics.weights) {
+            weightArea.append(weight.toString() + "\n");
+        }
+    } catch (NumberFormatException e) {
+        System.out.println("Error parsing input.");
+    }
+
+         
+         
+    }//GEN-LAST:event_AddButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,15 +394,19 @@ public class CourseScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddButton;
+    private javax.swing.JTextField CodeField;
     private javax.swing.JLabel CourseNameLabel;
     private javax.swing.JButton ExitButton;
-    private java.awt.Canvas canvas1;
+    private javax.swing.JTextField PercentField;
+    private javax.swing.JTextField WeightField;
     private javax.swing.JTextArea codeArea;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextArea percentArea;
+    private javax.swing.JLabel percentSignLabel;
     private javax.swing.JTextArea weightArea;
     // End of variables declaration//GEN-END:variables
 }

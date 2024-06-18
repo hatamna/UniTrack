@@ -290,15 +290,15 @@ public static ArrayList<String> mandatoryCourses = new ArrayList();
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(171, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(AddButton6)
                             .addComponent(AddButton5))
-                        .addGap(99, 99, 99)))
+                        .addGap(99, 99, 99))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 18, Short.MAX_VALUE)
@@ -371,7 +371,7 @@ public static ArrayList<String> mandatoryCourses = new ArrayList();
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddButton3)
                     .addComponent(AddButton5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addComponent(AddButton4)
                 .addGap(88, 88, 88)
                 .addComponent(nextButton)
@@ -461,33 +461,49 @@ public static ArrayList<String> mandatoryCourses = new ArrayList();
     }//GEN-LAST:event_uniDropDownActionPerformed
 
     private void AddButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton1ActionPerformed
-//        b1Enabled = false;
+    if (!AddButton1.equals("Add Class")){
+        ManualAddSpecifics.oldCourse = AddButton1.getText();
+    }
         openSpecifics();
     }//GEN-LAST:event_AddButton1ActionPerformed
 
     private void AddButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton2ActionPerformed
- //       b2Enabled = false;
+        if (!AddButton2.equals("Add Class")){
+        ManualAddSpecifics.oldCourse = AddButton1.getText();
+    }
         openSpecifics();
     }//GEN-LAST:event_AddButton2ActionPerformed
 
     private void AddButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton3ActionPerformed
  //       b3Enabled = false;
-        openSpecifics();
+ if (!AddButton3.equals("Add Class")){
+        ManualAddSpecifics.oldCourse = AddButton1.getText();
+    }       
+ openSpecifics();
     }//GEN-LAST:event_AddButton3ActionPerformed
 
     private void AddButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton4ActionPerformed
  //       b4Enabled = false;
-        openSpecifics();
+ if (!AddButton4.equals("Add Class")){
+        ManualAddSpecifics.oldCourse = AddButton1.getText();
+    }       
+ openSpecifics();
     }//GEN-LAST:event_AddButton4ActionPerformed
 
     private void AddButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton5ActionPerformed
  //       b5Enabled = false;
-        openSpecifics();
+        
+ if (!AddButton5.equals("Add Class")){
+        ManualAddSpecifics.oldCourse = AddButton1.getText();
+    }openSpecifics();
     }//GEN-LAST:event_AddButton5ActionPerformed
 
     private void AddButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton6ActionPerformed
  //       b6Enabled = false;
-        openSpecifics();
+ if (!AddButton6.equals("Add Class")){
+        ManualAddSpecifics.oldCourse = AddButton1.getText();
+    }       
+ openSpecifics();
     }//GEN-LAST:event_AddButton6ActionPerformed
 
     
