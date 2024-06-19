@@ -20,9 +20,9 @@ import java.util.Set;
 
 public class uniInfo {
 
-    public static final String PROG_NAME_01 = "Computer Science";
+     public static final String PROG_NAME_01 = "Computer Science";
     public static final String PROG_NAME_02 = "Biology";
-    public static final String PROG_NAME_03 = "Life Sciences";
+    public static final String PROG_NAME_03 = "Mechanical Engineering";
     public static final String PROG_NAME_04 = "Chemical Engineering";
 
     static HashMap<String, List<String>> uMandatoryCourses = new HashMap<>();
@@ -47,16 +47,20 @@ public class uniInfo {
         uMandatoryCourses.put(PROG_NAME_01, Arrays.asList("ENG4U", "MHF4U", "MCV4U"));
 
         UOPrograms.put(PROG_NAME_02, 89.00);
-        uMandatoryCourses.put(PROG_NAME_02, Arrays.asList("ENG4U", "MHF4U", "MCV4U"));
+        uMandatoryCourses.put(PROG_NAME_02, Arrays.asList("ENG4U", "MHF4U", "MCV4U", "SBI4U"));
 
         UOPrograms.put(PROG_NAME_03, 87.00);
+        uMandatoryCourses.put(PROG_NAME_03, Arrays.asList("ENG4U", "MHF4U", "MCV4U", "SPH4U", "SCH4U"));
         uOttawa.put("uOttawa", UOPrograms);
 
         UTPrograms.put(PROG_NAME_01, 99.00);
         tMandatoryCourses.put(PROG_NAME_01, Arrays.asList("ENG4U", "MHF4U", "MCV4U"));
 
         UTPrograms.put(PROG_NAME_02, 95.00);
+        tMandatoryCourses.put(PROG_NAME_02, Arrays.asList("ENG4U", "MHF4U", "MCV4U", "SBI4U"));
+        
         UTPrograms.put(PROG_NAME_03, 97.00);
+        tMandatoryCourses.put(PROG_NAME_03, Arrays.asList("ENG4U", "MHF4U", "MCV4U", "SPH4U", "SCH4U"));
         uToronto.put("uToronto", UTPrograms);
 
         ottawa = UOPrograms.keySet();
@@ -70,4 +74,5 @@ public class uniInfo {
             torGrades[i] = UTPrograms.get(PROG_NAME_01);
         }
     }
+
 }

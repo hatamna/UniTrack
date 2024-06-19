@@ -46,11 +46,13 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     }
 
      public ManualAddSpecifics() {
-        initComponents();
+          initComponents();
         maxMSG.setVisible(false);
+        CourseCodeDropDown.removeAllItems();
         for (String i : HSCourses){
             CourseCodeDropDown.addItem(i);
         }
+
     }
 
 
@@ -327,7 +329,7 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
             AddButton.setEnabled(false);
             maxMSG.setVisible(true);
         }
-        //codeLabel.setPreferredSize(new Dimension(62 , codeLabel.getHeight()+10));       
+        //codeLabel.setPreferredSize(new Dimension(62 , codeLabel.getHeight()+10));         
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void currentAverageInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentAverageInputMouseClicked
@@ -335,7 +337,7 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     }//GEN-LAST:event_currentAverageInputMouseClicked
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        for (int i = 0; i < percents.size() && i < weights.size(); i++){
+         for (int i = 0; i < percents.size() && i < weights.size(); i++){
             perweightSum = perweightSum + (percents.get(i)*weights.get(i));
             weightSum = weightSum + weights.get(i);  
         }
@@ -343,29 +345,33 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
         grade = perweightSum / weightSum;
         courseName = (String)CourseCodeDropDown.getSelectedItem();
         course_Avg.put(courseName, (String.format("%.2f", grade)));
+        percents.clear();
+        weights.clear();
         
         if (CourseCodeDropDown.getSelectedItem().equals("Select Course")){
             nextButton.setText("Please Choose a Course");
         }
         else {
-            if (!AddClassScreen.courseNames[UniTrack.universalNum].equals("Add Class")){
+            if (!AddClassScreen.courseNames[AddClassScreen.buttonIndex].equals("Add Class")){
                 ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
-                oldCourse = AddClassScreen.courseNames[UniTrack.universalNum];
-                AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
+                oldCourse = AddClassScreen.courseNames[AddClassScreen.buttonIndex];
+                if (oldCourse != null){
+                    list.add(oldCourse);
+                }
+                AddClassScreen.courseNames[AddClassScreen.buttonIndex] = String.valueOf(CourseCodeDropDown.getSelectedItem());
+                
                 list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
-                list.add(oldCourse);
-            HSCourses  = list.toArray(HSCourses);
+                HSCourses  = list.toArray(HSCourses);
             
-            UniTrack.universalNum += 1;
+            
             }
             else{
-            
-            AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
+            AddClassScreen.courseNames[AddClassScreen.buttonIndex] = String.valueOf(CourseCodeDropDown.getSelectedItem());
             ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
             list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
             HSCourses  = list.toArray(HSCourses);
 
-            UniTrack.universalNum += 1;
+            
             }
             
             
@@ -395,6 +401,8 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
             screen.toFront();
             dispose();
         }
+
+
 
     }//GEN-LAST:event_nextButtonActionPerformed
 
