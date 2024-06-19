@@ -36,6 +36,9 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     
     private static int addCount = 0;
     
+    private static double thisAvg = 0.00;
+    private static int totalWeight = 0;
+    
     
     public static int added = 0;
     
@@ -46,7 +49,12 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     }
 
      public ManualAddSpecifics() {
-          initComponents();
+        initComponents();
+        thisAvg = 0;
+        totalWeight = 0;
+        codes.clear();
+        percents.clear();
+        weights.clear();
         maxMSG.setVisible(false);
         CourseCodeDropDown.removeAllItems();
         for (String i : HSCourses){
@@ -306,7 +314,7 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     }//GEN-LAST:event_currentAverageInputActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-               if (addCount < 100){
+        if (addCount < 100){
             try{
                 percents.add(parseDouble(PercentField.getText()));
                 weights.add(parseInt(WeightField.getText()));
@@ -316,20 +324,15 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
             }
             printResults();
             addCount++;
-            /*AddButton.setLocation(AddButton.location().x, AddButton.location().y + 30);
-            CodeField.setLocation(CodeField.location().x, CodeField.location().y + 30);
-            PercentField.setLocation(PercentField.location().x, PercentField.location().y + 30);
-            WeightField.setLocation(WeightField.location().x, WeightField.location().y + 30);
-            percentSignLabel.setLocation(percentSignLabel.location().x, percentSignLabel.location().y + 30);
-            AddButton.setLocation(new Point(AddButton.getLocation().x, AddButton.getLocation().y + 30));*/
+            thisAvg += Double.parseDouble(PercentField.getText())* Integer.parseInt(WeightField.getText());
+            totalWeight += Integer.parseInt(WeightField.getText());
             CodeField.setText("");
             PercentField.setText("");
             WeightField.setText("");
         } else {
             AddButton.setEnabled(false);
             maxMSG.setVisible(true);
-        }
-        //codeLabel.setPreferredSize(new Dimension(62 , codeLabel.getHeight()+10));         
+        }       
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void currentAverageInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentAverageInputMouseClicked
@@ -337,7 +340,7 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     }//GEN-LAST:event_currentAverageInputMouseClicked
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-         for (int i = 0; i < percents.size() && i < weights.size(); i++){
+        /*for (int i = 0; i < percents.size() && i < weights.size(); i++){
             perweightSum = perweightSum + (percents.get(i)*weights.get(i));
             weightSum = weightSum + weights.get(i);  
         }
@@ -345,33 +348,26 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
         grade = perweightSum / weightSum;
         courseName = (String)CourseCodeDropDown.getSelectedItem();
         course_Avg.put(courseName, (String.format("%.2f", grade)));
-        percents.clear();
-        weights.clear();
-        
+        */
         if (CourseCodeDropDown.getSelectedItem().equals("Select Course")){
             nextButton.setText("Please Choose a Course");
         }
         else {
-            if (!AddClassScreen.courseNames[AddClassScreen.buttonIndex].equals("Add Class")){
+            if (!AddClassScreen.courseNames[UniTrack.universalNum].equals("Add Class")){
                 ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
-                oldCourse = AddClassScreen.courseNames[AddClassScreen.buttonIndex];
-                if (oldCourse != null){
-                    list.add(oldCourse);
-                }
-                AddClassScreen.courseNames[AddClassScreen.buttonIndex] = String.valueOf(CourseCodeDropDown.getSelectedItem());
-                
+                oldCourse = AddClassScreen.courseNames[UniTrack.universalNum];
+                AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
                 list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
+                list.add(oldCourse);
                 HSCourses  = list.toArray(HSCourses);
-            
-            
+                UniTrack.universalNum += 1;
             }
             else{
-            AddClassScreen.courseNames[AddClassScreen.buttonIndex] = String.valueOf(CourseCodeDropDown.getSelectedItem());
-            ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
-            list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
-            HSCourses  = list.toArray(HSCourses);
-
-            
+                AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
+                ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
+                list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
+                HSCourses  = list.toArray(HSCourses);
+                UniTrack.universalNum += 1;
             }
             
             
@@ -390,7 +386,7 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
 
         try{
             FileWriter writer = new FileWriter("" + User.username + ".txt", true);
-            writer.write("\n" + UniTrack.universalNum + "\n" + CourseCodeDropDown.getSelectedItem() + "\n" + String.format("%.2f", grade) + "\n" + poopoo + "\n" + poopoo2 + "\n" + poopoo3);
+            writer.write("\n" + UniTrack.universalNum + "\n" + CourseCodeDropDown.getSelectedItem() + "\n" + String.format("%.2f", thisAvg/totalWeight) + "\n" + poopoo + "\n" + poopoo2 + "\n" + poopoo3);
             writer.close();
         } catch (IOException a){
             System.out.println("An error has occured. ");
@@ -401,9 +397,6 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
             screen.toFront();
             dispose();
         }
-
-
-
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void CAinfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CAinfoActionPerformed

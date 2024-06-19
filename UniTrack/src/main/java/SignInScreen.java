@@ -18,6 +18,7 @@ public class SignInScreen extends javax.swing.JFrame {
     public static String username;
     private String password;
     private String outString;
+    public static boolean signedIn = false;
 
     /**
      * Creates new form SignInScreen
@@ -178,6 +179,7 @@ public class SignInScreen extends javax.swing.JFrame {
         if (outString.contains(username + "=" + password)){
             MainScreen screen;
             try {
+                signedIn = true;
                 screen = new MainScreen();
                 screen.setVisible(true);
                 screen.toFront();

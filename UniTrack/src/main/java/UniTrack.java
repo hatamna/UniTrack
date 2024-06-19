@@ -33,6 +33,7 @@ public class UniTrack {
         screen.setVisible(true);
         screen.toFront();
         */
+        uniInfo uni = new uniInfo();
         if (numProfiles == 0){
         ChoiceScreen screen = new ChoiceScreen();
         screen.setVisible(true);

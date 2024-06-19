@@ -23,6 +23,7 @@ public class MainScreen extends javax.swing.JFrame {
     public JLabel[] top6;
     public JLabel[] avgLabels;
     public ArrayList<String> avgValues = new ArrayList();
+    public double CurrentAverage = 0.00;
     
     private int x = 0;
     
@@ -43,9 +44,21 @@ public class MainScreen extends javax.swing.JFrame {
     
     public MainScreen() throws IOException { 
         initComponents();
+        if (SignInScreen.signedIn == true){
+            for (int i = 3; i < 36; i+=6){
+                System.out.println("LOG IN");
+                CurrentAverage += Double.parseDouble(Files.readAllLines(Paths.get("" + SignInScreen.username + ".txt")).get(i));
+            }
+        } else {
+            for (int i = 3; i < 36; i+=6){
+                System.out.println("Acc Creation");
+                CurrentAverage += Double.parseDouble(Files.readAllLines(Paths.get("" + User.username + ".txt")).get(i));
+            }
+        }
+        CurrentAverage = Double.parseDouble(String.format("%.2f", CurrentAverage/6));
+        currentAvgLabel.setText(String.valueOf(CurrentAverage) + "%");
         this.top6 = new JLabel[]{class1, class2, class3, class4, class5, class6};
         this.avgLabels = new JLabel[]{avg1, avg2, avg3, avg4, avg5, avg6};
-        currentAvgLabel.setText(String.valueOf(SettingsScreen.currentAvg) + "%");
         if (SettingsScreen.centerButtonColour == 0){
             MainScreen.CenterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yellowCenterButton.png/")));
         } else if (SettingsScreen.centerButtonColour == 1){
