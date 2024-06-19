@@ -18,7 +18,7 @@ import javax.swing.JLayeredPane;
 public class SettingsScreen extends javax.swing.JFrame {
     
     public static double currentAvg = 90.56;
-    public double currentGoal;
+    public static double currentGoal;
     public static int centerButtonColour = 0;
 
     /**

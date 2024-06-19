@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import static java.lang.Double.parseDouble;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
@@ -63,7 +64,13 @@ public class MainScreen extends javax.swing.JFrame {
         } catch (IndexOutOfBoundsException e){
             setButtonText(SignInScreen.username);
         }
-        
+        if (parseDouble(avg1.getText().replace("%", "")) > SettingsScreen.currentGoal + 2){
+            surroundButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/greenSurroundButton.png/")));
+        } else if ((parseDouble(avg1.getText().replace("%", "")) > SettingsScreen.currentGoal - 2) && (parseDouble(avg1.getText()) < SettingsScreen.currentGoal + 2)){
+            surroundButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yellowSurroundButton.png/")));
+        } else {
+            surroundButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/redSurroundButton.png/")));
+        }
     }
     
     public void openCourseScreen() throws IOException{
@@ -208,7 +215,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         currentAvgLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         currentAvgLabel.setForeground(new java.awt.Color(255, 255, 255));
-        currentAvgLabel.setText("90%");
+        currentAvgLabel.setText("90.00%");
 
         avg1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         avg1.setForeground(new java.awt.Color(255, 255, 255));
@@ -313,15 +320,15 @@ public class MainScreen extends javax.swing.JFrame {
                             .addComponent(surroundButton5))
                         .addGap(0, 249, Short.MAX_VALUE))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(GoldenExperience)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(signOutButton))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(UniTrack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(exitButton)))
+                        .addComponent(exitButton))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(GoldenExperience)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(signOutButton)))
                 .addContainerGap())
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -355,9 +362,9 @@ public class MainScreen extends javax.swing.JFrame {
                     .addContainerGap(517, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(338, 338, 338)
-                    .addComponent(currentAvgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(365, Short.MAX_VALUE)))
+                    .addGap(323, 323, 323)
+                    .addComponent(currentAvgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(346, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(359, 359, 359)
@@ -392,103 +399,103 @@ public class MainScreen extends javax.swing.JFrame {
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(UniTrack)
-                        .addGap(121, 121, 121)
-                        .addComponent(surroundButton6)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(surroundButton3))
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGap(119, 119, 119)
-                                .addComponent(surroundButton4)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(GoldenExperience))
+                        .addComponent(exitButton)
+                        .addGap(76, 76, 76)
+                        .addComponent(surroundButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(CenterButton)
+                        .addGap(298, 298, 298))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(exitButton)
-                                .addGap(76, 76, 76)
-                                .addComponent(surroundButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(CenterButton)
-                                .addGap(275, 275, 275)
-                                .addComponent(signOutButton))
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(surroundButton2)
-                                .addGap(47, 47, 47)
-                                .addComponent(surroundButton5)
-                                .addGap(282, 282, 282)))))
+                        .addComponent(surroundButton2)
+                        .addGap(47, 47, 47)
+                        .addComponent(surroundButton5)
+                        .addGap(282, 282, 282)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(UniTrack)
+                .addGap(121, 121, 121)
+                .addComponent(surroundButton6)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(surroundButton3))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(surroundButton4)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(GoldenExperience)
+                    .addComponent(signOutButton))
+                .addGap(50, 50, 50))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(114, 114, 114)
                     .addComponent(class1)
-                    .addContainerGap(520, Short.MAX_VALUE)))
+                    .addContainerGap(514, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(172, 172, 172)
                     .addComponent(class2)
-                    .addContainerGap(355, Short.MAX_VALUE)))
+                    .addContainerGap(456, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(295, 295, 295)
                     .addComponent(class3)
-                    .addContainerGap(232, Short.MAX_VALUE)))
+                    .addContainerGap(333, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(363, 363, 363)
                     .addComponent(class4)
-                    .addContainerGap(164, Short.MAX_VALUE)))
+                    .addContainerGap(265, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(295, 295, 295)
                     .addComponent(class5)
-                    .addContainerGap(232, Short.MAX_VALUE)))
+                    .addContainerGap(333, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(169, 169, 169)
                     .addComponent(class6)
-                    .addContainerGap(358, Short.MAX_VALUE)))
+                    .addContainerGap(459, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(223, 223, 223)
-                    .addComponent(currentAvgLabel)
-                    .addContainerGap(272, Short.MAX_VALUE)))
+                    .addComponent(currentAvgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(361, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(135, 135, 135)
                     .addComponent(avg1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(485, Short.MAX_VALUE)))
+                    .addContainerGap(479, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(198, 198, 198)
                     .addComponent(avg2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(419, Short.MAX_VALUE)))
+                    .addContainerGap(413, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(321, 321, 321)
                     .addComponent(avg3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(304, Short.MAX_VALUE)))
+                    .addContainerGap(298, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(389, 389, 389)
                     .addComponent(avg4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(229, Short.MAX_VALUE)))
+                    .addContainerGap(223, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(318, 318, 318)
                     .addComponent(avg5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(304, Short.MAX_VALUE)))
+                    .addContainerGap(298, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(201, 201, 201)
                     .addComponent(avg6)
-                    .addContainerGap(433, Short.MAX_VALUE)))
+                    .addContainerGap(423, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -499,7 +506,9 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -510,10 +519,12 @@ public class MainScreen extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 72, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(803, 593));
+        setSize(new java.awt.Dimension(800, 600));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
