@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.FileWriter;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import java.util.*;
@@ -49,8 +50,8 @@ public class CourseScreen extends javax.swing.JFrame {
     }
     
     public void setOGtext(String un) throws IOException{
-        gradeLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(getNameNum()+4).split(" ");
-        weightLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(getNameNum()+3).split(" ");
+        gradeLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(getNameNum()+3).split(" ");
+        weightLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(getNameNum()+4).split(" ");
         codeLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(getNameNum()+2).split(" ");
         initComponents();
         CourseNameLabel.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(getNameNum()));
@@ -126,8 +127,9 @@ public class CourseScreen extends javax.swing.JFrame {
         CourseNameLabel.setText("COURSE");
 
         ExitButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        ExitButton.setText("Back");
+        ExitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backButton.png"))); // NOI18N
         ExitButton.setBorder(null);
+        ExitButton.setContentAreaFilled(false);
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExitButtonActionPerformed(evt);
@@ -263,7 +265,7 @@ public class CourseScreen extends javax.swing.JFrame {
                             .addComponent(WeightField)
                             .addComponent(weightArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
                 .addComponent(AddButton)
                 .addGap(67, 67, 67))
         );
@@ -283,7 +285,7 @@ public class CourseScreen extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(percentArea, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                            .addComponent(percentArea, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
                             .addComponent(weightArea))
                         .addGap(54, 54, 54))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -373,38 +375,16 @@ public class CourseScreen extends javax.swing.JFrame {
     
     
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-         try {
-        // Add values to the lists
-        ManualAddSpecifics.codes.add(CodeField.getText());
-        ManualAddSpecifics.percents.add(Double.parseDouble(PercentField.getText()));
-        ManualAddSpecifics.weights.add(Integer.parseInt(WeightField.getText()));
-
-        // Clear text fields after adding values
-        CodeField.setText("");
-        PercentField.setText("");
-        WeightField.setText("");
-
-        // Clear JTextAreas
-        codeArea.setText("");
-        percentArea.setText("");
-        weightArea.setText("");
-
-        // Reprint entire lists to JTextAreas
-        for (String code : ManualAddSpecifics.codes) {
-            codeArea.append(code + "\n");
+        if (!CodeField.getText().equals("")&&!PercentField.getText().equals("")&&!WeightField.getText().equals("")){
+            codeArea.setText(codeArea.getText()+CodeField.getText()+"\n");
+            CodeField.setText("");
+            percentArea.setText(percentArea.getText()+PercentField.getText()+"\n");
+            PercentField.setText("");
+            weightArea.setText(weightArea.getText()+WeightField.getText()+"\n");
+            WeightField.setText("");
+        } else {
+            AddButton.setText("Fill All Fields");
         }
-        for (Double percent : ManualAddSpecifics.percents) {
-            percentArea.append(percent.toString() + "\n");
-        }
-        for (Integer weight : ManualAddSpecifics.weights) {
-            weightArea.append(weight.toString() + "\n");
-        }
-    } catch (NumberFormatException e) {
-        System.out.println("Error parsing input.");
-    }
-
-         
-         
     }//GEN-LAST:event_AddButtonActionPerformed
 
     /**

@@ -371,22 +371,22 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
             }
             
             
-        String poopoo = "";
+        String p = "";
         for (String i : codes){
-            poopoo += i+" ";
+            p += i+" ";
         }
-        String poopoo2 ="";
+        String p2 ="";
         for(double j : percents){
-            poopoo2+=j+" ";
+            p2+=j+" ";
         }
-        String poopoo3=" ";
+        String p3="";
         for(int k:weights){
-            poopoo3+=k+" ";
+            p3+=k+" ";
         }
 
         try{
             FileWriter writer = new FileWriter("" + User.username + ".txt", true);
-            writer.write("\n" + UniTrack.universalNum + "\n" + CourseCodeDropDown.getSelectedItem() + "\n" + String.format("%.2f", thisAvg/totalWeight) + "\n" + poopoo + "\n" + poopoo2 + "\n" + poopoo3);
+            writer.write("\n" + UniTrack.universalNum + "\n" + CourseCodeDropDown.getSelectedItem() + "\n" + String.format("%.2f", thisAvg/totalWeight) + "\n" + p + "\n" + p2 + "\n" + p3);
             writer.close();
         } catch (IOException a){
             System.out.println("An error has occured. ");
