@@ -44,7 +44,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="80" green="0" red="0" type="rgb"/>
+          <Color blue="38" green="19" red="15" type="rgb"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -68,6 +68,14 @@
       </Layout>
       <SubComponents>
         <Container class="javax.swing.JLayeredPane" name="jLayeredPane1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="38" green="19" red="15" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="38" green="19" red="15" type="rgb"/>
+            </Property>
+          </Properties>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -75,275 +83,281 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="surroundButton3" min="-2" max="-2" attributes="0"/>
                                   <Component id="surroundButton6" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="CenterButton" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                              <Component id="surroundButton1" min="-2" pref="85" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                                      <Component id="surroundButton1" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="surroundButton4" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                                      <Component id="CenterButton" min="-2" pref="165" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="surroundButton5" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="136" max="32767" attributes="0"/>
+                                  </Group>
                                   <Component id="surroundButton2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="surroundButton5" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="249" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               <Component id="UniTrack" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="exitButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="GoldenExperience" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="signOutButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="GoldenExperience" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="signOutButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="surroundButton4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="347" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="360" max="-2" attributes="0"/>
-                          <Component id="class1" min="-2" pref="75" max="-2" attributes="0"/>
-                          <EmptySpace pref="368" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="371" max="-2" attributes="0"/>
+                          <Component id="class1" min="-2" pref="64" max="-2" attributes="0"/>
+                          <EmptySpace pref="365" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="496" max="-2" attributes="0"/>
-                          <Component id="class2" min="-2" pref="45" max="-2" attributes="0"/>
-                          <EmptySpace pref="244" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="570" max="-2" attributes="0"/>
+                          <Component id="class2" min="-2" pref="78" max="-2" attributes="0"/>
+                          <EmptySpace pref="152" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="492" max="-2" attributes="0"/>
-                          <Component id="class3" min="-2" pref="51" max="-2" attributes="0"/>
-                          <EmptySpace pref="242" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="572" max="-2" attributes="0"/>
+                          <Component id="class3" min="-2" pref="76" max="-2" attributes="0"/>
+                          <EmptySpace pref="152" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="4" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="367" max="-2" attributes="0"/>
-                          <Component id="class4" min="-2" pref="47" max="-2" attributes="0"/>
-                          <EmptySpace pref="371" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="356" max="-2" attributes="0"/>
+                          <Component id="class4" min="-2" pref="85" max="-2" attributes="0"/>
+                          <EmptySpace pref="359" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="5" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
-                          <Component id="class5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="516" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
+                          <Component id="class5" min="-2" pref="69" max="-2" attributes="0"/>
+                          <EmptySpace pref="555" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="6" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="231" max="-2" attributes="0"/>
-                          <Component id="class6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="517" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
+                          <Component id="class6" min="-2" pref="74" max="-2" attributes="0"/>
+                          <EmptySpace pref="555" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="7" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="323" max="-2" attributes="0"/>
-                          <Component id="currentAvgLabel" min="-2" pref="134" max="-2" attributes="0"/>
-                          <EmptySpace pref="346" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="331" max="-2" attributes="0"/>
+                          <Component id="currentAvgLabel" min="-2" pref="149" max="-2" attributes="0"/>
+                          <EmptySpace pref="320" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="8" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="359" max="-2" attributes="0"/>
-                          <Component id="avg1" min="-2" pref="99" max="-2" attributes="0"/>
-                          <EmptySpace pref="345" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="355" max="-2" attributes="0"/>
+                          <Component id="avg1" min="-2" pref="98" max="-2" attributes="0"/>
+                          <EmptySpace pref="347" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="9" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="492" max="-2" attributes="0"/>
-                          <Component id="avg2" min="-2" pref="50" max="-2" attributes="0"/>
-                          <EmptySpace pref="261" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="560" max="-2" attributes="0"/>
+                          <Component id="avg2" min="-2" pref="102" max="-2" attributes="0"/>
+                          <EmptySpace pref="138" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="10" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="490" max="-2" attributes="0"/>
-                          <Component id="avg3" min="-2" pref="54" max="-2" attributes="0"/>
-                          <EmptySpace pref="259" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="561" max="-2" attributes="0"/>
+                          <Component id="avg3" min="-2" pref="97" max="-2" attributes="0"/>
+                          <EmptySpace pref="142" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="11" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="365" max="-2" attributes="0"/>
-                          <Component id="avg4" min="-2" pref="52" max="-2" attributes="0"/>
-                          <EmptySpace pref="386" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="avg4" min="-2" pref="101" max="-2" attributes="0"/>
+                          <EmptySpace pref="349" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="12" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="230" max="-2" attributes="0"/>
-                          <Component id="avg5" min="-2" pref="48" max="-2" attributes="0"/>
-                          <EmptySpace pref="525" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
+                          <Component id="avg5" min="-2" pref="94" max="-2" attributes="0"/>
+                          <EmptySpace pref="541" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="13" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="231" max="-2" attributes="0"/>
-                          <Component id="avg6" min="-2" pref="47" max="-2" attributes="0"/>
-                          <EmptySpace pref="525" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
+                          <Component id="avg6" min="-2" pref="102" max="-2" attributes="0"/>
+                          <EmptySpace pref="538" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="exitButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                              <Component id="surroundButton1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="CenterButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
+                                      <Component id="surroundButton6" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="surroundButton3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="surroundButton2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                                      <Component id="surroundButton5" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
+                              <Component id="signOutButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="surroundButton2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                              <Component id="surroundButton5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="282" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="exitButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                      <Component id="surroundButton1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="UniTrack" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                                      <Component id="CenterButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                                      <Component id="surroundButton4" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="413" max="-2" attributes="0"/>
+                                      <Component id="GoldenExperience" min="-2" pref="20" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="UniTrack" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
-                      <Component id="surroundButton6" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="surroundButton3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
-                              <Component id="surroundButton4" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="GoldenExperience" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="signOutButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace min="106" pref="106" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                           <Component id="class1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="514" max="32767" attributes="0"/>
+                          <EmptySpace pref="604" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
                           <Component id="class2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="456" max="32767" attributes="0"/>
+                          <EmptySpace pref="516" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="295" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="358" max="-2" attributes="0"/>
                           <Component id="class3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="333" max="32767" attributes="0"/>
+                          <EmptySpace pref="315" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="4" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="363" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="474" max="-2" attributes="0"/>
                           <Component id="class4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="265" max="32767" attributes="0"/>
+                          <EmptySpace pref="199" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="5" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="295" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="353" max="-2" attributes="0"/>
                           <Component id="class5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="333" max="32767" attributes="0"/>
+                          <EmptySpace pref="320" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="6" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="169" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
                           <Component id="class6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="459" max="32767" attributes="0"/>
+                          <EmptySpace pref="524" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="7" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="223" max="-2" attributes="0"/>
-                          <Component id="currentAvgLabel" min="-2" pref="60" max="-2" attributes="0"/>
-                          <EmptySpace pref="361" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="262" max="-2" attributes="0"/>
+                          <Component id="currentAvgLabel" min="-2" pref="39" max="-2" attributes="0"/>
+                          <EmptySpace pref="388" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="8" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
-                          <Component id="avg1" min="-2" pref="30" max="-2" attributes="0"/>
-                          <EmptySpace pref="479" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                          <Component id="avg1" min="-2" pref="34" max="-2" attributes="0"/>
+                          <EmptySpace pref="556" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="9" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="186" max="-2" attributes="0"/>
                           <Component id="avg2" min="-2" pref="33" max="-2" attributes="0"/>
-                          <EmptySpace pref="413" max="32767" attributes="0"/>
+                          <EmptySpace pref="470" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="10" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="321" max="-2" attributes="0"/>
-                          <Component id="avg3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <EmptySpace pref="298" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="385" max="-2" attributes="0"/>
+                          <Component id="avg3" min="-2" pref="41" max="-2" attributes="0"/>
+                          <EmptySpace pref="263" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="11" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="389" max="-2" attributes="0"/>
-                          <Component id="avg4" min="-2" pref="32" max="-2" attributes="0"/>
-                          <EmptySpace pref="223" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="499" max="-2" attributes="0"/>
+                          <Component id="avg4" min="-2" pref="42" max="-2" attributes="0"/>
+                          <EmptySpace pref="148" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="12" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="318" max="-2" attributes="0"/>
-                          <Component id="avg5" min="-2" pref="28" max="-2" attributes="0"/>
-                          <EmptySpace pref="298" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="383" max="-2" attributes="0"/>
+                          <Component id="avg5" min="-2" pref="40" max="-2" attributes="0"/>
+                          <EmptySpace pref="266" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="13" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
-                          <Component id="avg6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="423" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
+                          <Component id="avg6" min="-2" pref="34" max="-2" attributes="0"/>
+                          <EmptySpace pref="473" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -353,7 +367,7 @@
             <Component class="javax.swing.JButton" name="surroundButton1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/redSurroundButton.png"/>
+                  <Image iconType="3" name="/redSurroundButton_v2.png"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -368,7 +382,7 @@
             <Component class="javax.swing.JButton" name="surroundButton2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/yellowSurroundButton.png"/>
+                  <Image iconType="3" name="/yellowSurroundButton_v2.png"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -383,7 +397,7 @@
             <Component class="javax.swing.JButton" name="surroundButton3">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/greenSurroundButton.png"/>
+                  <Image iconType="3" name="/greenSurroundButton_v2.png"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -417,7 +431,7 @@
             <Component class="javax.swing.JButton" name="surroundButton5">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/greenSurroundButton.png"/>
+                  <Image iconType="3" name="/greenSurroundButton_v2.png"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -432,7 +446,7 @@
             <Component class="javax.swing.JButton" name="surroundButton4">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/greenSurroundButton.png"/>
+                  <Image iconType="3" name="/greenSurroundButton_v2.png"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -447,7 +461,7 @@
             <Component class="javax.swing.JButton" name="surroundButton6">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/greenSurroundButton.png"/>
+                  <Image iconType="3" name="/greenSurroundButton_v2.png"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -556,7 +570,7 @@
             <Component class="javax.swing.JLabel" name="avg2">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="1"/>
+                  <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -570,7 +584,7 @@
             <Component class="javax.swing.JLabel" name="avg3">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="1"/>
+                  <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -584,7 +598,7 @@
             <Component class="javax.swing.JLabel" name="avg4">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="1"/>
+                  <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -598,7 +612,7 @@
             <Component class="javax.swing.JLabel" name="avg5">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="1"/>
+                  <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -612,7 +626,7 @@
             <Component class="javax.swing.JLabel" name="avg6">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="1"/>
+                  <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -631,7 +645,9 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="UniTrack"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/newLogoSmall.png"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="GoldenExperience">
@@ -650,7 +666,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="signOutButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="SIGN OUT"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/SignOutIcon.png"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="signOutButtonActionPerformed"/>

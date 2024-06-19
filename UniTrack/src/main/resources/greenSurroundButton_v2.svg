@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="53.58588mm"
+   height="53.585876mm"
+   viewBox="0 0 53.58588 53.585876"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="UniTrackIcons.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.2787542"
+     inkscape:cx="461.38656"
+     inkscape:cy="447.70136"
+     inkscape:window-width="2240"
+     inkscape:window-height="1294"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showgrid="false" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-2.6016942,-123.12278)">
+    <circle
+       style="fill:#00ff66;fill-opacity:1;stroke-width:0.224342"
+       id="circle3"
+       cx="29.394634"
+       cy="149.91573"
+       r="26.79294"
+       inkscape:export-filename="..\..\..\Docu\UniTrack_v5\UniTrack\UniTrack\src\main\resources\redSurroundButton_v2.png"
+       inkscape:export-xdpi="46.566666"
+       inkscape:export-ydpi="46.566666" />
+    <rect
+       style="fill:#f9f9f9;stroke-width:0.236298"
+       id="rect4"
+       width="28.484987"
+       height="0.52266026"
+       x="15.152144"
+       y="141.50792"
+       ry="0.26133013" />
+  </g>
+</svg>

@@ -49,7 +49,7 @@ public class SignInScreen extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 128));
+        jPanel1.setBackground(new java.awt.Color(21, 25, 56));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -114,36 +114,36 @@ public class SignInScreen extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(208, 208, 208)
+                .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(applyButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cancelButton))
                     .addComponent(jLabel1)
-                    .addComponent(usernameField)
-                    .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
-                .addGap(46, 46, 46)
+                    .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(applyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(61, 61, 61)
                 .addComponent(passwordIncorrectBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(139, 139, 139)
+                .addGap(63, 63, 63)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(passwordIncorrectBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(23, 23, 23)
                         .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(applyButton)
-                            .addComponent(cancelButton)))
-                    .addComponent(passwordIncorrectBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(285, Short.MAX_VALUE))
+                            .addComponent(cancelButton))))
+                .addContainerGap(339, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -163,32 +163,36 @@ public class SignInScreen extends javax.swing.JFrame {
 
     
     private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
-        username = usernameField.getText();
-        password = passwordField.getText();
-        try {
-            Scanner in = new Scanner(new FileReader("" + username + ".txt"));
-            StringBuilder sb = new StringBuilder();
-            while(in.hasNext()) {
-                sb.append(in.next());
-            }
-            in.close();
-            outString = sb.toString();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(SignInScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (outString.contains(username + "=" + password)){
-            MainScreen screen;
+        try{
+            username = usernameField.getText();
+            password = passwordField.getText();
             try {
-                signedIn = true;
-                screen = new MainScreen();
-                screen.setVisible(true);
-                screen.toFront();
-                dispose();
-            } catch (IOException ex) {
+                Scanner in = new Scanner(new FileReader("" + username + ".txt"));
+                StringBuilder sb = new StringBuilder();
+                while(in.hasNext()) {
+                    sb.append(in.next());
+                }
+                in.close();
+                outString = sb.toString();
+            } catch (FileNotFoundException ex) {
                 Logger.getLogger(SignInScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        } else {
+            if (outString.contains(username + "=" + password)){
+                MainScreen screen;
+                try {
+                    signedIn = true;
+                    screen = new MainScreen();
+                    screen.setVisible(true);
+                    screen.toFront();
+                    dispose();
+                } catch (IOException ex) {
+                    Logger.getLogger(SignInScreen.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+                passwordIncorrectBox.setVisible(true);
+            }
+        } catch (NullPointerException a){
             passwordIncorrectBox.setVisible(true);
         }
         
