@@ -13,15 +13,21 @@ public class UniAssignment {
     private double grade;
     private int weight;
     
-    public UniAssignment(){
-        code=null;
-        grade=0;
-        weight=0;
-    }
-    
     public UniAssignment(String c, double g, int w){
         code=c;
         grade=g;
         weight=w;
+    }
+    
+    public int getWeight(){
+        return weight;
+    }
+    
+    public double getGrade(){
+        return grade;
+    }
+    
+    public String getName(){
+        return code;
     }
 }

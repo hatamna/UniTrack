@@ -1,15 +1,12 @@
 
 import java.io.IOException;
-import static java.lang.Double.parseDouble;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.security.GeneralSecurityException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
@@ -25,28 +22,31 @@ import javax.swing.SwingConstants;
 public class MainScreen extends javax.swing.JFrame {
     public JLabel[] top6;
     public JLabel[] avgLabels;
-    public ArrayList<String> avgValues = new ArrayList();
     public double CurrentAverage = 0.00;
+    private User user;
+    private JButton[] surroundButtons;
     
     private int x = 0;
     
     public void setButtonText(String un) throws IOException{
-        class1.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(2));
-        avg1.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(3)+"%");
-        class2.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(8));
-        avg2.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(9)+"%");
-        class3.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(14));
-        avg3.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(15)+"%");
-        class4.setText(Files.readAllLines(Paths.get("" +un + ".txt")).get(20));
-        avg4.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(21)+"%");
-        class5.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(26));
-        avg5.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(27)+"%");
-        class6.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(32));
-        avg6.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(33)+"%");
+        class1.setText(user.getCourseNames().get(0));
+        avg1.setText(String.format("%.2f", (user.getCourses().get(0).updateAverage())));
+        class2.setText(user.getCourseNames().get(1));
+        avg2.setText(String.format("%.2f",(user.getCourses().get(1).updateAverage())));
+        class3.setText(user.getCourseNames().get(2));
+        avg3.setText(String.format("%.2f",(user.getCourses().get(2).updateAverage())));
+        class4.setText(user.getCourseNames().get(3));
+        avg4.setText(String.format("%.2f",(user.getCourses().get(3).updateAverage())));
+        class5.setText(user.getCourseNames().get(4));
+        avg5.setText(String.format("%.2f",(user.getCourses().get(4).updateAverage())));
+        class6.setText(user.getCourseNames().get(5));
+        avg6.setText(String.format("%.2f",(user.getCourses().get(5).updateAverage())));
     }
     
-    public MainScreen() throws IOException { 
+    public MainScreen(User u) throws IOException { 
+        user=u;
         initComponents();
+        surroundButtons = new JButton[]{surroundButton1, surroundButton2, surroundButton5, surroundButton4, surroundButton3, surroundButton6};
         avg1.setHorizontalAlignment(SwingConstants.CENTER);
         avg1.setVerticalAlignment(SwingConstants.CENTER);
         avg2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -73,50 +73,45 @@ public class MainScreen extends javax.swing.JFrame {
         class6.setVerticalAlignment(SwingConstants.CENTER);
         currentAvgLabel.setHorizontalAlignment(SwingConstants.CENTER);
         currentAvgLabel.setVerticalAlignment(SwingConstants.CENTER);
-        if (SignInScreen.signedIn == true){
-            for (int i = 3; i < 36; i+=6){
-                System.out.println("LOG IN");
-                CurrentAverage += Double.parseDouble(Files.readAllLines(Paths.get("" + SignInScreen.username + ".txt")).get(i));
-            }
-        } else {
-            for (int i = 3; i < 36; i+=6){
-                System.out.println("Acc Creation");
-                CurrentAverage += Double.parseDouble(Files.readAllLines(Paths.get("" + User.username + ".txt")).get(i));
-            }
-        }
+        CurrentAverage = user.updateAverage();
+        user.updateColor();
         CurrentAverage = Double.parseDouble(String.format("%.2f", CurrentAverage/6));
         currentAvgLabel.setText(String.valueOf(CurrentAverage) + "%");
         this.top6 = new JLabel[]{class1, class2, class3, class4, class5, class6};
         this.avgLabels = new JLabel[]{avg1, avg2, avg3, avg4, avg5, avg6};
-        if (SettingsScreen.centerButtonColour == 0){
-            MainScreen.CenterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yellowCenterButton.png/")));
-        } else if (SettingsScreen.centerButtonColour == 1){
-            MainScreen.CenterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/redCenterButton.png/")));
-        } else if (SettingsScreen.centerButtonColour == 2){
-            MainScreen.CenterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/greenCenterButton.png/")));
+        switch(user.getAverageColor()){
+            case(ButtonColor.RED):
+                CenterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/redCenterButton.png/")));
+                break;
+            case(ButtonColor.YELLOW):
+                MainScreen.CenterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yellowCenterButton.png/")));
+                break;
+            default:
+                MainScreen.CenterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/greenCenterButton.png/")));
         }
-        for (String i : ManualAddSpecifics.course_Avg.values()){
-            avgValues.add(i);
+        for (int i = 0; i < user.getCourses().size()-1; i++) {
+            top6[i].setText(user.getCourseNames().get(i));
         }
-        for (int i = 0; i < AddClassScreen.courseNames.length; i++) {
-            top6[i].setText(AddClassScreen.courseNames[i]);
+        setButtonText(user.getUsername());
+        
+        for(int x=0; x<surroundButtons.length-1; x++){
+            user.getCourses().get(x).updateColor();
+            switch(user.getCourses().get(x).getColor()){
+                case(ButtonColor.RED):
+                    surroundButtons[x].setIcon(new javax.swing.ImageIcon(getClass().getResource("/redSurroundButton_v2.png/")));
+                    break;
+                case(ButtonColor.GREEN):
+                    surroundButtons[x].setIcon(new javax.swing.ImageIcon(getClass().getResource("/greenSurroundButton_v2.png/")));
+                default:
+                    surroundButtons[x].setIcon(new javax.swing.ImageIcon(getClass().getResource("/yellowSurroundButton_v2.png/")));
+                    break;
+            }
         }
-        try{
-            setButtonText(User.username);
-        } catch (IndexOutOfBoundsException e){
-            setButtonText(SignInScreen.username);
-        }
-        if (parseDouble(avg1.getText().replace("%", "")) > SettingsScreen.currentGoal + 2){
-            surroundButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/greenSurroundButton_v2.png/")));
-        } else if ((parseDouble(avg1.getText().replace("%", "")) > SettingsScreen.currentGoal - 2) && (parseDouble(avg1.getText()) < SettingsScreen.currentGoal + 2)){
-            surroundButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yellowSurroundButton_v2.png/")));
-        } else {
-            surroundButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/redSurroundButton_v2.png/")));
-        }
+        
     }
     
-    public void openCourseScreen() throws IOException{
-        CourseScreen screen = new CourseScreen();
+    public void openCourseScreen(UniCourse c) throws IOException{
+        CourseScreen screen = new CourseScreen(user, c);
         screen.setVisible(true);
         screen.toFront();
         dispose();
@@ -153,7 +148,7 @@ public class MainScreen extends javax.swing.JFrame {
         avg4 = new javax.swing.JLabel();
         avg5 = new javax.swing.JLabel();
         avg6 = new javax.swing.JLabel();
-        UniTrack = new javax.swing.JLabel();
+        UniTrackLabel = new javax.swing.JLabel();
         GoldenExperience = new javax.swing.JLabel();
         signOutButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
@@ -286,9 +281,9 @@ public class MainScreen extends javax.swing.JFrame {
         avg6.setForeground(new java.awt.Color(255, 255, 255));
         avg6.setText("00.00%");
 
-        UniTrack.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
-        UniTrack.setForeground(new java.awt.Color(255, 255, 255));
-        UniTrack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/newLogoSmall.png"))); // NOI18N
+        UniTrackLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        UniTrackLabel.setForeground(new java.awt.Color(255, 255, 255));
+        UniTrackLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/newLogoSmall.png"))); // NOI18N
 
         GoldenExperience.setBackground(new java.awt.Color(255, 255, 255));
         GoldenExperience.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
@@ -332,7 +327,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLayeredPane1.setLayer(avg4, javax.swing.JLayeredPane.PALETTE_LAYER);
         jLayeredPane1.setLayer(avg5, javax.swing.JLayeredPane.PALETTE_LAYER);
         jLayeredPane1.setLayer(avg6, javax.swing.JLayeredPane.PALETTE_LAYER);
-        jLayeredPane1.setLayer(UniTrack, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(UniTrackLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(GoldenExperience, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(signOutButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(exitButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -357,13 +352,12 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(CenterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(72, 72, 72)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(surroundButton5)
-                                .addGap(0, 136, Short.MAX_VALUE))
-                            .addComponent(surroundButton2)))
+                            .addComponent(surroundButton5)
+                            .addComponent(surroundButton2))
+                        .addGap(0, 136, Short.MAX_VALUE))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(UniTrack)
+                        .addComponent(UniTrackLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(exitButton)))
                 .addContainerGap())
@@ -468,7 +462,7 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(exitButton)
                                 .addGap(26, 26, 26)
                                 .addComponent(surroundButton1))
-                            .addComponent(UniTrack))
+                            .addComponent(UniTrackLabel))
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addGap(73, 73, 73)
@@ -577,7 +571,7 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CenterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CenterButtonActionPerformed
-        SettingsScreen screen = new SettingsScreen();
+        SettingsScreen screen = new SettingsScreen(user);
         screen.setVisible(true);
         screen.toFront();
         dispose();
@@ -586,7 +580,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         JFrame quitConfirm = new JFrame();
         if(JOptionPane.showConfirmDialog(quitConfirm, "Are you sure you want to quit?", "QUIT", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
-            System.exit(0);
+            UniTrack.endProgram();
         }
     }//GEN-LAST:event_exitButtonActionPerformed
 
@@ -598,102 +592,57 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_signOutButtonActionPerformed
 
     private void surroundButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundButton2ActionPerformed
-        CourseScreen.courseNumber = 2;
         try {
-            openCourseScreen();
+            openCourseScreen(user.getCourses().get(1));
         } catch (IOException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_surroundButton2ActionPerformed
 
     private void surroundButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundButton1ActionPerformed
-        CourseScreen.courseNumber = 1;
         try {
-            openCourseScreen();
+            openCourseScreen(user.getCourses().get(0));
         } catch (IOException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_surroundButton1ActionPerformed
 
     private void surroundButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundButton5ActionPerformed
-        CourseScreen.courseNumber = 3;
         try {
-            openCourseScreen();
+            openCourseScreen(user.getCourses().get(2));
         } catch (IOException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_surroundButton5ActionPerformed
 
     private void surroundButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundButton4ActionPerformed
-        CourseScreen.courseNumber = 4;
         try {
-            openCourseScreen();
+            openCourseScreen(user.getCourses().get(3));
         } catch (IOException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_surroundButton4ActionPerformed
 
     private void surroundButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundButton3ActionPerformed
-        CourseScreen.courseNumber = 5;
         try {
-            openCourseScreen();
+            openCourseScreen(user.getCourses().get(4));
         } catch (IOException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_surroundButton3ActionPerformed
 
     private void surroundButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surroundButton6ActionPerformed
-        CourseScreen.courseNumber = 6;
         try {
-            openCourseScreen();
+            openCourseScreen(user.getCourses().get(5));
         } catch (IOException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_surroundButton6ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new MainScreen().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton CenterButton;
     private javax.swing.JLabel GoldenExperience;
-    private javax.swing.JLabel UniTrack;
+    private javax.swing.JLabel UniTrackLabel;
     private javax.swing.JLabel avg1;
     private javax.swing.JLabel avg2;
     private javax.swing.JLabel avg3;

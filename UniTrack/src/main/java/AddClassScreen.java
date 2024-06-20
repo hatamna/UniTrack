@@ -1,227 +1,126 @@
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 
 public class AddClassScreen extends javax.swing.JFrame {
-public static ArrayList<String> mandatoryCourses = new ArrayList();
-    public static String programName = null;
-    public static JLabel[] labels;
-    
+    public ArrayList<String> mandatoryCourses = new ArrayList();
+    public String programName = null;
+    public JLabel[] labels;
+    private User user;
+
     private String university;
     private String program;
-    
+
     public static String one = "Add Class";
     public static String two = "Add Class";
     public static String three = "Add Class";
     public static String four = "Add Class";
     public static String five = "Add Class";
     public static String six = "Add Class";
-    public static int buttonIndex;
-    
-//    public static boolean b1Enabled = true;
-//    public static boolean b2Enabled = true;
-//    public static boolean b3Enabled = true;
-//    public static boolean b4Enabled = true;
-//    public static boolean b5Enabled = true;
-//    public static boolean b6Enabled = true;
-    
-    public static String[] courseNames = {"Add Class", "Add Class", "Add Class", "Add Class", "Add Class", "Add Class"};
-//    public Boolean[] chosen = {b1Enabled, b2Enabled, b3Enabled, b4Enabled, b5Enabled, b6Enabled};
-    
-    
-    
-//    private boolean isSelectionMade = false;
-//    private int choicesNum = 0;
- 
-    public void openSpecifics(){
-        ManualAddSpecifics screen = new ManualAddSpecifics();
+        
+    public void openSpecifics(int num){
+        ManualAddSpecifics screen = new ManualAddSpecifics(user, num);
         screen.setVisible(true);
         screen.toFront();
         dispose();
     }
 
-    public AddClassScreen(){
-          initComponents();
-        uniInfo.putty();  
+    public AddClassScreen(User u){
+        user=u;
+        initComponents();
         labels = new JLabel[]{jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6};
-        for (String i: uniInfo.universities){
+        for (String i: UniTrack.getUniversityNames()){
             uniDropDown.addItem(i);
         }
-        for (String i: uniInfo.ottawa){
-            programDropDown.addItem(i);
+        for (Program i: UniTrack.getUniversities()[0].getPrograms()){
+            programDropDown.addItem(i.getName());
         }
         if (university != null && program != null) {
             uniDropDown.setSelectedItem(university);
             programDropDown.setSelectedItem(program);
         }
-        
-        for (int i = 0; i < courseNames.length; i++) {
-        String courseName = courseNames[i];
-        JButton button = null;
-        boolean isEnabled = false;
-    
-    switch (i) {
-        case 0:
-            button = AddButton1;
-//            isEnabled = chosen[0];
-            one = courseName;
-            UniTrack.top6Courses[i] = courseName;
-            break;
-        case 1:
-            button = AddButton2;
-//            isEnabled = chosen[1];
-            UniTrack.top6Courses[i] = courseName;
-            two = courseName;
-            break;
-        case 2:
-            button = AddButton3;
-//            isEnabled = chosen[2];
-            UniTrack.top6Courses[i] = courseName;
-            three = courseName;
-            break;
-        case 3:
-            button = AddButton4;
-//            isEnabled = chosen[3];
-            four = courseName;
-            UniTrack.top6Courses[i] = courseName;
-            break;
-        case 4:
-            button = AddButton5;
-//            isEnabled = chosen[4];
-            UniTrack.top6Courses[i] = courseName;
-            five = courseName;
-            break;
-        case 5:
-            button = AddButton6;
-//            isEnabled = chosen[5];
-            UniTrack.top6Courses[i] = courseName;
-            six = courseName;
-            break;
-    }
-    
-    if (button != null) {
-        button.setText(courseName);
-//        button.setEnabled(isEnabled);
-    }
-}
-        
-        
-        
-        
-//        nextButton.setEnabled(false);
+
+        for (int i = 0; i < user.getCourseNames().size()-1; i++) {
+            String courseName = user.getCourseNames().get(i);
+            JButton button = null;
+            switch (i) {
+                case 0:
+                    button = AddButton1;
+                    one = courseName;
+                    //UniTrack.getTop6Courses()[i] = courseName;
+                    break;
+                case 1:
+                    button = AddButton2;
+                    //UniTrack.getTop6Courses()[i] = courseName;
+                    two = courseName;
+                    break;
+                case 2:
+                    button = AddButton3;
+                    //UniTrack.getTop6Courses()[i] = courseName;
+                    three = courseName;
+                    break;
+                case 3:
+                    button = AddButton4;
+                    four = courseName;
+                    //UniTrack.getTop6Courses()[i] = courseName;
+                    break;
+                case 4:
+                    button = AddButton5;
+                    //UniTrack.getTop6Courses()[i] = courseName;
+                    five = courseName;
+                    break;
+                case 5:
+                    button = AddButton6;
+                    //UniTrack.getTop6Courses()[i] = courseName;
+                    six = courseName;
+                    break;
+            }
+
+            if (button != null) {
+                button.setText(courseName);
+            }
+        }
     }
     
     public void choiceTrack() {
-     university = String.valueOf(uniDropDown.getSelectedItem());
-    program = String.valueOf(programDropDown.getSelectedItem());
-    switch (university) {
-        case "uOttawa":
-            mandatoryCourses.clear();
-            switch (program) {
-                case uniInfo.PROG_NAME_01:
-                    programName = uniInfo.PROG_NAME_01;
-                    mandatoryCourses.clear();
-                    for (String course : uniInfo.uMandatoryCourses.get(program)) {
-                        mandatoryCourses.add(course);
-                    }
-                    for (int j = 0; j < labels.length; j++) {
-                        if (j < mandatoryCourses.size()) {
-                            labels[j].setVisible(true);
-                            labels[j].setText(mandatoryCourses.get(j));
-                        } else {
-                            labels[j].setVisible(false);
-                        }
-                    }
-                    break;
-                case uniInfo.PROG_NAME_02:
-                    mandatoryCourses.clear();
-                     for (String course : uniInfo.uMandatoryCourses.get(program)) {
-                        mandatoryCourses.add(course);
-                    }
-                    for (int j = 0; j < labels.length; j++) {
-                        if (j < mandatoryCourses.size()) {
-                            labels[j].setVisible(true);
-                            labels[j].setText(mandatoryCourses.get(j));
-                        } else {
-                            labels[j].setVisible(false);
-                        }
-                    }
-                    break;
-                case uniInfo.PROG_NAME_03:
-                    mandatoryCourses.clear();
-                     for (String course : uniInfo.uMandatoryCourses.get(program)) {
-                        mandatoryCourses.add(course);
-                    }
-                    for (int j = 0; j < labels.length; j++) {
-                        if (j < mandatoryCourses.size()) {
-                            labels[j].setVisible(true);
-                            labels[j].setText(mandatoryCourses.get(j));
-                        } else {
-                            labels[j].setVisible(false);
-                        }
-                    }
-                    break;
-                default:
-                    System.out.println("Error: Invalid program selected for uOttawa.");
-            }
-            break;
-        case "uToronto":
-            mandatoryCourses.clear();
-            switch (String.valueOf(programDropDown.getSelectedItem())) {
-                case uniInfo.PROG_NAME_01:
-                    mandatoryCourses.clear();
-                    for (String course : uniInfo.tMandatoryCourses.get(program)) {
-                        mandatoryCourses.add(course);
-                    }
-                    for (int j = 0; j < labels.length; j++) {
-                        if (j < mandatoryCourses.size()) {
-                            labels[j].setVisible(true);
-                            labels[j].setText(mandatoryCourses.get(j));
-                        } else {
-                            labels[j].setVisible(false);
-                        }
-                    }
-                    break;
-                case uniInfo.PROG_NAME_02:
-                    mandatoryCourses.clear();
-                    for (String course : uniInfo.tMandatoryCourses.get(program)) {
-                        mandatoryCourses.add(course);
-                    }
-                    for (int j = 0; j < labels.length; j++) {
-                        if (j < mandatoryCourses.size()) {
-                            labels[j].setVisible(true);
-                            labels[j].setText(mandatoryCourses.get(j));
-                        } else {
-                            labels[j].setVisible(false);
-                        }
-                    }
-                    break;
-                case uniInfo.PROG_NAME_03:
-                    mandatoryCourses.clear();
-                    for (String course : uniInfo.tMandatoryCourses.get(program)) {
-                        mandatoryCourses.add(course);
-                    }
-                    for (int j = 0; j < labels.length; j++) {
-                        if (j < mandatoryCourses.size()) {
-                            labels[j].setVisible(true);
-                            labels[j].setText(mandatoryCourses.get(j));
-                        } else {
-                            labels[j].setVisible(false);
-                        }
-                    }
-                    break;
-                default:
-                    System.out.println("Error: Invalid program selected for uToronto.");
-            }
-            break;
-        default:
-            System.out.println("Error: Invalid university selected.");
-    }
+        String universityName = String.valueOf(uniDropDown.getSelectedItem());
+        String programName = String.valueOf(programDropDown.getSelectedItem());
 
-} 
+        University university = UniTrack.getUniversity(universityName);
+        if (university == null) {
+            System.out.println("Error: Invalid university selected.");
+            return;
+        }
+
+        Program selectedProgram = null;
+        for (Program program : university.getPrograms()) {
+            if (program.getName().equals(programName)) {
+                selectedProgram = program;
+                break;
+            }
+        }
+
+        if (selectedProgram == null) {
+            System.out.println("Error: Invalid program selected for " + universityName + ".");
+            return;
+        }
+
+        mandatoryCourses.clear();
+        for (String course : selectedProgram.getRequiredCourses()) {
+            mandatoryCourses.add(course);
+        }
+
+        for (int j = 0; j < labels.length-1; j++) {
+            if (j < mandatoryCourses.size()-1) {
+                labels[j].setVisible(true);
+                labels[j].setText(mandatoryCourses.get(j));
+            } else {
+                labels[j].setVisible(false);
+            }
+        }
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -460,7 +359,7 @@ public static ArrayList<String> mandatoryCourses = new ArrayList();
     }// </editor-fold>//GEN-END:initComponents
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-         if (courseNames.length < 6) {
+         if (user.isValidAmount()) {
             nextButton.setText("ENTER AT LEAST 6 COURSES");
             return;
         }
@@ -469,36 +368,34 @@ public static ArrayList<String> mandatoryCourses = new ArrayList();
             boolean allMandatorySelected = true;
             for (String course : mandatoryCourses) {
                 boolean found = false;
-                for (String selectedCourse : courseNames) {
+                for (String selectedCourse : user.getCourseNames()) {
                     if (selectedCourse.equals(course)) {
                     found = true;
                     break;
-                }
+                    }
                 }
                 if (!found) {
                 allMandatorySelected = false;
                 break;
                 }
             }
-        if (!allMandatorySelected) {
-            nextButton.setText("SELECT ALL MANDATORY COURSES");
-            return;
-        }
+            if (!allMandatorySelected) {
+                nextButton.setText("SELECT ALL MANDATORY COURSES");
+                return;
+            }
         }   
-        String[] top6Courses = UniTrack.getTop6();
-        for (String s : top6Courses) {
-        System.out.println(s);
-          }  
+        //String[] top6Courses = UniTrack.getTop6();  
 
-    MainScreen screen;
-    try {
-        screen = new MainScreen();
-        screen.setVisible(true);
-        screen.toFront();
-        dispose();
-    } catch (IOException ex) {
-        Logger.getLogger(AddClassScreen.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        MainScreen screen;
+        try {
+            screen = new MainScreen(user);
+            screen.setVisible(true);
+            screen.toFront();
+            dispose();
+        } 
+        catch (IOException ex) {
+            Logger.getLogger(AddClassScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void programDropDownMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_programDropDownMouseMoved
@@ -518,96 +415,50 @@ public static ArrayList<String> mandatoryCourses = new ArrayList();
     }//GEN-LAST:event_uniDropDownActionPerformed
 
     private void AddButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton1ActionPerformed
-     if (!AddButton1.equals("Add Class")){
-        ManualAddSpecifics.oldCourse = AddButton1.getText();
-        buttonIndex = 0;
-    }
-        openSpecifics();
+        if (!AddButton1.equals("Add Class")){
+            //ManualAddSpecifics.setOldCourse(AddButton1.getText());
+        }
+        openSpecifics(0);
 
     }//GEN-LAST:event_AddButton1ActionPerformed
 
     private void AddButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton2ActionPerformed
         if (!AddButton2.equals("Add Class")){
-        ManualAddSpecifics.oldCourse = AddButton1.getText();
-        buttonIndex = 1;
-    }
-        openSpecifics();
+            //ManualAddSpecifics.setOldCourse(AddButton1.getText());
+        }
+        openSpecifics(1);
 
     }//GEN-LAST:event_AddButton2ActionPerformed
 
     private void AddButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton3ActionPerformed
- //       b3Enabled = false;
- if (!AddButton3.equals("Add Class")){
-        ManualAddSpecifics.oldCourse = AddButton1.getText();
-        buttonIndex = 2;
-    }       
- openSpecifics();
+    if (!AddButton3.equals("Add Class")){
+            //ManualAddSpecifics.setOldCourse(AddButton1.getText());
+        }       
+        openSpecifics(2);
 
     }//GEN-LAST:event_AddButton3ActionPerformed
 
     private void AddButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton4ActionPerformed
- if (!AddButton4.equals("Add Class")){
-        ManualAddSpecifics.oldCourse = AddButton1.getText();
-        buttonIndex = 3;
-    }       
- openSpecifics();
+        if (!AddButton4.equals("Add Class")){
+            //ManualAddSpecifics.setOldCourse(AddButton1.getText());
+        }       
+        openSpecifics(3);
 
     }//GEN-LAST:event_AddButton4ActionPerformed
 
     private void AddButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton5ActionPerformed
-         
- if (!AddButton5.equals("Add Class")){
-        ManualAddSpecifics.oldCourse = AddButton1.getText();
-        buttonIndex = 4;
-    }
-    openSpecifics();
-
+        if (!AddButton5.equals("Add Class")){
+            //ManualAddSpecifics.setOldCourse(AddButton1.getText());
+        }
+        openSpecifics(4);
     }//GEN-LAST:event_AddButton5ActionPerformed
 
     private void AddButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButton6ActionPerformed
- //       b6Enabled = false;
- if (!AddButton6.equals("Add Class")){
-        ManualAddSpecifics.oldCourse = AddButton1.getText();
-        buttonIndex = 5;
-    }       
- openSpecifics();
+    if (!AddButton6.equals("Add Class")){
+            //ManualAddSpecifics.setOldCourse(AddButton1.getText());
+        }       
+        openSpecifics(5);
     }//GEN-LAST:event_AddButton6ActionPerformed
-
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddClassScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddClassScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddClassScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddClassScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddClassScreen().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddButton1;

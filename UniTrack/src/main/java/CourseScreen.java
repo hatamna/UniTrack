@@ -1,15 +1,14 @@
 
+import java.awt.Canvas;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
-import java.io.FileWriter;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
-import java.util.*;
+import javax.swing.JFrame;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -27,66 +26,20 @@ public class CourseScreen extends javax.swing.JFrame {
     private String[] gradeLine;
     private int weightSum;
     private int weightedGradeSum;
-    private int[][] coords;
-    
-    public static int courseNumber;
-    
-    public int getNameNum(){
-        switch (courseNumber){
-            case 1: 
-                return 2;
-            case 2:
-                return 8;
-            case 3:
-                return 14;
-            case 4:
-                return 20;
-            case 5:
-                return 26;
-            case 6:
-                return 32;
-        }
-        return 0;
-    }
-    
-    public void setOGtext(String un) throws IOException{
-        gradeLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(getNameNum()+3).split(" ");
-        weightLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(getNameNum()+4).split(" ");
-        codeLine = Files.readAllLines(Paths.get("" + un + ".txt")).get(getNameNum()+2).split(" ");
-        initComponents();
-        CourseNameLabel.setText(Files.readAllLines(Paths.get("" + un + ".txt")).get(getNameNum()));
-
-        updateJTextAreaContents();
-    }
-    
+    private User user;
+    private UniCourse course;
     
     
     public void setCodeAreaText(){
         
     }
     
-    public CourseScreen() throws IOException {
-       try {
-        setOGtext(User.username);
-    } catch (IndexOutOfBoundsException e) {
-        setOGtext(SignInScreen.username);
-    }
-
-    
-    codeArea.setText("");
-    percentArea.setText("");
-    weightArea.setText("");
-
-    
-    for (String i : codeLine) {
-        codeArea.append(i + "\n");
-    }
-    for (String i : gradeLine) {
-        percentArea.append(i + "\n");
-    }
-    for (String i : weightLine) {
-        weightArea.append(i + "\n");
-    }
+    public CourseScreen(User u, UniCourse c) throws IOException {
+        user=u;
+        course=c;
+        initComponents();
+        CourseNameLabel.setText(course.getName());
+        updateJTextAreaContents();
     }
 
     @SuppressWarnings("unchecked")
@@ -111,6 +64,7 @@ public class CourseScreen extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        graphView = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -152,16 +106,22 @@ public class CourseScreen extends javax.swing.JFrame {
         codeArea.setColumns(20);
         codeArea.setForeground(new java.awt.Color(255, 255, 255));
         codeArea.setRows(5);
+        codeArea.setOpaque(false);
+        codeArea.setRequestFocusEnabled(false);
 
         percentArea.setBackground(new java.awt.Color(0, 0, 128));
         percentArea.setColumns(20);
         percentArea.setForeground(new java.awt.Color(255, 255, 255));
         percentArea.setRows(5);
+        percentArea.setOpaque(false);
+        percentArea.setRequestFocusEnabled(false);
 
         weightArea.setBackground(new java.awt.Color(0, 0, 128));
         weightArea.setColumns(20);
         weightArea.setForeground(new java.awt.Color(255, 255, 255));
         weightArea.setRows(5);
+        weightArea.setOpaque(false);
+        weightArea.setRequestFocusEnabled(false);
 
         CodeField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,6 +178,13 @@ public class CourseScreen extends javax.swing.JFrame {
                 .addComponent(jLabel7))
         );
 
+        graphView.setText("Graph View");
+        graphView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                graphViewActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -265,7 +232,9 @@ public class CourseScreen extends javax.swing.JFrame {
                             .addComponent(WeightField)
                             .addComponent(weightArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addComponent(graphView)
+                .addGap(18, 18, 18)
                 .addComponent(AddButton)
                 .addGap(67, 67, 67))
         );
@@ -299,7 +268,9 @@ public class CourseScreen extends javax.swing.JFrame {
                         .addComponent(PercentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(CodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(WeightField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(AddButton))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(AddButton)
+                        .addComponent(graphView)))
                 .addGap(34, 34, 34))
         );
 
@@ -321,7 +292,7 @@ public class CourseScreen extends javax.swing.JFrame {
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         MainScreen screen;
         try {
-            screen = new MainScreen();
+            screen = new MainScreen(user);
             screen.setVisible(true);
             screen.toFront();
             dispose();
@@ -345,87 +316,88 @@ public class CourseScreen extends javax.swing.JFrame {
 
     
     private void updateJTextAreaContents() {
-    // Clear existing text
-    codeArea.setText("");
-    percentArea.setText("");
-    weightArea.setText("");
-
-    // Display original values read from file
-    for (String code : codeLine) {
-        codeArea.append(code + "\n");
+        // Clear existing text
+        codeArea.setText("");
+        percentArea.setText("");
+        weightArea.setText("");
+        UniAssignment ass;
+        for(int x=0; x<=course.getAssignments().size()-1;x++){
+            ass = course.getAssignments().get(x);
+            codeArea.setText(codeArea.getText()+(ass.getName()+"\n"));
+            percentArea.setText(percentArea.getText()+(ass.getGrade()+"\n"));
+            weightArea.setText(weightArea.getText()+(ass.getWeight()+"\n"));
+        }
+        jLabel6.setText(String.format("%.2f", (course.updateAverage())));
+        jLabel7.setText(String.valueOf(course.getWeight()));
+        revalidate();
+        repaint();
     }
-    for (String percent : gradeLine) {
-        percentArea.append(percent + "\n");
-    }
-    for (String weight : weightLine) {
-        weightArea.append(weight + "\n");
-    }
-
-    // Display manually added values
-    for (String code : ManualAddSpecifics.codes) {
-        codeArea.append(code + "\n");
-    }
-    for (Double percent : ManualAddSpecifics.percents) {
-        percentArea.append(percent.toString() + "\n");
-    }
-    for (Integer weight : ManualAddSpecifics.weights) {
-        weightArea.append(weight.toString() + "\n");
-    }
-}
     
     
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-        if (!CodeField.getText().equals("")&&!PercentField.getText().equals("")&&!WeightField.getText().equals("")){
-            codeArea.setText(codeArea.getText()+CodeField.getText()+"\n");
-            CodeField.setText("");
-            percentArea.setText(percentArea.getText()+PercentField.getText()+"\n");
-            PercentField.setText("");
-            weightArea.setText(weightArea.getText()+WeightField.getText()+"\n");
-            WeightField.setText("");
+        String code = CodeField.getText().trim();
+        String percent = PercentField.getText().trim();
+        String weight = WeightField.getText().trim();
+
+        if (!code.isEmpty() && !percent.isEmpty() && !weight.isEmpty()) {
+            course.addAssignment(new UniAssignment(code,parseDouble(percent), parseInt(weight)));
         } else {
             AddButton.setText("Fill All Fields");
         }
     }//GEN-LAST:event_AddButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void graphViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graphViewActionPerformed
+    JFrame graphFrame = new JFrame();
+        graphFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Canvas for drawing
+        Canvas graphCanvas = new Canvas() {
+            @Override
+            public void paint(Graphics g) {
+                super.paint(g); // Clear the canvas
+                
+                int[] coordsX = new int[course.getAssignments().size()-1];
+                int[] coordsY = new int[course.getAssignments().size()-1];
+                
+                for (int x = 0; x < course.getAssignments().size()-1; x++) {
+                    weightSum = 0;
+                    weightedGradeSum = 0;
+                    
+                    for (int y = 0; y < x; y++) {
+                        try {
+                            weightSum += course.getAssignments().get(y).getWeight();
+                            weightedGradeSum += course.getAssignments().get(y).getWeight() * course.getAssignments().get(y).getWeight();
+                        } catch (NumberFormatException ex) {
+                            Logger.getLogger(CourseScreen.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    
+                    if (weightSum == 0) continue;
+                    
+                    int xPos = 50 + 50 * x; // Adjust the x position based on your needs
+                    int yPos = 300 - weightedGradeSum / weightSum; // Adjust the y position based on your needs
+                    
+                    coordsX[x] = xPos;
+                    coordsY[x] = yPos;
+                    
+                    g.setColor(Color.RED);
+                    g.fillOval(xPos, yPos, 5, 5); // Adjust the size of the oval
+                }
+                
+                g.setColor(Color.BLUE);
+                for (int z = 0; z < coordsX.length-1; z++) {
+                    g.drawLine(coordsX[z], coordsY[z], coordsX[z + 1], coordsY[z + 1]);
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CourseScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CourseScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CourseScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CourseScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        };
+        
+        graphFrame.add(graphCanvas);
+        graphCanvas.setPreferredSize(new Dimension(600, 400)); // Set the preferred size of the canvas
+        graphFrame.pack(); // Pack the frame to fit the canvas
+        graphFrame.setLocationRelativeTo(null);
+        graphFrame.setVisible(true);
+    }//GEN-LAST:event_graphViewActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new CourseScreen().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(CourseScreen.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddButton;
     private javax.swing.JTextField CodeField;
@@ -434,6 +406,7 @@ public class CourseScreen extends javax.swing.JFrame {
     private javax.swing.JTextField PercentField;
     private javax.swing.JTextField WeightField;
     private javax.swing.JTextArea codeArea;
+    private javax.swing.JButton graphView;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

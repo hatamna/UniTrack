@@ -2,19 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-import java.awt.Dimension;
-import java.awt.Point;
-import java.io.FileWriter;
-import java.io.IOException;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
@@ -22,45 +14,46 @@ import javax.swing.JPanel;
  */
 public class ManualAddSpecifics extends javax.swing.JFrame {
     
-    public static String[] HSCourses = Arrays.stream(uniInfo.HSCourses).toArray(String[]::new);
-    public static ArrayList<String> codes = new ArrayList<>();
-    public static ArrayList<Double> percents = new ArrayList<>();
-    public static ArrayList<Integer> weights = new ArrayList<>();
-    public static HashMap<String, String> course_Avg = new HashMap<>();
+    private ArrayList<String> codes = new ArrayList<>();
+    private ArrayList<Double> percents = new ArrayList<>();
+    private ArrayList<Integer> weights = new ArrayList<>();
+    private HashMap<String, String> course_Avg = new HashMap<>();
+    private User user;
+    private double perweightSum = 0;
+    private int weightSum = 0;
+    private double grade;
+    private String courseName = null;
+    private String oldCourse = null;
+    private int index;
     
-    public static double perweightSum = 0;
-    public static int weightSum = 0;
-    public static double grade;
-    public static String courseName = null;
-    public static String oldCourse = null;
+    private int addCount = 0;
     
-    private static int addCount = 0;
-    
-    private static double thisAvg = 0.00;
-    private static int totalWeight = 0;
+    private double thisAvg = 0.00;
+    private int totalWeight = 0;
     
     
-    public static int added = 0;
+    private int added = 0;
     
     public void printResults(){
-        codeLabel.setText(codeLabel.getText() + "\n" + CodeField.getText());
-        percentLabel.setText(percentLabel.getText() + "\n" + PercentField.getText());
-        weightLabel.setText(weightLabel.getText() + "\n" + WeightField.getText());
+        getCodeLabel().setText(getCodeLabel().getText() + "\n" + getCodeField().getText());
+        getPercentLabel().setText(getPercentLabel().getText() + "\n" + getPercentField().getText());
+        getWeightLabel().setText(getWeightLabel().getText() + "\n" + getWeightField().getText());
     }
 
-     public ManualAddSpecifics() {
-        initComponents();
-        thisAvg = 0;
-        totalWeight = 0;
-        codes.clear();
-        percents.clear();
-        weights.clear();
-        maxMSG.setVisible(false);
-        CourseCodeDropDown.removeAllItems();
-        for (String i : HSCourses){
-            CourseCodeDropDown.addItem(i);
-        }
-
+    public ManualAddSpecifics(User u, int b) {
+       user=u;
+       index=b;
+       initComponents();
+       thisAvg = 0;
+       totalWeight = 0;
+       codes.clear();
+       percents.clear();
+       weights.clear();
+       maxMSG.setVisible(false);
+       CourseCodeDropDown.removeAllItems();
+       for (String i : user.getAvailableCourses()){
+           CourseCodeDropDown.addItem(i);
+       }
     }
 
 
@@ -314,85 +307,51 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     }//GEN-LAST:event_currentAverageInputActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-        if (addCount < 100){
+        if (getAddCount() < 100){
             try{
-                percents.add(parseDouble(PercentField.getText()));
-                weights.add(parseInt(WeightField.getText()));
-                codes.add(CodeField.getText());
+                getPercents().add(parseDouble(getPercentField().getText()));
+                getWeights().add(parseInt(getWeightField().getText()));
+                getCodes().add(getCodeField().getText());
             } catch (NumberFormatException e){
                 System.out.println("Error.");
             }
             printResults();
-            addCount++;
-            thisAvg += Double.parseDouble(PercentField.getText())* Integer.parseInt(WeightField.getText());
-            totalWeight += Integer.parseInt(WeightField.getText());
-            CodeField.setText("");
-            PercentField.setText("");
-            WeightField.setText("");
+            setAddCount(getAddCount() + 1);
+            setThisAvg(getThisAvg() + Double.parseDouble(getPercentField().getText()) * Integer.parseInt(getWeightField().getText()));
+            setTotalWeight(getTotalWeight() + Integer.parseInt(getWeightField().getText()));
+            getCodeField().setText("");
+            getPercentField().setText("");
+            getWeightField().setText("");
         } else {
-            AddButton.setEnabled(false);
-            maxMSG.setVisible(true);
+            getAddButton().setEnabled(false);
+            getMaxMSG().setVisible(true);
         }       
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void currentAverageInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentAverageInputMouseClicked
-        currentAverageInput.setText("");
+        getCurrentAverageInput().setText("");
     }//GEN-LAST:event_currentAverageInputMouseClicked
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        /*for (int i = 0; i < percents.size() && i < weights.size(); i++){
-            perweightSum = perweightSum + (percents.get(i)*weights.get(i));
-            weightSum = weightSum + weights.get(i);  
-        }
         
-        grade = perweightSum / weightSum;
-        courseName = (String)CourseCodeDropDown.getSelectedItem();
-        course_Avg.put(courseName, (String.format("%.2f", grade)));
-        */
-        if (CourseCodeDropDown.getSelectedItem().equals("Select Course")){
-            nextButton.setText("Please Choose a Course");
+        if (getCourseCodeDropDown().getSelectedItem().equals("Select Course")){
+            getNextButton().setText("Please Choose a Course");
         }
         else {
-            if (!AddClassScreen.courseNames[UniTrack.universalNum].equals("Add Class")){
-                ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
-                oldCourse = AddClassScreen.courseNames[UniTrack.universalNum];
-                AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
-                list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
-                list.add(oldCourse);
-                HSCourses  = list.toArray(HSCourses);
-                UniTrack.universalNum += 1;
+            if (!user.getCourses().get(index).equals("Add Class")){
+                user.getAvailableCourses().remove(String.valueOf(getCourseCodeDropDown().getSelectedItem()));
+                user.replaceCourse(index, new UniCourse(user, String.valueOf(getCourseCodeDropDown().getSelectedItem())));
             }
             else{
-                AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
-                ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
-                list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
-                HSCourses  = list.toArray(HSCourses);
-                UniTrack.universalNum += 1;
+                user.getAvailableCourses().add(user.getCourses().get(index).getName());
+                user.getAvailableCourses().remove(String.valueOf(getCourseCodeDropDown().getSelectedItem()));
+                user.replaceCourse(index, new UniCourse(user, String.valueOf(getCourseCodeDropDown().getSelectedItem())));
             }
             
-            
-        String p = "";
-        for (String i : codes){
-            p += i+" ";
-        }
-        String p2 ="";
-        for(double j : percents){
-            p2+=j+" ";
-        }
-        String p3="";
-        for(int k:weights){
-            p3+=k+" ";
-        }
-
-        try{
-            FileWriter writer = new FileWriter("" + User.username + ".txt", true);
-            writer.write("\n" + UniTrack.universalNum + "\n" + CourseCodeDropDown.getSelectedItem() + "\n" + String.format("%.2f", thisAvg/totalWeight) + "\n" + p + "\n" + p2 + "\n" + p3);
-            writer.close();
-        } catch (IOException a){
-            System.out.println("An error has occured. ");
-        }
-            addCount = 0;
-            AddClassScreen screen = new AddClassScreen();
+            for(int x=0;x<=getCodes().size()-1;x++ ){
+                user.getCourses().get(index).addAssignment(new UniAssignment(getCodes().get(x), getPercents().get(x), getWeights().get(x)));
+            }
+            AddClassScreen screen = new AddClassScreen(user);
             screen.setVisible(true);
             screen.toFront();
             dispose();
@@ -400,43 +359,8 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void CAinfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CAinfoActionPerformed
-        JOptionPane.showMessageDialog(this.CAinfo, "Writing in this box is optional. This overrides the calculation the app does to calculate the\naverage in case you grade has been changed and the grades do not reflect it.");
+        JOptionPane.showMessageDialog(this.getCAinfo(), "Writing in this box is optional. This overrides the calculation the app does to calculate the\naverage in case you grade has been changed and the grades do not reflect it.");
     }//GEN-LAST:event_CAinfoActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManualAddSpecifics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManualAddSpecifics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManualAddSpecifics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManualAddSpecifics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ManualAddSpecifics().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddButton;
@@ -461,24 +385,495 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     private javax.swing.JLabel percentSignLabel;
     private javax.swing.JTextPane weightLabel;
     // End of variables declaration//GEN-END:variables
-/*
-                JPanel grades = new JPanel();
-                ArrayList<JLabel[]> cancer = new ArrayList<>();
-                JLabel[] labels = {new JLabel(PercentField.getText()), new JLabel(WeightField.getText()), new JLabel(CodeField.getText())};
-                cancer.add(labels);
-                for(JLabel[] x: cancer){
-                    grades.add(x[0]);
-                    grades.add(x[1]);
-                    grades.add(x[2]);
-                }
-                grades.location().x = CodeField.location().x;
-                grades.location().y = CodeField.location().y - 30; //FIX
-                grades.setVisible(true);
-                JLayeredPane bruder = new JLayeredPane();
-                jPanel1.setVisible(false);
-                grades.setOpaque(false);
-                bruder.add(grades, JLayeredPane.DEFAULT_LAYER);
-                bruder.add(jPanel1, JLayeredPane.PALETTE_LAYER);
-                revalidate();
-                repaint();*/
+
+
+    /**
+     * @return the codes
+     */
+    public ArrayList<String> getCodes() {
+        return codes;
+    }
+
+    /**
+     * @param codes the codes to set
+     */
+    public void setCodes(ArrayList<String> codes) {
+        this.codes = codes;
+    }
+
+    /**
+     * @return the percents
+     */
+    public ArrayList<Double> getPercents() {
+        return percents;
+    }
+
+    /**
+     * @param percents the percents to set
+     */
+    public void setPercents(ArrayList<Double> percents) {
+        this.percents = percents;
+    }
+
+    /**
+     * @return the weights
+     */
+    public ArrayList<Integer> getWeights() {
+        return weights;
+    }
+
+    /**
+     * @param weights the weights to set
+     */
+    public void setWeights(ArrayList<Integer> weights) {
+        this.weights = weights;
+    }
+
+    /**
+     * @return the course_Avg
+     */
+    public HashMap<String, String> getCourse_Avg() {
+        return course_Avg;
+    }
+
+    /**
+     * @param course_Avg the course_Avg to set
+     */
+    public void setCourse_Avg(HashMap<String, String> course_Avg) {
+        this.course_Avg = course_Avg;
+    }
+
+    /**
+     * @return the user
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * @param user the user to set
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    /**
+     * @return the perweightSum
+     */
+    public double getPerweightSum() {
+        return perweightSum;
+    }
+
+    /**
+     * @param perweightSum the perweightSum to set
+     */
+    public void setPerweightSum(double perweightSum) {
+        this.perweightSum = perweightSum;
+    }
+
+    /**
+     * @return the weightSum
+     */
+    public int getWeightSum() {
+        return weightSum;
+    }
+
+    /**
+     * @param weightSum the weightSum to set
+     */
+    public void setWeightSum(int weightSum) {
+        this.weightSum = weightSum;
+    }
+
+    /**
+     * @return the grade
+     */
+    public double getGrade() {
+        return grade;
+    }
+
+    /**
+     * @param grade the grade to set
+     */
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+
+    /**
+     * @return the courseName
+     */
+    public String getCourseName() {
+        return courseName;
+    }
+
+    /**
+     * @param courseName the courseName to set
+     */
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    /**
+     * @return the oldCourse
+     */
+    public String getOldCourse() {
+        return oldCourse;
+    }
+
+    /**
+     * @param oldCourse the oldCourse to set
+     */
+    public void setOldCourse(String oldCourse) {
+        this.oldCourse = oldCourse;
+    }
+
+    /**
+     * @return the addCount
+     */
+    public int getAddCount() {
+        return addCount;
+    }
+
+    /**
+     * @param addCount the addCount to set
+     */
+    public void setAddCount(int addCount) {
+        this.addCount = addCount;
+    }
+
+    /**
+     * @return the thisAvg
+     */
+    public double getThisAvg() {
+        return thisAvg;
+    }
+
+    /**
+     * @param thisAvg the thisAvg to set
+     */
+    public void setThisAvg(double thisAvg) {
+        this.thisAvg = thisAvg;
+    }
+
+    /**
+     * @return the totalWeight
+     */
+    public int getTotalWeight() {
+        return totalWeight;
+    }
+
+    /**
+     * @param totalWeight the totalWeight to set
+     */
+    public void setTotalWeight(int totalWeight) {
+        this.totalWeight = totalWeight;
+    }
+
+    /**
+     * @return the added
+     */
+    public int getAdded() {
+        return added;
+    }
+
+    /**
+     * @param added the added to set
+     */
+    public void setAdded(int added) {
+        this.added = added;
+    }
+
+    /**
+     * @return the AddButton
+     */
+    public javax.swing.JButton getAddButton() {
+        return AddButton;
+    }
+
+    /**
+     * @param AddButton the AddButton to set
+     */
+    public void setAddButton(javax.swing.JButton AddButton) {
+        this.AddButton = AddButton;
+    }
+
+    /**
+     * @return the CAinfo
+     */
+    public javax.swing.JButton getCAinfo() {
+        return CAinfo;
+    }
+
+    /**
+     * @param CAinfo the CAinfo to set
+     */
+    public void setCAinfo(javax.swing.JButton CAinfo) {
+        this.CAinfo = CAinfo;
+    }
+
+    /**
+     * @return the CodeField
+     */
+    public javax.swing.JTextField getCodeField() {
+        return CodeField;
+    }
+
+    /**
+     * @param CodeField the CodeField to set
+     */
+    public void setCodeField(javax.swing.JTextField CodeField) {
+        this.CodeField = CodeField;
+    }
+
+    /**
+     * @return the CourseCode
+     */
+    public javax.swing.JLabel getCourseCode() {
+        return CourseCode;
+    }
+
+    /**
+     * @param CourseCode the CourseCode to set
+     */
+    public void setCourseCode(javax.swing.JLabel CourseCode) {
+        this.CourseCode = CourseCode;
+    }
+
+    /**
+     * @return the CourseCode1
+     */
+    public javax.swing.JLabel getCourseCode1() {
+        return CourseCode1;
+    }
+
+    /**
+     * @param CourseCode1 the CourseCode1 to set
+     */
+    public void setCourseCode1(javax.swing.JLabel CourseCode1) {
+        this.CourseCode1 = CourseCode1;
+    }
+
+    /**
+     * @return the CourseCode2
+     */
+    public javax.swing.JLabel getCourseCode2() {
+        return CourseCode2;
+    }
+
+    /**
+     * @param CourseCode2 the CourseCode2 to set
+     */
+    public void setCourseCode2(javax.swing.JLabel CourseCode2) {
+        this.CourseCode2 = CourseCode2;
+    }
+
+    /**
+     * @return the CourseCodeDropDown
+     */
+    public static javax.swing.JComboBox<String> getCourseCodeDropDown() {
+        return CourseCodeDropDown;
+    }
+
+    /**
+     * @param aCourseCodeDropDown the CourseCodeDropDown to set
+     */
+    public static void setCourseCodeDropDown(javax.swing.JComboBox<String> aCourseCodeDropDown) {
+        CourseCodeDropDown = aCourseCodeDropDown;
+    }
+
+    /**
+     * @return the PercentField
+     */
+    public javax.swing.JTextField getPercentField() {
+        return PercentField;
+    }
+
+    /**
+     * @param PercentField the PercentField to set
+     */
+    public void setPercentField(javax.swing.JTextField PercentField) {
+        this.PercentField = PercentField;
+    }
+
+    /**
+     * @return the WeightField
+     */
+    public javax.swing.JTextField getWeightField() {
+        return WeightField;
+    }
+
+    /**
+     * @param WeightField the WeightField to set
+     */
+    public void setWeightField(javax.swing.JTextField WeightField) {
+        this.WeightField = WeightField;
+    }
+
+    /**
+     * @return the codeLabel
+     */
+    public javax.swing.JTextPane getCodeLabel() {
+        return codeLabel;
+    }
+
+    /**
+     * @param codeLabel the codeLabel to set
+     */
+    public void setCodeLabel(javax.swing.JTextPane codeLabel) {
+        this.codeLabel = codeLabel;
+    }
+
+    /**
+     * @return the currentAverageInput
+     */
+    public javax.swing.JTextField getCurrentAverageInput() {
+        return currentAverageInput;
+    }
+
+    /**
+     * @param currentAverageInput the currentAverageInput to set
+     */
+    public void setCurrentAverageInput(javax.swing.JTextField currentAverageInput) {
+        this.currentAverageInput = currentAverageInput;
+    }
+
+    /**
+     * @return the jLabel1
+     */
+    public javax.swing.JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    /**
+     * @param jLabel1 the jLabel1 to set
+     */
+    public void setjLabel1(javax.swing.JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    /**
+     * @return the jLabel2
+     */
+    public javax.swing.JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    /**
+     * @param jLabel2 the jLabel2 to set
+     */
+    public void setjLabel2(javax.swing.JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    /**
+     * @return the jLabel3
+     */
+    public javax.swing.JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    /**
+     * @param jLabel3 the jLabel3 to set
+     */
+    public void setjLabel3(javax.swing.JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    /**
+     * @return the jLabel4
+     */
+    public javax.swing.JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    /**
+     * @param jLabel4 the jLabel4 to set
+     */
+    public void setjLabel4(javax.swing.JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+
+    /**
+     * @return the jPanel1
+     */
+    public javax.swing.JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    /**
+     * @param jPanel1 the jPanel1 to set
+     */
+    public void setjPanel1(javax.swing.JPanel jPanel1) {
+        this.jPanel1 = jPanel1;
+    }
+
+    /**
+     * @return the maxMSG
+     */
+    public javax.swing.JLabel getMaxMSG() {
+        return maxMSG;
+    }
+
+    /**
+     * @param maxMSG the maxMSG to set
+     */
+    public void setMaxMSG(javax.swing.JLabel maxMSG) {
+        this.maxMSG = maxMSG;
+    }
+
+    /**
+     * @return the nextButton
+     */
+    public javax.swing.JButton getNextButton() {
+        return nextButton;
+    }
+
+    /**
+     * @param nextButton the nextButton to set
+     */
+    public void setNextButton(javax.swing.JButton nextButton) {
+        this.nextButton = nextButton;
+    }
+
+    /**
+     * @return the percentLabel
+     */
+    public javax.swing.JTextPane getPercentLabel() {
+        return percentLabel;
+    }
+
+    /**
+     * @param percentLabel the percentLabel to set
+     */
+    public void setPercentLabel(javax.swing.JTextPane percentLabel) {
+        this.percentLabel = percentLabel;
+    }
+
+    /**
+     * @return the percentSignLabel
+     */
+    public javax.swing.JLabel getPercentSignLabel() {
+        return percentSignLabel;
+    }
+
+    /**
+     * @param percentSignLabel the percentSignLabel to set
+     */
+    public void setPercentSignLabel(javax.swing.JLabel percentSignLabel) {
+        this.percentSignLabel = percentSignLabel;
+    }
+
+    /**
+     * @return the weightLabel
+     */
+    public javax.swing.JTextPane getWeightLabel() {
+        return weightLabel;
+    }
+
+    /**
+     * @param weightLabel the weightLabel to set
+     */
+    public void setWeightLabel(javax.swing.JTextPane weightLabel) {
+        this.weightLabel = weightLabel;
+    }
 }

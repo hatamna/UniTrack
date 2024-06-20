@@ -1,7 +1,5 @@
 
 import java.io.IOException;
-import java.util.*;
-import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLayeredPane;
@@ -16,79 +14,46 @@ import javax.swing.JLayeredPane;
  * @author Yahya
  */
 public class SettingsScreen extends javax.swing.JFrame {
-    
-    public static double currentAvg = 90.56;
-    public static double currentGoal;
-    public static int centerButtonColour = 0;
+    private double goal;
+    private User user;
 
     /**
      * Creates new form SettingsScreen
      */
-    public SettingsScreen() {
+    public SettingsScreen(User u) {
         initComponents();
+        goal=user.getGoalAverage();
         remove(jPanel1);
         remove(jPanel2);
         JLayeredPane layers = new JLayeredPane();
         jPanel2.setOpaque(false);
         layers.add(jPanel1, JLayeredPane.PALETTE_LAYER);
         layers.add(jPanel2, JLayeredPane.DEFAULT_LAYER);
-        uniInfo.putty();
-        for (String i: uniInfo.universities){
+        
+        for (String i: UniTrack.getUniversityNames()){
             uniDropDown.addItem(i);
         }
-        for (String i: uniInfo.ottawa){
-            programDropDown.addItem(i);
+        for (Program j: UniTrack.getUniversities()[0].getPrograms()){
+            programDropDown.addItem(j.getName());
         }
     }
     
     public void dropDownActPer(){
-        switch (String.valueOf(uniDropDown.getSelectedItem())){
-            case "uOttawa":
-                switch (String.valueOf(programDropDown.getSelectedItem())){
-                    case uniInfo.PROG_NAME_01:
-                        tempGradeText.setText(String.valueOf(uniInfo.ottGrades[0]));
-                        currentGoal = uniInfo.ottGrades[0];
-                        break;
-                    case uniInfo.PROG_NAME_02:
-                        tempGradeText.setText(String.valueOf(uniInfo.ottGrades[1]));
-                        currentGoal = uniInfo.ottGrades[1];
-                        break;
-                    case uniInfo.PROG_NAME_03:
-                        tempGradeText.setText(String.valueOf(uniInfo.ottGrades[2]));
-                        currentGoal = uniInfo.ottGrades[2];
-                        break;
-                    default:
-                        System.out.println("Error.");
-                    }
-                    break;
-            case "uToronto":
-                switch (String.valueOf(programDropDown.getSelectedItem())){
-                    case "Computer Science":
-                        tempGradeText.setText(String.valueOf(uniInfo.torGrades[0]));
-                        currentGoal = uniInfo.torGrades[0];
-                        break;
-                    case "Biology":
-                        tempGradeText.setText(String.valueOf(uniInfo.torGrades[1]));
-                        currentGoal = uniInfo.torGrades[1];
-                        break;
-                    case "Life Sciences":
-                        tempGradeText.setText(String.valueOf(uniInfo.torGrades[2]));
-                        currentGoal = uniInfo.torGrades[2];
-                        break;
-                    default:
-                        System.out.println("Error.");
-                    }
-                    break;
+        for(University x: UniTrack.getUniversities()){
+            x.getGoal(String.valueOf(programDropDown.getSelectedItem()));
         }
-        if (currentAvg == currentGoal || ((currentAvg > (currentGoal - 2)) && (currentAvg < (currentGoal + 2)))){
-            gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/requiredAVGyellow.png/")));
-            centerButtonColour = 0;
-        } else if (currentAvg < (currentGoal - 2)){
-            gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/requiredAVGred.png/")));
-            centerButtonColour = 1;
-        } else if (currentAvg > (currentGoal + 2)){
-            gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/requiredAVGgreen.png/")));
-            centerButtonColour = 2;
+        user.updateColor();
+        switch(user.getAverageColor()){
+            case(ButtonColor.RED):
+                gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/requiredAVGred.png/")));
+                break;
+            case(ButtonColor.GREEN):
+                gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/requiredAVGgreen.png/")));
+                break;
+            default:
+                gradeRecBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/requiredAVGyellow.png/")));
+                break;
+                
         }
     }
 
@@ -293,11 +258,12 @@ public class SettingsScreen extends javax.swing.JFrame {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         MainScreen screen;
         try {
-            screen = new MainScreen();
+            screen = new MainScreen(user);
             screen.setVisible(true);
             screen.toFront();
             dispose();
-        } catch (IOException ex) {
+        } 
+        catch (IOException ex) {
             Logger.getLogger(SettingsScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_backButtonActionPerformed
@@ -325,41 +291,6 @@ public class SettingsScreen extends javax.swing.JFrame {
             Logger.getLogger(SettingsScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_uoinfoButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SettingsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SettingsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SettingsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SettingsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SettingsScreen().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;

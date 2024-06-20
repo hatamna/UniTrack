@@ -174,7 +174,7 @@ public class ChoiceScreen extends javax.swing.JFrame {
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         JFrame quitConfirm = new JFrame();
         if(JOptionPane.showConfirmDialog(quitConfirm, "Are you sure you want to quit?", "QUIT", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
-            System.exit(0);
+            UniTrack.endProgram();
         }
     }//GEN-LAST:event_exitButtonActionPerformed
 

@@ -4,6 +4,8 @@
  */
 import com.google.api.services.classroom.Classroom;
 import com.google.api.services.classroom.model.Course;
+import com.google.api.services.classroom.model.CourseWork;
+import com.google.api.services.classroom.model.StudentSubmission;
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.SOUTH;
 import java.awt.Color;
@@ -17,15 +19,19 @@ import java.awt.Dimension;
 import static java.awt.GridBagConstraints.RELATIVE;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.io.File;
 import java.io.IOException;
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -48,14 +54,23 @@ public class User {
     private ArrayList<UniCourse> userCourses = new ArrayList<>();
     private ArrayList<Course> classroomCourses = new ArrayList<>();
     private HashMap<Course, UniCourse> linkedCourses = new HashMap<>();
+    private double currentAverage;
+    private double goalAverage;
+    private ButtonColor averageColor;   
+    private ArrayList<String> availableCourses;
+    private String[] codes;
+    private String[] grades;
+    private String[] weights;
+    
+    
+    
     
     private Classroom classroomData = null;
     GridBagConstraints layout = new GridBagConstraints();
     private List<Course> studentCourseList;
-    private ArrayList<Course> courseList;
     private Thread OAuth = null;
-    public static String username;
-    public static String password;
+    private String username;
+    private String password;
     private JFrame setUpMenu;
     private JPanel accountCreation;
     private JPanel importing;
@@ -70,7 +85,6 @@ public class User {
     private JPasswordField passwordInput;
     private JButton createAccount;
     private JLabel errorMessage;
-    private JPanel courseSelection;
     private Object[][] courseSelector;
     private boolean allowArchived;
     private int size;
@@ -82,6 +96,10 @@ public class User {
     private JPanel importPanel;
     
     public User() throws IOException, GeneralSecurityException, InterruptedException{
+        for(int x=0; x<7; x++){
+            userCourses.add(new UniCourse(User.this, "Add Class"));
+        }
+        availableCourses=new ArrayList<>(Arrays.asList(UniTrack.getCourses()));
         SwingUtilities.invokeLater(() -> {
             try {
                 this.createAccountSetup();
@@ -90,7 +108,19 @@ public class User {
             }
         }); //creates seperate thread for the gui
         waitForOAuth(); //pauses main code until OAuth complete
-        
+    }
+    
+    public User(File f) throws IOException{
+        for(int x=2; x< 32; x+=6){
+            userCourses.add(new UniCourse(User.this, Files.readAllLines(Paths.get(f.getPath())).get(x)));
+            codes=Files.readAllLines(Paths.get(f.getPath())).get(x + 2).split(" ");
+            grades= Files.readAllLines(Paths.get(f.getPath())).get(x + 3).split(" ");
+            weights = Files.readAllLines(Paths.get(f.getPath())).get(x + 4).split(" ");
+            for(int y=0; y<codes.length;y++ ){
+                userCourses.get(x).addAssignment(new UniAssignment(codes[y], parseDouble(grades[y]), parseInt(weights[y])));
+                
+            }
+        }
     }
     
     private void createAccountSetup() throws IOException{
@@ -186,7 +216,7 @@ public class User {
         no.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                AddClassScreen screen = new AddClassScreen();
+                AddClassScreen screen = new AddClassScreen(User.this);
                 screen.setVisible(true);
                 screen.toFront();
                 setUpMenu.dispose();
@@ -215,7 +245,7 @@ public class User {
                 }
                 else{
                     setUpMenu.remove(errorMessage); //remove invalid msg cuz its valid
-                    UniTrack.saveCreds();
+                    UniTrack.getUserList().put(username, User.this);
                     //updating jframe visuals
                     setUpMenu.revalidate();
                     setUpMenu.repaint();
@@ -275,7 +305,6 @@ public class User {
         size=Import.getCourses(classroomData).size();
         courseButtons = new JPanel(new GridLayout(((size+2)/3),3,5 ,5 ));
         courseButtons.setBounds(0,0,640,500);
-        courseList = new ArrayList<>();
         courseSelector = new Object[size][5]; //one array per course 4 Jcomponents per
         SwingUtilities.invokeLater(() -> {
             for(int x=0; x<size; x++){
@@ -342,19 +371,19 @@ public class User {
             submit.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e){
-//                    for(int x=0; x<size; x++){
-//                        if(!((JToggleButton)courseSelector[x][4]).isSelected()) continue;
-//                        classroomCourses.add(courseSelector[x][0]);                    
-//                    }
-                    
+                    try {
+                        for(int x=0; x<size; x++){
+                            if(!((JToggleButton)courseSelector[x][4]).isSelected()) continue;
+                            classroomCourses.add((Course)courseSelector[x][0]);                    
+                    }
                     addUniCourses();
+                    } catch (IOException ex) {
+                        Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     
                     //done importing
-                    setUpMenu.remove(importPanel);
-                    
-                    //update gui
-                    setUpMenu.revalidate();
-                    setUpMenu.repaint();
+                    new AddClassScreen(User.this).setVisible(true);
+                    setUpMenu.dispose();
                 }
             });
             submit.setPreferredSize(new Dimension(100,100));
@@ -384,27 +413,85 @@ public class User {
         if(OAuth!=null){
             OAuth.join();
         }
-        
     }
     
-    public void addUniCourses(){
+    public void addUniCourses() throws IOException{
         //loop through classes to add courses
-//        for(Course x :classroomCourses){
-//            linkedCourses.add(x, new UniCourse());
-//            userCourses.add(linkedCourses.get(x));
-////            loop through assignments and add them
-//            for(CourseWork y: x.courseWork().list(x).execute().getCourseWork()){
-//                if (y.getAssignedGrade()==null) continue; //if its not marked dont add it
-//                
-//                if(y.getGradeCategory==null){
-//                    linkedCourses.get(x).addAssignment(new Assignment(y.getTitle(),y.getAssignedGrade())); //only name and grade
-//                }
-//                
-//                else{ //adds name grade and category (weight is assigned to categories not assignments)
-//                    linkedCourses.get(x).addAssignment(new Assignment(y.getTitle(),y.getAssignedGrade(),y.getGradeCategory())); 
-//                }
-//            }
-//        }
+        for(Course x :classroomCourses){
+           linkedCourses.put(x, new UniCourse(User.this, x.getName()));
+            userCourses.add(linkedCourses.get(x));
+            //loop through assignments and add them
+            for(CourseWork y: classroomData.courses().courseWork().list(x.getId()).execute().getCourseWork()){
+                for(StudentSubmission z: classroomData.courses().courseWork().studentSubmissions().list(x.getId(), y.getId()).setUserId(classroomData.userProfiles().get("me").execute().getId()).execute().getStudentSubmissions()){
+                    if (z.getAssignedGrade()==null) continue; 
+                    linkedCourses.get(x).addAssignment(new UniAssignment(y.getTitle(),z.getAssignedGrade(), 1)); //only name and grade
+                }
+            }
+        }
     }
         
+    public double getGoalAverage(){
+        return goalAverage;
+    }
+    
+    public void updateColor(){
+        updateAverage();
+        if(currentAverage < (goalAverage - 2)){
+            averageColor=ButtonColor.RED;
+        }
+        else if(currentAverage > (goalAverage +2)){
+            averageColor=ButtonColor.GREEN;
+        }
+        else{
+            averageColor=ButtonColor.YELLOW;
+        }
+    }
+    
+    public ButtonColor getAverageColor(){
+        return averageColor;
+    }
+    
+    public double updateAverage(){
+        currentAverage=0;
+        for(int x=0; x<6; x++){
+            currentAverage+=userCourses.get(x).updateAverage();
+        }
+        return currentAverage/6;
+    }
+    
+    public String getUsername(){
+        return username;
+    }
+    
+    public String getPassword(){
+        return password;
+    }
+  
+    public ArrayList<UniCourse> getCourses(){
+        return userCourses;
+    }
+    
+    public void replaceCourse(int i, UniCourse r){
+        userCourses.set(i,r);
+    }
+    
+    public boolean isValidAmount(){
+        for(UniCourse x : userCourses){
+            if(x.getName().equals("Add Class")) return false;
+        }
+        return true;
+    }
+    
+    public List<String> getCourseNames(){
+        List<String> c = new ArrayList<>();
+        for(UniCourse x : userCourses){
+            c.add(x.getName());
+        }
+        return c;
+    } 
+    
+    public ArrayList<String> getAvailableCourses(){
+        return availableCourses;
+    }
+    
 }

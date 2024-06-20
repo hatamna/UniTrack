@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 public class SignInScreen extends javax.swing.JFrame {
     
-    public static String username;
+    private String username;
     private String password;
     private String outString;
     public static boolean signedIn = false;
@@ -166,32 +166,29 @@ public class SignInScreen extends javax.swing.JFrame {
         try{
             username = usernameField.getText();
             password = passwordField.getText();
+            String path =System.getProperty("user.home")+"/Documents/" + username + ".txt";
             try {
-                Scanner in = new Scanner(new FileReader("" + username + ".txt"));
-                StringBuilder sb = new StringBuilder();
-                while(in.hasNext()) {
-                    sb.append(in.next());
+                Scanner in = new Scanner(new FileReader(path));
+                if(!in.hasNextLine()) passwordIncorrectBox.setVisible(true);
+                if(in.nextLine().equals(username+" | "+password)){
+                    MainScreen screen;
+                    try {
+                        signedIn = true;
+                        UniTrack.getUserList().put(username, new User(new File(path)));
+                        screen = new MainScreen(UniTrack.getUserList().get(username));
+                        screen.setVisible(true);
+                        screen.toFront();
+                        dispose();
+                    }
+                    catch (IOException ex) {
+                        Logger.getLogger(SignInScreen.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-                in.close();
-                outString = sb.toString();
-            } catch (FileNotFoundException ex) {
+            } 
+            catch (FileNotFoundException ex) {
                 Logger.getLogger(SignInScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (outString.contains(username + "=" + password)){
-                MainScreen screen;
-                try {
-                    signedIn = true;
-                    screen = new MainScreen();
-                    screen.setVisible(true);
-                    screen.toFront();
-                    dispose();
-                } catch (IOException ex) {
-                    Logger.getLogger(SignInScreen.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            } else {
-                passwordIncorrectBox.setVisible(true);
-            }
+            
         } catch (NullPointerException a){
             passwordIncorrectBox.setVisible(true);
         }
@@ -217,43 +214,6 @@ public class SignInScreen extends javax.swing.JFrame {
         screen.toFront();
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SignInScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SignInScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SignInScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SignInScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SignInScreen().setVisible(true);
-                
-            }
-        });
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton applyButton;
