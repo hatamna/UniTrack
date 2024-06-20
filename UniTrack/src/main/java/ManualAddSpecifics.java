@@ -35,9 +35,9 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     public static String oldCourse = null;
     
     private static int addCount = 0;
-    
     private static double thisAvg = 0.00;
     private static int totalWeight = 0;
+    public static final String FILE_PATH = SignInScreen.username + ".txt";
     
     
     public static int added = 0;
@@ -329,7 +329,8 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
             CodeField.setText("");
             PercentField.setText("");
             WeightField.setText("");
-        } else {
+        } 
+        else {
             AddButton.setEnabled(false);
             maxMSG.setVisible(true);
         }       
@@ -340,62 +341,71 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     }//GEN-LAST:event_currentAverageInputMouseClicked
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        /*for (int i = 0; i < percents.size() && i < weights.size(); i++){
-            perweightSum = perweightSum + (percents.get(i)*weights.get(i));
-            weightSum = weightSum + weights.get(i);  
-        }
-        
-        grade = perweightSum / weightSum;
-        courseName = (String)CourseCodeDropDown.getSelectedItem();
-        course_Avg.put(courseName, (String.format("%.2f", grade)));
-        */
         if (CourseCodeDropDown.getSelectedItem().equals("Select Course")){
-            nextButton.setText("Please Choose a Course");
+        nextButton.setText("Please Choose a Course");
+    }
+    else {
+        // Gather input fields
+        if (addCount < 100){
+            try{
+                percents.add(parseDouble(PercentField.getText()));
+                weights.add(parseInt(WeightField.getText()));
+                codes.add(CodeField.getText());
+            } catch (NumberFormatException e){
+                System.out.println("Error parsing input: " + e.getMessage());
+            }
+            printResults();
+            addCount++;
+            thisAvg += Double.parseDouble(PercentField.getText()) * Integer.parseInt(WeightField.getText());
+            totalWeight += Integer.parseInt(WeightField.getText());
+            CodeField.setText("");
+            PercentField.setText("");
+            WeightField.setText("");
+        } else {
+            AddButton.setEnabled(false);
+            maxMSG.setVisible(true);
         }
-        else {
-            if (!AddClassScreen.courseNames[UniTrack.universalNum].equals("Add Class")){
-                ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
-                oldCourse = AddClassScreen.courseNames[UniTrack.universalNum];
-                AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
-                list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
-                list.add(oldCourse);
-                HSCourses  = list.toArray(HSCourses);
-                UniTrack.universalNum += 1;
-            }
-            else{
-                AddClassScreen.courseNames[UniTrack.universalNum] = String.valueOf(CourseCodeDropDown.getSelectedItem());
-                ArrayList<String> list = new ArrayList<String>(Arrays.asList(HSCourses));
-                list.removeAll(Arrays.asList(CourseCodeDropDown.getSelectedItem()));
-                HSCourses  = list.toArray(HSCourses);
-                UniTrack.universalNum += 1;
-            }
-            
-            
+
+        // Write all data to file
         String p = "";
         for (String i : codes){
-            p += i+" ";
+            p += i + " ";
         }
         String p2 ="";
         for(double j : percents){
-            p2+=j+" ";
+            p2 += j + " ";
         }
-        String p3="";
-        for(int k:weights){
-            p3+=k+" ";
+        String p3 = "";
+        for(int k : weights){
+            p3 += k + " ";
         }
 
-        try{
-            FileWriter writer = new FileWriter("" + User.username + ".txt", true);
-            writer.write("\n" + UniTrack.universalNum + "\n" + CourseCodeDropDown.getSelectedItem() + "\n" + String.format("%.2f", thisAvg/totalWeight) + "\n" + p + "\n" + p2 + "\n" + p3);
+        try {
+            FileWriter writer = new FileWriter(FILE_PATH, true);
+            writer.write("\n" + UniTrack.universalNum + "\n" +
+                         CourseCodeDropDown.getSelectedItem() + "\n" +
+                         String.format("%.2f", thisAvg/totalWeight) + "\n" +
+                         p + "\n" +
+                         p2 + "\n" +
+                         p3 + "\n");
+
+            // Append labels from CourseScreen
+            writer.write("Labels:\n");
+            writer.write("CodeLabel: " + codeLabel.getText() + "\n");
+            writer.write("PercentLabel: " + percentLabel.getText() + "\n");
+            writer.write("WeightLabel: " + weightLabel.getText() + "\n");
+
             writer.close();
         } catch (IOException a){
-            System.out.println("An error has occured. ");
+            System.out.println("An error has occurred: " + a.getMessage());
         }
-            addCount = 0;
-            AddClassScreen screen = new AddClassScreen();
-            screen.setVisible(true);
-            screen.toFront();
-            dispose();
+
+        // Reset addCount and navigate to AddClassScreen
+        addCount = 0;
+        AddClassScreen screen = new AddClassScreen();
+        screen.setVisible(true);
+        screen.toFront();
+        dispose();
         }
     }//GEN-LAST:event_nextButtonActionPerformed
 
@@ -461,24 +471,5 @@ public class ManualAddSpecifics extends javax.swing.JFrame {
     private javax.swing.JLabel percentSignLabel;
     private javax.swing.JTextPane weightLabel;
     // End of variables declaration//GEN-END:variables
-/*
-                JPanel grades = new JPanel();
-                ArrayList<JLabel[]> cancer = new ArrayList<>();
-                JLabel[] labels = {new JLabel(PercentField.getText()), new JLabel(WeightField.getText()), new JLabel(CodeField.getText())};
-                cancer.add(labels);
-                for(JLabel[] x: cancer){
-                    grades.add(x[0]);
-                    grades.add(x[1]);
-                    grades.add(x[2]);
-                }
-                grades.location().x = CodeField.location().x;
-                grades.location().y = CodeField.location().y - 30; //FIX
-                grades.setVisible(true);
-                JLayeredPane bruder = new JLayeredPane();
-                jPanel1.setVisible(false);
-                grades.setOpaque(false);
-                bruder.add(grades, JLayeredPane.DEFAULT_LAYER);
-                bruder.add(jPanel1, JLayeredPane.PALETTE_LAYER);
-                revalidate();
-                repaint();*/
+
 }

@@ -375,16 +375,32 @@ public class CourseScreen extends javax.swing.JFrame {
     
     
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-        if (!CodeField.getText().equals("")&&!PercentField.getText().equals("")&&!WeightField.getText().equals("")){
-            codeArea.setText(codeArea.getText()+CodeField.getText()+"\n");
+        String code = CodeField.getText().trim();
+    String percent = PercentField.getText().trim();
+    String weight = WeightField.getText().trim();
+
+    if (!code.isEmpty() && !percent.isEmpty() && !weight.isEmpty()) {
+        // Update text areas with entered values
+        codeArea.append(code + "\n");
+        percentArea.append(percent + "\n");
+        weightArea.append(weight + "\n");
+
+        try (FileWriter writer = new FileWriter(ManualAddSpecifics.FILE_PATH, true)) {
+            writer.write(code + "\n");
+            writer.write(percent + "\n");
+            writer.write(weight + "\n");
+            writer.write("\n");
+
+            
             CodeField.setText("");
-            percentArea.setText(percentArea.getText()+PercentField.getText()+"\n");
             PercentField.setText("");
-            weightArea.setText(weightArea.getText()+WeightField.getText()+"\n");
             WeightField.setText("");
-        } else {
-            AddButton.setText("Fill All Fields");
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
         }
+    } else {
+        AddButton.setText("Fill All Fields");
+    }
     }//GEN-LAST:event_AddButtonActionPerformed
 
     /**

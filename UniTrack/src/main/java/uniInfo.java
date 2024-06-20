@@ -20,7 +20,7 @@ import java.util.Set;
 
 public class uniInfo {
 
-     public static final String PROG_NAME_01 = "Computer Science";
+    public static final String PROG_NAME_01 = "Computer Science";
     public static final String PROG_NAME_02 = "Biology";
     public static final String PROG_NAME_03 = "Mechanical Engineering";
     public static final String PROG_NAME_04 = "Chemical Engineering";

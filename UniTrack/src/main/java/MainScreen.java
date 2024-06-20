@@ -97,6 +97,7 @@ public class MainScreen extends javax.swing.JFrame {
         }
         for (String i : ManualAddSpecifics.course_Avg.values()){
             avgValues.add(i);
+            
         }
         for (int i = 0; i < AddClassScreen.courseNames.length; i++) {
             top6[i].setText(AddClassScreen.courseNames[i]);
